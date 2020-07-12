@@ -1,0 +1,92 @@
+
+
+<html>
+
+<head>
+
+<title>  SchApp 8.0 - Enterprise School Software</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="shortcut icon" href="/static/school-logo/log.jpeg" />
+<link type="text/css" rel="Stylesheet" href="/static/JS/jquery-ui.css" />
+<script type="text/javascript" src='/static/JS/jquery-1.5.js'></script>
+<script type="text/javascript" src='/static/JS/jquery.validate.js'></script>
+<script type='text/javascript' src='/static/JS/csrf_tokenizer.js'></script>
+<script type='text/javascript' src='/static/JS/jquery.js'></script>
+<script type='text/javascript' src='/static/JS/jquery-ui.js'></script>
+<script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+<script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+<script type='text/javascript' src='/static/JS/myprint.js'></script>
+<script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+<script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+<link rel="stylesheet" type="text/css" href="/static/JS/css/hot-sneaks/jquery-ui-1.8.18.custom.css" />
+<script type='text/javascript' src='/static/JS/myprint.js'></script>
+
+<link type="text/css" rel="Stylesheet" href="/static/CSS/new_body_style.css" />
+
+
+
+<script language="javascript" type="text/javascript">
+    function disable(f)
+    {
+        var button = f.elements['submit'];
+        button.value = 'Processing';
+        button.disabled = 'true';
+        return true;
+    }
+</script>
+
+<script type=text/javascript>
+    $(document).ready(function() {
+        openrec();
+    });
+</script>
+
+
+<script language="javascript" type="text/javascript">
+    function openrec()
+    {
+        var data='userid='+'test';
+        $.ajax({
+            type:"POST",
+            url:"/header/",
+            data:data,
+            success:function(html) {
+                $(".boxnn").show();
+                $(".boxnn").html(html);
+            }
+        });
+        return false;
+    }
+</script>
+</head>
+
+<body>
+        <div id="wrapper"> 
+        	<div id="header"> 
+    			<div class="boxnn"></div>
+		    </div>
+    		<div id="content1" >
+    			<div id="content_left_other_reg">
+    				{%block content%}
+                    {%endblock%}
+    			</div>
+
+    			<div id="content_right_student2">
+                    <div class="side_menu_header">Menu Items</div>
+                    <ul class="side_menu">
+                        <li><a href="/student/register/">New Student</a></li>
+                        <li><a href="/student/editregistration/">Edit Entries</a></li>
+                        <li><a href="/student/studentreport/"> Class List</a></li>
+                        <li><a href="/student/withdraw_student/">Withdraw</a></li>
+                        <li><a href="/student/student_return/" >Return</a></li>
+                        <li><a href="/student/withdrawn_report/">Report</a></li>
+                    </ul>
+    			</div>
+    		</div>
+        <div id="footer">ADYSYS Technologies (07031009036,  08035076979)</div>
+
+	</div>
+
+</body>
+
+</html>

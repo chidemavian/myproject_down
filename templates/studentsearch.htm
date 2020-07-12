@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{%block content%}
+    <table align ="left" style="border:1px solid #f5deb3;width:100%;" cellspacing="1" cellpadding="1" >
+       <tr>
+           <td style="color:#ffffff;background:#000;text-align:center;height:25px;padding-top:6px;font-weight:bold;" colspan="2">
+               SEARCH FOR STUDENT
+           </td>
+       </tr>
+        <tr>
+            <td>
+               <form>
+                   <table>
+                       <tr>
+                           <td>
+                              By Name :
+                           </td>
+                           <td>
+                               <input type="text" name="id_name" id="id_name" size="30" class="loginTxtbox">
+                           </td>
+                       </tr>
+                   </table>
+               </form>
+            </td>
+            <td>
+                <form>
+                    <table>
+                        <tr>
+                            <td>
+                                By Admission No :
+                            </td>
+                            <td>
+                                <input type="text" name="id_admno" id="id_admno" size="30" class="loginTxtbox">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><div class="box"></div></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $(".box").hide();
+            $("#id_name").focus();
+            $("#id_name").keyup(function () {
+                autopost();
+            });
+            $("#id_admno").keyup(function () {
+                autopost1();
+            });
+        });
+    </script>
+        <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_name").val() ;
+            //alert(state);
+            var url = "/student/search_ajax/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+                }
+            });
+            return false;
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost1(){
+            var state = $("#id_admno").val() ;
+            //alert(state);
+            var url = "/student/search_ajax1/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+                }
+            });
+            return false;
+        }
+    </script>
+{%endblock%}

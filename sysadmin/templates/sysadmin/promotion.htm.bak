@@ -1,0 +1,114 @@
+{% extends "controllers/base.htm" %}
+{% block title %}New Account {% endblock %}
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+        <table style="width:103%;border:0.3px solid black;">
+            <tr>
+                <td colspan="15" style="font-size:15px;text-align:center;font-weight:bold;background-color:#FFF;color:red">
+                    {{succ}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="45" style="font-size:15px;border:0.3px solid black;text-align:center;font-weight:bold;background-color:#ccccc0;color:#000000;height:25px;">
+                    STUDENT PROMOTION
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    Current Session:
+                </td>
+                <td>
+                    {{ form.session }}
+                </td>            
+                <td>
+                    Current Class:
+                </td>
+                <td>
+                    {{ form.oldclass }}                      
+                </td>
+                <td>
+                    New Class:
+                </td>
+                <td>
+                    {{ form.newclass }}
+                </td>
+                <td>
+                    Subject Category:
+                </td>
+                <td>
+                    {{ form.subclass }}
+                </td>
+
+                <td>
+                    <input name="submit" type= "submit" value="Promote Class "/>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+    <script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            };
+            subclass();
+            });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+     function subclass(){
+            var state = $("#id_new_class").val() ;
+            var p = state.charAt(0).toUpperCase();
+            var url = "/controllers/subclass/";
+            var i = 0;
+            var data='userid='+p;
+            $("#id_subclass").val('');
+            $("#id_subclass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subclass").append(options);
+                    }
+                })
+            }
+
+
+
+        }
+
+    </script>
+
+
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#id_new_class").change(function () {
+                subclass();
+            });
+        });
+    </script>
+{% endblock %}

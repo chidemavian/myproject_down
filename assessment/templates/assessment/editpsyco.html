@@ -1,0 +1,270 @@
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .error2 { color: red; }
+        .error1 { color: red; }
+        .error3 { color: red; }
+        .error4 { color: red; }
+        .error5 { color: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 16px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form action="/assessment/editpsyco/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+<table style="width:100%;background-color:#f5f5f5;">
+
+    <tr style="width:100%;">
+        <td colspan="15">
+            <table style="width:100%;">
+                <tr>
+                    <td colspan="5" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                        Press ESC to close this box
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Adm. No
+                    </td>
+                    <td>
+                        {{ getdetails.academic_rec.student.admissionno }}
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Student Name
+                    </td>
+                    <td  colspan="5">
+                        {{ getdetails.academic_rec.student.fullname }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Session
+                    </td>
+                    <td>
+                        {{ getdetails.academic_rec.student.admitted_session}}
+                    </td>
+                        <td rowspan="4">
+                            <img style="width: 100px; height: 100px;"src="/static/{{ getdetails.academic_rec.student.studentpicture  }} " alt="{{ k.studentinfo.fullname  }}">
+                        </td>
+
+                  <!--  <td rowspan="4">
+                        <img src="/static/{{ getdetails.academic_rec.student.studentpicture  }}/" alt="" width="100px" height="80px">
+                    </td> -->
+
+                </tr>
+                <tr>
+
+                    <td style="color:blue;">
+                        Term
+                    </td>
+                    <td>
+                        {{getdetails.academic_rec.term}}
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+                    <td style="color:blue;">
+                        Class
+                    </td>
+                    <td>
+                        {{getdetails.academic_rec.klass}}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Arm
+                    </td>
+                    <td>
+                        {{getdetails.academic_rec.arm}}
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td style="color:blue;">
+                        Attendance:
+                    </td>
+                    <td>
+                        <input type="text" name="attendance" id="handwriting" size="5" value="{{ getdetails.attendance }}" class ="loginTxtbox">
+                    </td>
+                    <td><span class="error1"> Can Not Be Empty</span></td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Social Behaviour:
+                    </td>
+                    <td>
+                        <input type="text" name="social_behaviour" id="games" size="5" value="{{ getdetails.social_behaviour }}" class ="loginTxtbox">
+                    </td>
+                    <td><span class="error2"> Can Not Be Empty</span></td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        motivation:
+                    </td>
+                    <td>
+                        <input type="text" name="motivation" id="painting" size="5" value="{{ getdetails.motivation }}" class ="loginTxtbox"> &nbsp;
+
+                    </td>
+                    <td><span class="error4"> Can Not Be Empty</span></td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Contribution:
+                    </td>
+                    <td>
+                        <input type="text" name="contribution" id="music" size="5" value="{{ getdetails.contribution }}" class ="loginTxtbox"> &nbsp;
+                    </td>
+                    <td><span class="error5">Can Not Be Empty</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center"><input type="submit" value=": Submit :" name="submit"></td>
+                </tr>
+            </table>
+        </td>
+
+    </tr>
+</table>
+
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error1').hide();
+        $('.submit').click(function(event){
+            var data1=$("#handwriting").val();
+            var len1=data1.length;
+            if (len1 > 0){
+                $('.error1').hide();
+            }
+            else
+            {
+                $("#handwriting").focus();
+                $('.error1').show();
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error2').hide();
+        $('.submit').click(function(event){
+            var data2=$("#games").val();
+            var len2=data2.length;
+            if (len2 <= 0){
+               // alert('Second CA Score can not be Empty');
+                $("#games").focus();
+                $('.error2').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error2').hide();
+            }
+
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error3').hide();
+        $('.submit').click(function(event){
+            var data=$("#art").val();
+            var len=data.length;
+            if (len <= 0){
+                $("#art").focus();
+                $('.error3').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error3').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error4').hide();
+        $('.submit').click(function(event){
+            var data3=$("#painting").val();
+            var len3=data3.length;
+            if (len3 <= 0){
+                $("#painting").focus();
+                $('.error4').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error4').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error5').hide();
+        $('.submit').click(function(event){
+            var data3=$("#music").val();
+            var len3=data3.length;
+            if (len3 <= 0){
+                $("#music").focus();
+                $('.error5').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error5').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#handwriting").keyup(function () {
+            $('.error1').hide();
+        });
+        $("#games").keyup(function () {
+            $('.error2').hide();
+        });
+        $("#art").keyup(function () {
+            $('.error3').hide();
+        });
+        $("#painting").keyup(function () {
+            $('.error4').hide();
+        });
+        $("#music").keyup(function () {
+            $('.error5').hide();
+        });
+
+    });
+</script>
+</body>
+</html>

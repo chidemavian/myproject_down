@@ -1,0 +1,86 @@
+<form action="/student/withdraw/" method="post">
+    <table style="width: 100%; text-align: left;">
+        <tr>
+            <td colspan="5" style = "background-color:#000000;color:white;">Bio Data</td>
+        </tr>
+        <tr>
+            <td><label>Surname</label></td>
+            <td>{{ student.surname }}</td>
+            <td><label>First Name</label></td>
+            <td>{{ student.firstname }}</td>
+            <td rowspan="5"><img src="/media/{{ img_url }}" height="120px" width="120px"></td>
+        </tr>
+        <tr>
+            <td><label>Other Names</label></td>
+            <td>{{ student.othername }}</td>
+            <td><label>Address</label></td>
+            <td>{{ student.address }}</td>
+        </tr>
+        <tr>
+            <td><label>Sex</label></td>
+            <td>{{ student.sex }}</td>
+            <td><label>Date of Birth</label></td>
+            <td>{{ student.birth_date }}</td>
+        </tr>
+        <tr>
+            <td><label>Place of Birth</label></td>
+            <td>{{ student.birth_place }}</td>
+            <td><label>State of Origin</label></td>
+            <td>{{ student.state_of_origin }}</td>
+        </tr>
+        <tr>
+            <td><label>L.G.A.</label></td>
+            <td>{{ student.lga }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="background-color: #000000;">Academics</td>
+        </tr>
+        <tr>
+            <td><label>Former School</label></td>
+            <td>{{ student.prev_school }}</td>
+            <td><label>Former Class</label></td>
+            <td>{{ student.prev_class }}</td>
+        </tr>
+        <tr>
+            <td><label>Admitted Class</label></td>
+            <td>{{ student.admitted_class }}</td>
+            <td><label>Arm</label></td>
+            <td>{{ student.admitted_arm }}</td>
+        </tr>
+        <tr>
+            <td><label>House</label></td>
+            <td>{{ student.house }}</td>
+            <td><label>Day/Boarding</label></td>
+            <td>{{ student.dayboarding }}</td>
+        </tr>
+        <tr>
+            <td><label>Admission Number</label></td>
+            <td>{{ student.admissionno }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="sectionCaption" style="background-color: #000000;">Withdrawal Information</td>
+        </tr>
+        <tr>
+            <td>{{ form.reason.label_tag }}</td>
+            <td>{{ form.reason }}&nbsp;{{ form.reason.errors }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{{ form.date_withdrawn.label_tag }}</td>
+            <td>{{ form.date_withdrawn }}&nbsp;{{ form.date_withdrawn.errors }}</td>
+            <td>{{ form.pk }}</td>
+            <td>{% csrf_token %}</td>
+        </tr>
+        <tr>
+            <td colspan="5"><hr></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center; vertical-align: middle;"><input name="submit" type="submit" value=":: Submit ::"></td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,77 @@
+<table>
+    <tr>
+        <td>
+            <table style="border:0px solid black">
+                <div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+                <div> W. A for  {{subject}}, {{klass}}</div>
+                       <tr class = "ajaxhead">
+                        <td> S/N</td>
+                        <td > Subject </td>
+                        <td > Class </td>           
+                         <td > W.A </td>
+                          <td > Edit </td>
+                    </tr>
+                    {{forms.lessonnotes}}
+                     {% if sett %}
+            {% for pincode in sett %}
+                        <tr class = "ajaxbody">
+                            <td >{{ forloop.counter}}</td>
+                            <td > {{ pincode.subject}}</td>
+                            <td> {{ pincode.klass}}</td>
+                            <td> {{pincode.wa}}</a></td>
+                             <td > <a href = '#' Onclick='changewa({{pincode.id}})'>click here to change value</a> </td>
+                            {% endfor %}
+                     {% else %}
+        <td colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found</td>
+    {% endif %}
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div id="myDialognew" title="Enter Content"> </div>
+
+      <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+    function changewa(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/lesson/set_up/lesson_count/entwa/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:250,
+                    width:650,
+                    title:'<a>SchApp 8.0</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialognew").dialog(dialogOpts);
+            }
+        </script>

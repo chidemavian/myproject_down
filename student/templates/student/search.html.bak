@@ -1,0 +1,100 @@
+{% extends 'base1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bright Future College</title>
+        <link type="text/css" rel="Stylesheet" href="/static/CSS/new_lekan.css" />
+    <script src="/static/jquery/jquery.js"></script>
+</head>
+
+<body>
+  <div class="panel-body">
+     <img style='width:100px;height:100px' src="/static/{{data.studentpicture}}" class="img-responsive" alt="Student Image">
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <thead>
+      <tr>
+          <th>Student Record</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+          <td bgcolor="#C8C8C8">Student Name</td>
+          <td>{{ data.fullname }}</td>
+          <td bgcolor="#C8C8C8">Admission Number</td>
+          <td>{{ data.admissionno }}</td>
+      </tr>
+
+          <tr>
+
+          <td bgcolor="#C8C8C8">Session</td>
+
+          <td>{{ data.admitted_session }}</td>
+
+          <td bgcolor="#C8C8C8">Day/Boarding</td>
+          <td>{{ data.dayboarding }}</td>
+
+      </tr>
+      <tr>
+          <td bgcolor="#C8C8C8">Class</td>
+          <td>{{ data.admitted_class }}</td>
+          <td bgcolor="#C8C8C8">Arm</td>
+          <td>{{ data.admitted_arm }} </td>
+
+      </tr>
+      <tr>
+          <td bgcolor="#C8C8C8">Address</td>
+          <td>{{ data.address }}</td>
+          <td bgcolor="#C8C8C8">Sex</td>
+          <td>{{ data.sex }} </td>
+      </tr>
+      <tr>
+          <td bgcolor="#C8C8C8">Birth Date</td>
+          <td>{{ data.birth_date|date:"d/m/Y" }}</td>
+          <td bgcolor="#C8C8C8">Place Of Birth</td>
+          <td>{{ data.birth_place }} </td>
+      </tr>
+      <tr>
+          <td bgcolor="#C8C8C8">State Of Origin</td>
+          <td>{{ data.state_of_origin}}</td>
+          <td bgcolor="#C8C8C8">Local Government</td>
+          <td >{{ data.lga }} </td>
+      </tr>
+
+      <tr>
+          <td bgcolor="#C8C8C8">Parent/Guardian</td>
+          <td>{{ data.fathername}}</td>
+          <td bgcolor="#C8C8C8">Parent/Guardian Address</td>
+          <td>{{ data.fatheraddress }} </td>
+      </tr>
+
+      <tr>
+          <td bgcolor="#C8C8C8">Parent/Guardian Phone</td>
+          <td>{{ data.fathernumber}}</td>
+          <td bgcolor="#C8C8C8">Parent/Guardian Occupation</td>
+          <td>{{ data.fatheroccupation }} </td>
+      </tr>
+
+      <tr>
+          <td bgcolor="#C8C8C8">Parent/Guardian E-mail</td>
+          <td>{{ data.fatheremail|lower}}</td>
+          <td bgcolor="#C8C8C8">House</td>
+          <td>{{ data.house }} </td>
+      </tr>
+   </tbody>
+  </table>
+</div>
+</body>
+
+</html>
+{% endblock %}

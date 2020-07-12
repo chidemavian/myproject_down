@@ -1,0 +1,69 @@
+<html>
+<head>.
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+
+<table>
+<div> Will any of the options contain subscripts, superscripts, special symbols,diagramms,etc?,</div>
+    <td>
+        <form  action="/cbt/options/texts/{{state}}/" method="post" onsubmit="disable(this)">
+ 
+
+        <table width="100%" class="table  table-bordered " id="dataTables-example">
+                    <tr rowspan="2" style='border:0px solid black' align='center'>
+                  <img style="width: 230px; height: 230px;" src="/static/{{getdetails.question.image}}" alt="{{choose}}">
+              </tr>
+        </table>
+
+          <table width="100%" class="table  table-bordered " id="dataTables-example">
+                        <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    No    ">
+        </table>
+
+        </form>
+    </td>
+
+<td>
+<form  action="/cbt/options/images/{{state}}/" method="post" onsubmit="disable(this)">
+
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+            <tr rowspan="2" style='border:0px solid black' align='center'>
+          <img style="width: 230px; height: 230px;" src="/static/{{getdetails.question.image}}" alt="{{getdetails.question.image}}">
+      </tr>
+</table>
+
+
+         <table width="100%" class="table  table-bordered " id="dataTables-example">
+
+
+
+                <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="  Yes    ">   
+
+</table>
+
+</form>
+</td>
+</table>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#content").focus();
+    });
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</body>
+</html>
+

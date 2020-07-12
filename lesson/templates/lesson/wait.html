@@ -1,0 +1,208 @@
+<table style="width:auto; text-align: left; vertical-align: middle;background-color:#ffffff">
+ <!--       <tr>
+            <td colspan="20" style="text-align:center;color:black;font-size:14px;background-color:#ccccc0">
+                 Topics Set Up
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}
+            </td>
+        </tr>-->
+        <tr style="color:white;width:auto;">
+            <td colspan="20">
+               <form action="" method="POST">
+               <table style="width:auto;">
+                   <tr>
+                       <td>
+                           {{ form.session.label_tag }}&nbsp;{{ form.session }}
+                       </td>
+                       <td>
+                           {{ form.klass.label_tag }}&nbsp;{{ form.klass }}
+                       </td>
+                       <td>
+                           {{ form.subject.label_tag }}&nbsp;{{ form.subject }}
+                       </td>
+                   <!--    <td><input name="submit" type= "submit" value=" View Subject Report " ></td>-->
+
+                   </tr>
+               </table>
+               </form>
+            </td>
+
+        </tr>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // $("#id_birth_date").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+            //$("#id_studentname").focus();
+            //$("id_birth_date").attr('disable','True');
+
+            getclass();
+            //getarm();
+            getterm();
+            //getsubject();
+            //autopost();
+
+           // $(".ass").hide();
+        });
+    </script>
+    
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                        getarm();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() ;
+            //alert(state);
+            var url = "/assessment/getarm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                        getsubject();
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getterm(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getterm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_term").val('');
+            $("#id_term").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_term").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getsubject(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val();
+            var url = "/assessment/getsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost();
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost();
+            });
+            $("#id_arm").change(function () {
+                getsubject();
+            });
+            $("#id_klass").change(function () {
+                getarm();
+            });
+            $("#id_term").change(function () {
+                autopost();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() ;
+            var url = "/assessment/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>

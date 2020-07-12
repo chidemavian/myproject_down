@@ -1,0 +1,129 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bright Future College</title>
+        <link type="text/css" rel="Stylesheet" href="/static/CSS/new_lekan.css" />
+</head>
+          
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> {{getstu.fullname}}'s COURSE FORM</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+  <div class="panel-body">
+
+     <img style='width:100px;height:100px' src="/static/{{getstu.studentpicture}}" class="img-responsive" alt="Student Image">
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+      <thead>
+
+
+      </thead>
+      <tbody>
+          <tr>
+              <td >Admission Number</td>
+              <td>{{ getstu.admissionno }}</td>
+              <td>Student Name</td>
+              <td>{{ getstu.fullname }}</td>
+          </tr>
+           <tr>
+              <td>Session</td>
+              <td>{{ getstu.admitted_session }}</td>
+              <td>Class</td>
+              <td>{{ getstu.admitted_class }}&nbsp;&nbsp;{{ getstu.admitted_arm }}</td>
+          </tr>
+          <tr>
+              <td >Gender</td>
+              <td>{{ getstu.sex }} </td>
+              <td >Term</td>
+              <td>
+                <form action="" method="POST">
+                           {{form.term}}
+                </form>
+            </td>
+          </tr>
+
+     </tbody>
+  </table>
+
+
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+            <tr>
+
+            <td colspan="25">
+                <div class="box2"></div>
+            </td>
+
+        </tr>
+</table>
+
+</div>
+
+<div id="myDialog" title="Add Subject"></div>
+<div id="deletesubject" title="Delete Subject"></div>
+</body>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+            getcf();
+          $("#id_term").change(function () {
+               getcf();
+           });
+        });
+    </script>
+
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#myDialog").hide();
+            $("#deletesubject").hide();
+        });
+    </script>
+
+
+<script type="text/javascript" language="javascript">
+        function getcf(){
+            var state =  ('{{ getstu.admissionno }}') + ':'+ $("#id_term").val();;
+            // alert(state);
+            var url = "/assessment/stucourseform/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    // $(".box2").show();
+                    $(".box2").html(html);
+                }
+            });
+            return false;
+        }
+</script>
+
+</html>
+{% endblock %}

@@ -1,0 +1,23 @@
+<form id="{% block formID %}generic-form{% endblock %}" action="{% block form_action %}#{% endblock %}"
+      method="{% block form_method %}post{% endblock %}" enctype="{% block formenctype %}text/plain{% endblock %}">
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+    <table style="text-align: left; vertical-align: text-top;">
+        {% for field in form %}
+            <tr>
+                <td>{{ field.label_tag }}</td>
+                <td>{{ field }}</td>
+                <td>{{ field.errors }}</td>
+            </tr>
+        {% endfor %}
+        {% block submitButton %}
+            <tr>
+                <td></td>
+                <td><input type="button" value="{% block submitButtonLabel %}Submit{% endblock %}"
+                           onclick="{% block onClickDo %}{% endblock %}"></td>
+                <td></td>
+            </tr>
+        {% endblock %}
+    </table>
+</form>

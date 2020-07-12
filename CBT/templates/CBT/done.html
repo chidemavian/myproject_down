@@ -1,0 +1,19 @@
+
+
+
+{% extends 'welcome1.html' %}
+{% block sectionTitle %}Success{% endblock %}
+{% block content %}
+
+   <span style="font-size:20px;color:blue;text-align:center;"> CONGRATULATIONS YOU ARE DONE!!! <br> CHECK BACK FOR YOUR RESULTS</span>
+
+   <div >To see how you have performed, click continue and proceed to script</div>
+
+<form action="/cbt/take_test/clear/" method="post" enctype="multipart/form-data" role="form">
+
+<table style='display:inline'  width="10%" class="table  table-bordered" id="dataTables-example">
+<input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="  Continue ">
+</table>
+
+</form>
+{% endblock %}

@@ -1,0 +1,140 @@
+<head>
+  <title>  SchApp 8.0 - Enterprise School Software</title>
+  <style type="text/css">
+
+  .style11 {
+  font-size: 100px;
+  color: #FF3300;
+  text-align: :center;
+}
+.style1 {
+  color: #000000;
+  font-weight: bold;
+  font-size: 16px;
+}
+.style2 {font-size: 9px}
+.labeltax {
+  color: #0F0;
+  text-decoration: blink;
+  text-emphasis: accent;
+  font-weight: bold;
+}
+.l {
+  font-size: 16px;
+}
+
+
+/* Bordered form */
+form {
+    border: 8px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+ input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid black;#ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+
+  </style>
+</head>
+<link type="text/css" rel="Stylesheet" href="/static/CSS/new_body_style.css" />
+
+
+  <tr style='text-align:center:top:580%'>
+    <table>
+      <td style='font-size:420%; color:#FF3300; text-align:center'>SchApp</span></td>
+      </table>
+
+</tr>
+<tr>
+ <div class = 'login' > 
+ <form action="/login/" method='post'>
+
+  <div class="container">
+    
+    <label><b>Username</b></label>
+    <input type="text" id = 'username' placeholder="Enter Username" name="username" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <button type="submit">Login</button>
+    <input type="checkbox" checke="checked"> Remember me
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form> 
+</div>
+
+</tr>
+<script type="text/javascript">
+document.getElementById('#id_username').focus()
+</script>
+
+

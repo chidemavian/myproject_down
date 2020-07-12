@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+ 
+<body>
+
+<table style=" width: 100%">
+    <tr>
+
+      <td>
+            <table style=" width:100%; border:1px solid black">
+<div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+            
+               <tr>
+                    <td colspan="6" align="center" valign="center" style = "background-color:#ccccc0;font-size:15px;width:auto;color:#000000;border-radius:5px;border:1px solid black">Subject: {{subject }}</td>
+               </tr>
+    {% for pin in sublist %}
+
+
+                   <tr class ='curr'>
+                      <td colspan="4"> <b > Topic {{forloop.counter}}.&nbsp;&nbsp;{{pin.topic.topic}}</b></td>
+                       <td align="right" colspan="4"><a href="#" onClick= "getdialogir({{ pin.topic.id}})"  title="Enter Instructional Resources for {{ pin.topic.topic}}">Click here to enter Instructional Resources</a></td>
+                   </tr>
+
+                   <tr class='ajaxhead'>
+                        <td > S/N</td>
+
+                        <td > Subject </td>
+
+                        <td > Class </td>
+
+                        <td > Term</td>
+
+                        <td > Resources</td>
+                        <td > Examples</td>
+                    </tr>
+                     {% if pin.ir %}
+                          {% for p in pin.ir  %}
+                         
+                
+                        <tr class='ajaxbody'>
+                            <td >{{ forloop.counter}}</td>
+                            <td > {{ p.topic.subject}}</td>
+                            <td >{{ p.topic.klass}}</td>
+                            <td >  {{ p.topic.term}}</td>
+                            <td ><a href="/lesson/set_up/resources/delete/{{p.id}}/"title="Edit/Delete{{p.subtopic}}">{{ p.resource}}</a></td>
+                            <td >  {{ p.example}}</td>
+                    </tr>
+                            {% endfor %}
+                            {% else %}
+                                <td colspan="7" class='null'>  .......No Instructional Resources Found for {{pin.topic.topic}}.</td>
+                            {% endif %}
+                                   
+                  
+                       
+  {% endfor %}
+              
+            </table>
+        </td>
+    </tr>
+</table>
+<div id="myDialog" title="Enter Sub Topic">
+</div>
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+
+<script type="text/javascript" language="javascript">
+    function getdialogir(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/lesson/set_up/resources/enterir/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:500,
+                    width:450,
+                    title:'<a>SchApp 8.0</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+        </script>
+
+
+</body>
+</html>

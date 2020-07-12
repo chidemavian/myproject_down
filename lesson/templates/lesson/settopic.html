@@ -1,0 +1,95 @@
+{% extends 'lesson/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+
+<div id = "submenu_cont">
+<table>
+        <tr>
+            <td colspan="20" style="border-radius:0px;text-align:center;color:black;font-size:16px;background-color:#ccccc0">
+                 Set Up Lesson Plan
+            </td>
+        </tr>
+        <tr class ="submenu">
+            <td <a title = "Set Up Subject Topic" href="/lesson/se_up/topic=?"> Set Up Topic</a></td>
+            <td <a title = "Set Up Contents" href="/lesson/setuspall/"> Set Up Contents </a></td>
+            <td <a title ="Set Up Objectives" href="/lesson/setuspall/"> Set Up Objectives</a></td>
+            <td <a title = "Set Up Instructional Resource" href="/lesson/setupall/">I.R</a></td>
+            <td <a title ="Set Up Student Activity" href="/lesson/setuspall/"> Set Up S.A</a></td>
+            <td <a title ="Set Up Teacher's Activity" href="/lesson/setupall/"> Set Up T.A</a></td>
+            <td <a title ="Set Up Number of Weekly Lessons Per Class" href="/lesson/setuspall/"> Set Up W.L</a></td>
+        </tr> 
+</table>  
+        <tr>
+            <td colspan="20" valign= 'center' style="border-radius:0px;text-align:center;color:black;font-size:16px;background-color:#ccccc0"> Set up Topic
+                <div class="box"></div>
+            </td>
+
+        </tr>
+
+</div>
+
+  <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // $("#id_birth_date").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+            //$("#id_studentname").focus();
+            //$("id_birth_date").attr('disable','True');
+
+            getclass();
+            //getarm();
+            getterm();
+            //getsubject();
+            //autopost();
+
+           // $(".ass").hide();
+        });
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost();
+            });
+            $("#id_arm").change(function () {
+                getsubject();
+            });
+            $("#id_klass").change(function () {
+                getarm();
+            });
+            $("#id_term").change(function () {
+                autopost();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() ;
+            var url = "/assessment/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+{% endblock %}

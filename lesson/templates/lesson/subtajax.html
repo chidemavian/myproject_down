@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+ 
+<body>
+
+<table style=" width: 100%">
+    <tr>
+
+      <td>
+            <table style=" width:100%; border:1px solid black">
+<div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+            
+               <tr>
+                    <td colspan="6" align="center" valign="top" style = "background-color:#ccccc0;font-size:15px;width:auto;color:#000000;border-radius:5px;border:1px solid black">Subject: {{subject }}</td>
+               </tr>
+    {% for pin in sublist %}
+
+
+                   <tr class = 'curr'>
+                      <td colspan="4"> <b > Topic {{forloop.counter}}.&nbsp;&nbsp;{{pin.topic.topic}}</b></td>
+                       <td align="right" colspan="3"><a href="#" onClick= "getdialogcontent({{ pin.topic.id}})"  title="Enter Contents for {{ pin.topic.topic}}">Click here to enter Contents</a></td>
+                   </tr>
+
+                   <tr class='ajaxhead'>
+                        <td> S/N</td>
+
+                        <td > Subject </td>
+
+                        <td> Class </td>
+
+                        <td > Term</td>
+
+                        <td > Contents</td>
+                    </tr>
+                     {% if pin.content %}
+                          {% for p in pin.content  %}
+                         
+                
+                        <tr class = 'ajaxbody' >
+                            <td align="center" valign="top" style = "border-radius:10px;background-color:black;font-size:11px;width:auto;color:#00ff00;border:1px solid black">{{ forloop.counter}}</td>
+                            <td > {{ p.topic.subject}}</td>
+                            <td >{{ p.topic.klass}}</td>
+                            <td >  {{ p.topic.term}}</td>
+                            <td ><a href="/lesson/setup_sub/delete/{{ p.id }}/"  title="Edit/Delete {{ p.subtopic}}">{{ p.content}}</a></td>
+                    </tr>
+                            {% endfor %}
+                            {% else %}
+                                <td colspan="7" class= 'null' >  .......No Contents Found for {{pin.topic.topic}}.</td>
+                            {% endif %}                      
+                       
+  {% endfor %}
+              
+            </table>
+        </td>
+    </tr>
+</table>
+    <div id="myDialognew" title="Enter Content"> </div>
+
+      <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+    function getdialogcontent(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/lesson/setup_sub/entercont/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:600,
+                    width:650,
+                    title:'<a>SchApp 8.0</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialognew").dialog(dialogOpts);
+            }
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<table style="width:100%;">
+    <tr>
+        <td colspan="10">
+            {% if getdetails %}
+            <table style="width:100%;background-color:white;border-collapse:collapse;">
+                <thead >
+                <tr>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Admission No</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Name</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Class</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Arm</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Session</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Term</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Subject Offered</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in getdetails %}
+                    <tr>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.academic_rec.student.admissionno }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.academic_rec.student.fullname }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.academic_rec.student.admitted_class }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.academic_rec.student.admitted_arm }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.academic_rec.student.admitted_session }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.term }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.subject }}</td>
+                        <td title = "Add Subject for {{ student.academic_rec.student.fullname}}" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <a href="#" style="color:blue" onClick= "getdialogtry({{ stuid  }});"> Add Subject</a> </td>
+                        <td title = "Delete {{ student.subject}} for {{student.academic_rec.student.fullname}}" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <a href="#" style="color:blue" onClick= "deletesub({{ student.id  }});" > Remove Subject </a> </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+           {% else %}
+           <span style="font-weight:bold;font-size:18px;color:gray;"> No Subject Found For "{{ fullname }}",</span>   <a href="#" style="color:blue;font-size:12px;font-weight:bold;" onClick= "getdialogtry({{ stuid  }});" > Click Here to Add Subject </a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+<div id="myDialog" title="Add Subject">
+</div>
+<div id="deletesubject" title="Delete Subject">
+</div>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#myDialog").hide();
+        $("#deletesubject").hide();
+    });
+</script>
+<script type="text/javascript" language="javascript">
+    function getdialogtry(vid){
+        //alert($("#id_term").val());
+        var state = vid + ':'+ $("#id_term").val();
+        var url = "/assessment/getmoresubject/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdialog(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:400,
+            width:610,
+            title:'<a>SchApp 8.0 | Add More Subject</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#myDialog").dialog(dialogOpts);
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function deletedialog(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:350,
+            width:510,
+            title:'<a>SchApp 8.0 | Confirm Subject Delete</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#deletesubject").dialog(dialogOpts);
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function deletesub(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/deletemoresubject/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#deletesubject").html(html);
+                deletedialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+</body>
+</html>
+

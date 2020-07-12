@@ -1,0 +1,173 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+    <div >
+
+        <a href="/sysadmin/reportsheet/"><i class="fa fa-edit fa-fw"></i>Reportsheet Type</a>
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:25px; font-size:14px;color:black;text-align:center;padding-top:5px;"> SET TERM PREFERENCES  </div>
+        <div  style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:#ffffff;text-align:center;" > {{varerr}}</div>
+       <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <tr>
+                <td colspan="10">
+
+                    <form action="" method="post" name ="main" onsubmit="disable(this)">
+                      <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                            <tr>
+
+                                <td>
+                                    Status :
+                                </td>
+                                <td>{{ form.status}}
+                                </td>
+                                <td>
+                                    Term :
+                                </td>
+                                <td>
+                                    {{ form.term}}
+                                </td>
+                                <td>
+
+                                    <input name="submit" type= "submit" value="Change Type">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td></tr>
+
+            <tr>
+                <td colspan="10">
+                 {% if getdetails %}
+
+                    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <div style="background-color:#ccccc0;border:0px solid black;width:100%;height:25px; font-size:14px;color:black;text-align:center;padding-top:5px;"> TERM STATUS </div>
+                        <tr style='text-align:center'>
+                            <td ><strong>S/N</strong></td>
+                            <td ><strong>Term </strong></td>
+                            <td ><strong>Status</strong></td>
+                            <td ><strong>Start </strong></td>
+                            <td ><strong>Duration</strong></td>
+                        </tr>
+                        {% for pincode in getdetails %}
+
+                            <tr style='text-align:center'>
+
+                            <td >  {{ forloop.counter }} </td>
+                            <td >  {{ pincode.term }}</td>
+                            <td > {{ pincode.status }} </td>
+                     <td >  <a href="#" style="color:blue" onClick= "getdialogdate({{ pincode.id  }});">{{ pincode.start_date }}</a></td>        
+                            <!-- <td >  {{ pincode.start_date }}</td> -->
+
+                         <td >  <a href="#" style="color:blue" onClick= "getdialogtry({{ pincode.id  }});">{{ pincode.duration }}</a></td>   
+                            <!-- <td > {{ pincode.duration }} </td> -->
+
+                        {% endfor %}
+                        </tr>
+                    </table>
+
+                {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+<div id="myDialog" title="Edit Teacher">
+    <div id="myDate" title="Edit Teacher">
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+<script type="text/javascript" language="javascript">
+        function getdialogtry(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/duration/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $("#myDialog").html(html);
+                    getdialog1();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getdialog1(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:320,
+                width:510,
+                title:'Duration set Dialog box' ,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+    
+
+
+
+<script type="text/javascript" language="javascript">
+        function getdialogdate(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/date/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:320,
+                width:510,
+                title:' Set Date Dialog box' ,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+{%endblock%}

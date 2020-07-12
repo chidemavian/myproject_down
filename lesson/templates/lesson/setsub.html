@@ -1,0 +1,42 @@
+<html>
+<head>
+
+</head>
+<body>
+    {{va}}
+<table>
+    <tr>
+        <td>
+            <table style="border:0px solid black">
+                       <tr>
+                        <td align="center" valign="top" style = "border-radius:10px;width:4%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> S/N</td>
+                        <td width="120" align="center" valign="top" style = "border-radius:10px;width:25%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Subject </td>
+                        <td width="248" align="center" valign="top" style = "border-radius:10px;width:4%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Class </td>
+                        <td width="39" align="center" valign="top" style = "border-radius:10px;width:5%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Term</td>
+                        <td width="80" align="center" valign="top" style = "border-radius:10px;width:35%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Topic</td>    
+                    <td width="98" align="center" valign="top" style = "border-radius:10px;width:35%; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Subopic </td>
+                    </tr>
+             {% if sett %}
+            {% for pincode in sett %}
+                        <tr>
+                            <td align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter}}</td>
+                            <!--  <td align="center" valign="top" style = "border:1px solid black;background-color:white;font-size:12px;width:auto;color:white"> <strong><a href="/setup/class/delete/{{ pincode.id }}/"  title="Delete This Class">{{ pincode.klass}}</a></strong></td>-->
+                            <td align="center" valign="top" style = "border-radius:10px;border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black"> {{ pincode.subject}}</td>
+                            <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black">{{ pincode.klass}}</td>
+                            <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black">  {{ pincode.term}}</td>
+                            <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black">  <strong><a href="#" onClick= "getdialogtry{{ pincode.id }}/"  title="Enter a Contents for {{ pincode.topic}}">{{ pincode.topic}}</a></strong></td>
+                            <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black"> {{ pincode.Subtopic}}</td>
+                            {% endfor %}
+                {% else %}
+        <td width="67" colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found.</td>
+    {% endif %}
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+
+</html>
+

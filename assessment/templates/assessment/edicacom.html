@@ -1,0 +1,261 @@
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .error1 { color: red; }
+        .error2 { color: red; }
+        .error3 { color: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 16px;
+        }
+        .loginTxtbox1
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+{% load humanize %}
+</head>
+<body>
+<form action="/assessment/editcommentca1/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+    <table style="width:100%;background-color:#f5f5f5;">
+
+        <tr style="width:100%;">
+            <td colspan="15">
+                <table style="width:100%;">
+                    <tr>
+                        <td colspan="5" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Student Name
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.student.fullname }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Session
+                        </td>
+                        <td>
+                            {{ getdetails.student.admitted_session}}
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Term
+                        </td>
+                        <td>
+                            {{getdetails.term}}
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Class
+                        </td>
+                        <td>
+                            {{getdetails.klass}}{{getdetails.arm}}
+                        </td>
+                        <td></td>
+                    </tr>
+                  <tr style="color:red;">
+                        <td >
+                            REPORTSHEET:
+                        </td>
+                        <td colspan="5">
+                            {{ ca }}
+                        </td>
+
+                    </tr>
+                  <tr>
+                        <td style="color:blue;">
+                            Student Average
+                        </td>
+                        <td  colspan="5">
+                            {{ dit}}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Home room <br/>teacher's Comment
+                        </td>
+                        <td>
+
+                            <textarea id="class_teacher_comment" rows="2" cols="20"   name="comment" class ="loginTxtbox1">{{ getdetails.com1 }}</textarea>
+                        </td>
+                        <td><span class="error1">Your Comment Can Not Be Empty</span></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" style="text-align:center;"><input type="submit" value=":: Submit Comment ::" name="submit"></td>
+                    </tr>
+                </table>
+
+            </td>
+
+        </tr>
+    </table>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error1').hide();
+        $('.error2').hide();
+        $('.error3').hide();
+        $('.submit').click(function(event){
+            var data1=$("#class_teacher_comment").val();
+            var len1=data1.length;
+            //alert(len);
+            if (len1 > 0){
+                $('.error1').hide();
+
+            }
+            else
+            {
+                //alert('Your Comment Cannot be Empty');
+                $("#class_teacher_comment").focus();
+                $('.error1').show();
+                event.preventDefault();
+            }
+
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#class_teacher_comment").keyup(function () {
+            $('.error1').hide();
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd-mm-yy"
+        };
+        $("#nexttem").datepicker(pickerOpts);
+        $("#noopen").focus();
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error2').hide();
+        $('.submit').click(function(event){
+            var data1=$("#noopen").val();
+            var len1=data1.length;
+            //alert(len);
+            if (len1 > 0){
+                $('.error2').hide();
+            }
+            else
+            {
+                //alert('Can not be Empty');
+                $("#noopen").focus();
+                $('.error2').show();
+                event.preventDefault();
+            }
+            //*********************************************************
+            if (jQuery.isNumeric(data1) == true){
+
+            }
+            else
+            {
+               // alert('A valid Number is required');
+                $('.error2').show();
+                $("#noopen").focus();
+                event.preventDefault();
+            }
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error3').hide();
+        $('.submit').click(function(event){
+            var data2=$("#nopresent").val();
+            var len2=data2.length;
+            if (len2 <= 0){
+              //  alert('Can not be Empty');
+                $("#nopresent").focus();
+                $('.error3').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error3').hide();
+            }
+            //*********************************************************
+
+            if (jQuery.isNumeric(data2) == true){
+
+            }
+            else
+            {
+               // alert('A valid Number is required');
+                $('.error3').show();
+                $("#nopresent").focus();
+                event.preventDefault();
+
+            }
+
+        });
+    });
+</script>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#class_teacher_comment").keyup(function () {
+            $('.error1').hide();
+        });
+        $("#noopen").keyup(function () {
+            $('.error2').hide();
+        });
+        $("#nopresent").keyup(function () {
+            $('.error3').hide();
+        });
+
+
+    });
+</script>
+
+
+
+</body>
+</html>

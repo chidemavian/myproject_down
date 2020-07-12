@@ -1,0 +1,82 @@
+{%extends 'setup/typography.html' %}
+{% block content %}
+    <div align ="center" style="background-color:#ccccc0;border:0px solid black;width:100%;height:3%; font-size:16px;color:black;text-align:center">School House Set Up </div>
+    <div align="center" style="color:red;font-family:verdana;font-size:15px;background-color:#ffffff;height:5%; " > {{varerr}}</div>
+  <table align ="left" style="border:1px solid black;width:40%">
+    <tr  valign="top" ><td >
+        <form action="" method="post" name ="main" id="form1" onsubmit="disable(this)">
+            <table align ="left" style="border:0px solid black;width:99%">
+                <thead> <tr>
+                    <td colspan="20" align="center" style="width:100%;font-weight: ld;background-color:#ccccc0;color: black;text-align:center" > House
+                    </td></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td align ="left" style="width:auto;">{{ form.house.label }}:</td>
+                    <td align ="left" style="width:auto;">{{form.house}}    </td>
+                    <td align ="left" style="width:auto;">{{form.house.errors}} </td>
+                </tr>
+                <tr>
+                    <td align ="left" style="width:auto;"></td>
+                    <td align ="left" style="width:auto;">
+
+                        <input name="submit" type= "submit" value="   ADD HOUSE  " >
+                    </td>
+                    <td align ="left" style="width:auto;"></td>
+                </tr>
+                </tbody>
+            </table>
+         </form>
+    </tr>
+</table>
+    <table align ="left" style="border:1px solid black;width:59%">
+        <tr>
+            <td>
+                <table align ="right" style="border:0px solid black;width:100%">
+                    <thead>
+                        <tr>
+                             <td colspan="5">
+                                <input name="submitprint" type= "submit" value="Print house colours" class = "submit" onclick = "openrecprint();"><div class="printable"></div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td align="center" valign="top" style = "border-radius:5px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> S/N </td>
+                        <td align="center" valign="top" style = "border-radius:5px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Existing School Houses </td>
+                        <td align="center" valign="top" style = "border-radius:5px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Delete </td>
+                    </tr>
+                    {% for pincode in getdetails %}
+                        <tr>
+                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter}}</td>
+                          <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ pincode.house}}</td>
+                          <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"><a href="/setup/house/delete/{{ pincode.id }}/" title="Delete {{ pincode.house}} house " style ="color:blue;">{{ pincode.house}}</a> </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+<script language="javascript" type="text/javascript">
+    function openrecprint()
+    {
+        //alert("welcome");
+        $( ".printable" ).print();
+    }
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    {% endblock %}

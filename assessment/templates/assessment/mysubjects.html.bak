@@ -1,0 +1,154 @@
+{% extends 'welcome1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bright Future College</title>
+        <link type="text/css" rel="Stylesheet" href="/static/CSS/new_lekan.css" />
+</head>
+          
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> My Subjects</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+  <div class="panel-body">
+
+     <img style='width:100px;height:100px' src="/static/{{data.studentpicture}}" class="img-responsive" alt="Student Image">
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+      <thead>
+          <tr>
+              <th colspan='5'>{{term}} term Subjects Record</th>
+
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td bgcolor="">Admission Number</td>
+              <td>{{ data.admissionno }}</td>
+              <td bgcolor="">Student Name</td>
+              <td>{{ data.fullname }}</td>
+          </tr>
+           <tr>
+              <td bgcolor="">Session</td>
+              <td>{{ data.admitted_session }}</td>
+              <td bgcolor="">Class</td>
+              <td>{{ data.admitted_class }}&nbsp;&nbsp;{{ data.admitted_arm }}</td>
+          </tr>
+          <tr>
+              <td bgcolor="">Gender</td>
+              <td>{{ data.sex }} </td>
+              <td bgcolor="">Term</td>
+              <td>{{ term }} </td>
+          </tr>
+     </tbody>
+  </table>
+
+
+  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <tr>
+        <td colspan="10">
+            {% if getdetails %}
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <thead >
+                <tr class='ajaxhead4'>
+                    <td >S/N</td>
+                    <td >Subject </td>
+                    <td >Subject Teacher</td>
+               <!--      <td> Delete Subject</td> -->
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in getdetails %}
+                    <tr class='ajaxbody4'>
+                        <td >{{ forloop.counter }}</td>
+                        <td >{{ student.subject }}</td>
+                        <td >{{ student.subject_teacher}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+           {% else %}
+           <span style="font-weight:bold;font-size:18px;color:gray;"> No Subject Found For "{{ fullname }}",</span>   <a href="#" style="color:blue;font-size:12px;font-weight:bold;" onClick= "getdialogtrys({{ stuid  }});" > Click Here to Add Subject </a>
+            {% endif %}
+        </td>
+    </tr>
+    <div>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000"> <a href="#" style="color:blue" align= 'center' onClick= "getdialogtrys({{ stuid  }});"> Click here to add subject</a> </td>
+    </div>
+      <div>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000">NB:  Contact your home room teacher immediately, if you need help with deleting any subject.</td>
+    </div>
+        <div>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000">Submission Deadline:  {{ckk}}</td>
+    </div>
+</table>
+</div>
+
+<div id="myDialog" title="Add Subject"></div>
+<div id="deletesubject" title="Delete Subject"></div>
+</body>
+
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#myDialog").hide();
+        $("#deletesubject").hide();
+    });
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogtrys(vid){
+        var state = vid + ':'+ "{{term}}" ;
+        // alert(state)
+        var url = "/assessment/getmoresubject/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdialog(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:500,
+            width:610,
+            title:'<a>SchApp 8.0 |  Subject</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#myDialog").dialog(dialogOpts);
+    }
+
+</script>
+
+</html>
+{% endblock %}

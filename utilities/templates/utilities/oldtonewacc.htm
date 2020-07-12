@@ -1,0 +1,40 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}New Account {% endblock %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    <table style="width:auto;">
+        <tr>
+            <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;background-color:#336666;color:red">
+                {{succ}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;background-color:#336666;">
+                OLD ACCOUNT TO NEW ACCOUNT
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                OLD Account No
+            </td>
+            <td>
+                {{ form.oldacc }}
+            </td>
+            <td>
+                NEW Account No
+            </td>
+            <td>
+                {{ form.newacc }}
+            </td>
+            <td>
+                <input name="submit" type= "submit" value="CHANGE ACCOUNT "/>
+            </td>
+
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}File Upload{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div style ="color:red;font-size:20px;font-family:verdana;text-decoration:blink" align ="left">{{succ}}</div>
+    <h1>Enter A Date (e.g 2011-2-15)</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        <p>{{form.as_p}} <input name="submit" type= "submit" value="Submit "/></p>
+    </form>
+
+</div>
+{% endblock %}

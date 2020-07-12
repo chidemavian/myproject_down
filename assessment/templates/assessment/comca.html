@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+</head>
+<body>
+    <table width="100%" class="table  table-bordered" id="dataTables-example">
+    <tr>
+        <td >
+<div>Enter {{ca}} comments for <span style='color:blue'>{{term}} term {{klass}}{{arm}} {{session}} Session</span></div>
+            <table width="100%" class="table  table-bordered" id="dataTables-example">
+               
+                <tr >
+                    <td >S/N</td>
+                    <td >Name</td>
+                    <td >{{ca}} Comment</td>
+               <!--     <td >Reportsheet Progress</td> -->
+                </tr>
+               
+                <tbody>
+                {% for student in data %}
+                    <tr>
+                        <td >{{ forloop.counter }}</td>
+                        <td >{{ student.comment.student.fullname }}</td>
+                        <td ><a href="#" style ='font-size:12px' onClick= "commentca({{ student.comment.id  }});"> Homeroom Teacher's Comment </a> </td>
+                       <!-- <td > <a href="#" onClick= "getdialogtry1({{ student.comment.id  }});">Reportsheet Progress </a> </td> -->
+                    
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div id="comment" title="Enter Comment">
+</div>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#myDialog").hide();
+        $("#comment").hide();
+
+    });
+</script>
+
+<script type="text/javascript" language="javascript">
+    function commentca(vid){
+        //alert(vid);
+        var state = vid +':'+ $("#id_ca").val();
+        var url = "/assessment/getstucommentca/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#comment").html(html);
+                getcomment();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getcomment(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:"auto",
+            width:550,
+            title:"<a>SchApp 8.0 | Home room teacher's Comment</a>" ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#comment").dialog(dialogOpts);
+    }
+
+</script>
+</body>
+</html>
+

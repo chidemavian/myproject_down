@@ -1,0 +1,271 @@
+<html>
+<head></head>
+<body>
+
+    {% for k in bill_list %}
+    <table style="width:100%;height:842px;vertical-align:top;">
+        <tr style="vertical-align:top">
+            <td colspan="2">
+                <table style="width:100%;height:842px;vertical-align:top;" border="0">
+                    <tr>
+                        <td style=" text-align: right;vertical-align:top;" rowspan="2">
+                            <img style="width:80px; height:80px;" src="{{ school.logo }}" alt="{{ school.name }}">
+
+                        </td>
+                        <td style="text-align: center; vertical-align:top;">
+                           <span style="font-size:25px;color: #8b0000;font-weight:bold;font-family:Liberation Serif">{{ school.name }}</span><br>
+                            {{ school.address }} <br>
+                            {{ school.website }} <br>
+                            {{ school.phonenumber }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;font-size:20px;color:blue;font-weight:bold;padding-top:2px;" colspan="2"> School Bill </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <strong>Student Name: &nbsp;{{ k.student.fullname }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <strong> Class: &nbsp;{{klass }}</strong>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">
+                            <strong> Term: &nbsp;{{ term }}</strong>
+
+                        </td>
+                        <td style="text-align:right;">
+                            <strong> Session: &nbsp;{{ session }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align:left;color:black;" colspan="2">Details</td>
+
+                    </tr>
+                    <tr style="vertical-align:top">
+                        <td colspan="2" style="width:100%">
+                            <table style="width:100%;vertical-align:top;border-collapse:collapse;font-size:9px;padding:2px;">
+                                {% for b in k.bill %}
+                                    <tr>
+                                   <!-- <td>{{ forloop.counter }} </td>-->
+
+                                    <td style = "background-color:white;font-size:11px;color:#000000;border:1px solid black;width:80%;">  {{ b.desc }}
+
+                                    </td>
+
+                                    <td style = "background-color:white;font-size:11px;width:20%;color:#000000;border:1px solid black;text-align:right;">  {{ b.billamount }}
+                                    </td>
+                                {% endfor %}
+                                </tr>
+                           </table>
+                         </td>
+                      </tr>
+
+                                <tr>
+                                    <td colspan="2" style="text-align:right;padding:2px;">
+                                        <strong>Total : {{ k.totalbill }}</strong>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2" style="text-decoration:underline;font-size:11px;">
+                                        <strong> COST OF UNIFORMS :</strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;">
+                                        3 complete sets of uniforms
+                                    </td>
+                                    <td style="text-align:right;">
+                                        24,000.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;">
+                                        School Tie
+                                    </td>
+                                    <td style="text-align:right;">
+                                        1,8.0.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;">
+                                        Socks
+                                    </td>
+                                    <td style="text-align:right;">
+                                        1,500.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;">
+                                        Cardigans
+                                    </td>
+                                    <td style="text-align:right;">
+                                        4,000.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;">
+                                        Name Tag
+                                    </td>
+                                    <td style="text-align:right;">
+                                        2,500.00
+                                    </td>
+                                </tr>
+                                <tr style="border:0px;" >
+                                    <td  style="text-align:left;">
+                                        Housewear (Border Only)
+                                    </td>
+                                    <td style="text-align:right;">
+                                        14,000.00
+                                    </td>
+                                </tr>
+                                <tr style="border:0px;" >
+                                    <td  style="text-align:left;">
+                                        Sundaywear (Border Only)
+                                    </td>
+                                    <td style="text-align:right;">
+                                        9,000.00
+                                    </td>
+                                </tr>
+                                <tr style="border:0px;" >
+                                    <td  style="text-align:left;">
+                                        Bedsheet & Pillow (Border Only)
+                                    </td>
+                                    <td style="text-align:right;">
+                                        2,500.00
+                                    </td>
+                                </tr>
+                                <tr style="border:0px;" >
+                                    <td  style="text-align:left;">
+                                        Duvet (Border Only)
+                                    </td>
+                                    <td style="text-align:right;">
+                                        5,000.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;font-weight:bold;" colspan="2">
+                                        <hr>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td  style="text-align:left;font-weight:bold;">
+                                        Transportation
+                                    </td>
+                                    <td style="text-align:right;font-weight:bold;">
+                                        35,000.00
+                                    </td>
+                                </tr>
+                                <tr style="border:1px;" >
+                                    <td  style="text-align:left;font-weight:bold;">
+                                        Development Levy
+                                    </td>
+                                    <td style="text-align:right;font-weight:bold;">
+                                        50,000.00
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td  style="text-align:left;font-weight:bold;" colspan="2">
+                                        <hr>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        <strong> Note :</strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                    <strong> 1. Discount Policy</strong>
+                                </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        (a) A discount of 5% of total school fees will be given upon one-off full annual payment.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        (b) A discount of 10% of tuition fees will be given to 2 or more siblings of the same biological parent.
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        <strong> 2. School Fees Payment</strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        (a) Total school fees for the term must be paid on or before resumption date otherwise your child will not be allowed to resume for the term.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        (b) Please ensure that the name of your child is written as depositor on the pay-in-slip(teller) while paying the school fees.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        <strong> 3. Transportation</strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        This is optional for day student. Both ways is =N=35,000.00 per term and one way is =N=20,000.00 per term.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        <strong> 4. Development Levy</strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        This is a one-off payment and it is expected to be paid before the student graduates,but not necessarily on resumption.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;">
+                                        <strong> 5. Mode Of Payment : </strong> Payment can be made into our school accounts in any of the following banks :
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+                                    <td colspan="2" style="text-decoration:none;font-size:11px;text-align:left;padding-left:8px;">
+                                      Skye Bank - Acc Name:Landmark International School Ltd - Acc/No 18.0638878<br>
+                                      Wema Bank -  Acc Name:Landmark International School Ltd - Acc/No 0121553377<br>
+                                      GTBank  -Acc Name:Landmark International School Ltd - Acc/No 0015021619<br>
+                                      First Bank - Acc Name:Landmark International School Ltd - Acc/No 2013963617<br>
+                                      UBA Bank - Acc Name:Landmark International School Ltd - Acc/No 1018135164<br>
+                                        <span style="font-weight:bold;">OR</span><br>
+                                      <span style="font-weight:bold;"> Pay with your ATM/Debit (Master,Visa or Verve) cards at our Account office.</span>
+                                    </td>
+                                </tr>
+                        
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    {% endfor %}  
+</body>
+</html>

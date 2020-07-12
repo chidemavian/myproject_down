@@ -1,0 +1,47 @@
+
+<html>
+{% if getdetails %}
+<tr>
+     <td colspan="10">
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+         <!-- <table style="width:100%;color:black;border-collapse:collapse;"> -->
+             <tr>
+                <td ><strong>S/N </strong></td>
+                 <td ><strong>UserName </strong></td>
+                 <td ><strong>Staff Name</strong></td>
+                 <td ><strong>Status </strong></td>
+<!--                  <td ><strong>Student/Bill </strong></td>
+                <td ><strong>Accounts </strong></td>
+             <td ><strong>H-R </strong></td> -->
+            <td ><strong>Administrator </strong></td>
+            <td ><strong>Home Views</strong></td>
+
+             </tr>
+
+             {% for pincode in getdetails %}
+
+                 <tr>
+                    <td >  {{ forloop.counter }} </td>
+                 <td > {{ pincode.username|upper }}</td>
+
+                 <td >{{ pincode.staffname|title }}</td>
+                 <td > <a href="#" style ="color:#1c94c4;" onclick="admno({{ pincode.id }});" title="Edit This User"> {{ pincode.status}} </a></td>
+<!--                  <td >  <a href="#" style ="color:#1c94c4;" onclick="academic({{ pincode.id }});" title="Manage Student/Academic/Bill">Student/Academic/Bill  </a></td>
+                 <td > <a href="#" style ="color:#1c94c4;" onclick="acc({{ pincode.id }});" title="Manage Account">Accounts  </a></td>
+                 <td > <a href="#" style ="color:#1c94c4;" onclick="hrm({{ pincode.id }});" title="Manage Human Resources">Human Resources </a></td> -->
+                 <td > <a href="#" style ="color:#1c94c4;" onclick="admin({{ pincode.id }});" title="Manage Administrator"> Administrator </a></td>
+                 <td > <a href="#" style ="color:#1c94c4;" onclick="homeview({{ pincode.id }});" title="Manage Home View"> Home Views </a></td>
+             {% endfor %}
+
+
+             </tr>
+</table>
+
+
+     </td>
+ </tr>
+</table>
+{% else %}
+<label style='color:red'> No record found for  {{session}}</label>
+{% endif %}
+</html>

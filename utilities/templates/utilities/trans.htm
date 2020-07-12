@@ -1,0 +1,125 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Transactions Report{% endblock %}
+{% load humanize %}
+{% block content %}
+    <table style="width:100%;">
+      <tr>
+          <td>
+              <table style="width:auto;">
+                  <tr>
+                      <td><a href="/utils/" style="color: red;">View All Account </a>|</td>
+                      <td><a href="/utils/trans/" style="color:red;">View Transaction </a></td>
+                  </tr>
+              </table>
+          </td>
+      </tr>
+    <tr>
+    <td>
+    <form action="/utils/trans/" method="post" enctype="multipart/form-data">
+        <table style="width:50%;">
+            <tr>
+                <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;color:red">
+                    {{succ}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;">
+                    TRANSACTION REPORT
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    {{ form.startdate.label }}
+                </td>
+                <td>
+                    {{ form.startdate }}
+                </td>
+                <td>
+                    {{ form.enddate.label }}
+                </td>
+                <td>
+                    {{ form.enddate }}
+                </td>
+                <td>
+                    <input name="submit" type= "submit" value="View Transaction "/>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+    </td>
+    </tr>
+        <tr>
+            <td>
+
+
+                <table align ="left" style="width:100%;background-color:white;border-collapse:collapse;">
+                    <tr>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Total </strong></td>
+
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>{{ debit }}</strong></td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>{{ credit }}</strong></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Acc. Type</td>
+                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Account Number</td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Account Name </strong></td>
+
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Particulars</strong></td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Trans.Date</strong></td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Debit</strong></td>
+                        <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Credit</strong></td>
+
+                    </tr>
+                    {% for pincode in acc %}
+
+                        <tr>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black" align ="right"> {{ forloop.counter }}</td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.subname }} </td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.acccode }} </td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.accname }} </td>
+
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black;"> {{ pincode.particulars}}</td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ pincode.transdate|date:'d-m-Y' }}</td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.debit|intcomma }} </td>
+                        <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.credit|intcomma }} </td>
+
+
+
+                    {% endfor %}
+
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true
+                // showOn: "button"
+            };
+            $("#id_startdate").datepicker(pickerOpts);
+            $("#id_enddate").datepicker(pickerOpts);
+        });
+    </script>
+
+{% endblock %}

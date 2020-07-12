@@ -1,0 +1,161 @@
+<table style="width:100%;background-color:#f5f5f5;">
+
+    <tr style="width:100%;">
+        <td colspan="15">
+            <table style="width:100%;">
+                <tr>
+                    <td colspan="5" style="font-weight:bold;color:#000000;background-color:#808080;text-align:center">
+                        Press ESC to close this box
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Adm. No
+                    </td>
+                    <td>
+                        {{ getdetails.student.admissionno }}
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Student Name
+                    </td>
+                    <td  colspan="5">
+                        {{ getdetails.student.fullname }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Session
+                    </td>
+                    <td>
+                        {{ getdetails.student.admitted_session}}
+                    </td>
+                    <td rowspan="4">
+                        <img style="width: 80px; height: 80px;"src="/static/{{ getdetails.student.studentpicture  }}" alt="{{ k.studentinfo.fullname  }}">
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td style="color:blue;">
+                        Term
+                    </td>
+                    <td>
+                        {{getdetails.term}}
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+                    <td style="color:blue;">
+                        Class
+                    </td>
+                    <td>
+                        {{getdetails.klass}}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Arm
+                    </td>
+                    <td>
+                        {{getdetails.arm}}
+                    </td>
+                    <td></td>
+                </tr>
+
+
+
+
+            </table>
+
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="20">
+            <table style="width:auto;">
+                <tr>
+                    <td style="color:blue;">
+                        No.Of Days Present
+                    </td>
+                    <td style="font-weight:bold;color: red; text-align:left">
+                        {{ getdetails.days_present }}
+                    </td>
+                    <td style="color:blue;">
+                        No.Of Days Absent
+                    </td>
+                    <td style="font-weight:bold;color: red; text-align:left">
+                        {{ getdetails.days_absent }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Percentage(%)
+                    </td>
+                    <td style="font-weight:bold;color: red; text-align:left">
+                        {{ getdetails.percentage }}
+                    </td>
+                    <td style="color:blue;">
+                        Position in Class
+                    </td>
+                    <td style="font-weight:bold;color: red; text-align:left">
+                        {{ getdetails.position }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:blue;">
+                        Teacher's Comment
+                    </td>
+                    <td colspan="4" style="font-weight:bold;color: red; text-align:left">
+                        {{ getdetails.class_teacher_comment }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="9" style="color:#000000;font-weight:bold;background-color:#808080;">
+                        Academic Record
+                    </td>
+                </tr>
+              <tr>
+                  <td colspan="10">
+                      <table style="width:100%;background-color:white;border-collapse:collapse;">
+                      <tr>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Subject</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Term Score</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Grade</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Subject Average</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Subject Position</td>
+                          <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Teacher's Name</td>
+                      </tr>
+                          {% for p in academic %}
+                              <tr>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.subject }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.term_score }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.grade }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.subject_avg }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.subposition }}</td>
+                                  <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ p.subject_teacher }}</td>
+                              </tr>
+
+                          {% endfor %}
+
+                      </table>
+
+                  </td>
+              </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,39 @@
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">              
+                <div> Exam Question for  {{session}} {{subject}} {{term }} term, {{klass}}</div>
+                {% if myintr %} 
+                     <tr class = "ajaxhead">
+                        
+                        <td > Session </td>
+                        <td> term </td>
+                        <td> Class</td>
+                        <td> Subject </td>
+                        <td> Exam Questions </td>
+                        <td > Uploaded File </td>
+                    </tr>
+                     
+                     {% for sett in myintr %}        
+                        <tr class = "ajaxbody">
+                            <td> {{ sett.session}}</td>
+                            <td> {{ sett.term}}</td>
+                            <td> {{ sett.klass}}</td>
+                            <td > {{ sett.subject}}</td>
+                            <td>
+<form 
+    action="/lesson/ExamQuest/upload/{{sett.id}}/" 
+    enctype="multipart/form-data"
+    method="POST"> 
+                 <a  href="/lesson/ExamQuest/view/{{sett.id}}/"> Download Question</a>
+                 <button type="submit">Change Question File</button>
+                 <div><input type="file" name="datafile" size="40"/> </div>                            
+</form>
+                             </td>
+                            <td> {{sett.file}}</td>
+                        {% endfor %} 
+                     {% else %}
+
+        <td colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Questions Found</td>
+        <td>
+</td>
+    {% endif %}
+                    </tr>
+</table>

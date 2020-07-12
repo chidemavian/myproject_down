@@ -1,0 +1,84 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Delete Transaction{% endblock %}
+
+{% block content %}
+<table style="width:auto;">
+    <tr>
+        <td colspan="9" style="text-align:center;font-family:times;font-size:24px;background-color:#1d5987;color:white;">
+           Transaction List
+        </td>
+    </tr>
+    <tr>
+        <td colspan="9">
+            <form action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+                <table style="width:auto;">
+                    <tr>
+                        <td colspan="7">
+                            <table align ="left" style="border:0px solid black;background:white;width:auto">
+                                <tr>
+                                    <td colspan="10">
+                                        <div align="center" style="color:red;font-family:verdana;font-size:16px;text-decoration:blink">{{varerr}}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Action :
+                                    </td>
+                                    <td align ="left" style="width:auto"><select name="action" id="action">
+                                        <option selected = "selected" value="Approved">Approve</option>
+
+                                    </select>
+                                    </td>
+
+                                    <td>
+                                        <input name="submit" type= "submit" value="Delete Transactions">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Group Name</td>
+                                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Sub-Group Name</td>
+                                    <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Account Name </strong></td>
+                                    <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Account Code</strong></td>
+                                </tr>
+                                {% for pincode in acc %}
+                                    <tr>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black" align ="left">{{ forloop.counter }}</td>
+                                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.groupname }} </td>
+                                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.subgroupname }} </td>
+                                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.accname }} </td>
+                                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black;"> {{ pincode.acccode}}</td>
+                                {% endfor %}
+
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+    </tr>
+</table>
+
+
+
+<script language="javascript" type="text/javascript">
+    function disable(f)
+    {
+        var button = f.elements['submit'];
+        button.value = 'Processing';
+        button.disabled = 'true';
+        return true;
+    }
+</script>
+
+
+{% endblock %}

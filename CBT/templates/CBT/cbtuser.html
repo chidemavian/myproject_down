@@ -1,0 +1,109 @@
+<!-- <script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp 8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+
+
+
+                            {% if myqst %}
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+<div> <span style='color:blue'>{{klass}} </span>Exam Officers for <span style='color:blue'> </span> <span style='color:blue'>{{session}} </span>Session  </div>
+
+
+</table>
+
+                          
+</table>
+
+                          
+     <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                           
+                            <tr style='font-weight:bold;text-align:center'>
+                                <td >S/N</td>
+                                <!-- <td >Class</td> -->
+                                <td >Subject</td>
+                                <td >Teacher</td>
+                                <td >Delete</td>
+
+                            </tr>
+  {% for student in myqst%}
+                            <tr style='text-align:center'>
+                                <td >{{ forloop.counter }}.</td>
+                                <!-- <td>  {{ student.klass}}</td> -->
+
+                                <td> {{ student.subject}}</td>
+                                 <td> {{ student.user}}</td>
+                                <td ><a style='color:green' href="#" title="Click here to remove {{student.user}}" onClick= "getdialogtrys({{ student.id  }})" ><i class="fa fa-close"></i></a></td>
+                            {% endfor %}
+        {% else %}
+        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            
+        
+         <div> <span style='color:blue'>{{klass}} </span>Exam Officers <span style = "color:blue">Not yet assigned .............. </span>        
+    </table>
+        {% endif %}
+    </tr>
+  
+    <!-- </table> -->
+
+
+     </table>
+
+<div id="myDialog" title="Enter Assessment Score"></div>
+
+
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+
+<script type="text/javascript" language="javascript">
+    function getdialogtrys(vid){
+        var state = vid;
+        // alert(vid);
+        var url = "/cbt/delete/user/ajax/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:250,
+                    width:550,
+                    title:'SchApp 8.0 Delete exam officer' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+
+        </script>
+</body>
+
+</html>

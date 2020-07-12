@@ -1,0 +1,65 @@
+{% extends 'welcome1.html' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> My Studykits</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Session:&nbsp;{{ form.session }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action = "#"  method="post" role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                   <td >Term:&nbsp;{{ form.term }}</td>    
+                                </div>
+                                <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    View    ">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="box">  </div>
+</body>
+
+</html>
+   <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#id_ca").focus();
+            $("#id_term").change(function () {
+                myassess();
+            });
+            $("#id_ca").change(function () {
+                myassess();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function myassess(){
+            var state =  $("#id_term").val()+':' + $("#id_session").val()+':' + $("#id_ca").val() ;
+            var url = "/assessment/ca_student/";
+            // alert(state);
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+{% endblock %}

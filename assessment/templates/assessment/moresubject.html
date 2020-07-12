@@ -1,0 +1,137 @@
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .error1 { color: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 16px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form action="/assessment/addmoresubject/" method="post" onsubmit="disable(this)" >
+    <table style="width:100%;background-color:#f5f5f5;">
+        <tr style="width:100%;">
+            <td colspan="15">
+                <table style="width:100%;">
+                    <tr>
+                        <td colspan="5" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Student Name
+                        </td>
+                        <td  colspan="5">
+                            {{ fullname }}
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Class
+                        </td>
+                        <td>
+                            {{klass}}
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Arm
+                        </td>
+                        <td>
+                            {{arm}}
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Session
+                        </td>
+                        <td>
+                            <input id="id_session" readonly="readonly" type="text" name="session"  value = "{{session}}" class ="loginTxtbox">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Adm. No
+                        </td>
+                        <td>
+                            <input id="id_admno" readonly="readonly" type="text" name="admno"  value = "{{admno}}" class ="loginTxtbox">
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="color:blue;">
+                            Term
+                        </td>
+                        <td>
+                            <input id="id_term" readonly="readonly" type="text" name="term"  value = "{{term}}" class ="loginTxtbox">
+
+                        </td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Subclass
+                        </td>
+                        <td>
+                            <input id="id_subclass" readonly="readonly" type="text" name="subclass"  value = "{{subclass}}" class ="loginTxtbox">
+
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Subject List
+                        </td>
+                        <td align ="left" style="width:auto"><select name="subjectlist" id="id_subjectlist">
+                            {% for pincode in subjectlist %}
+                                <option value="{{pincode}}">{{pincode}}</option>
+                            {% endfor %}
+                        </select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" style="text-align:center;"><input type="submit" value=":: Add subject to list ::" name="submit"></td>
+                    </tr>
+                </table>
+
+            </td>
+
+        </tr>
+    </table>
+
+</form>
+
+</body>
+</html>

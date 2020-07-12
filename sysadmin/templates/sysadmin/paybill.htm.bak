@@ -1,0 +1,35 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <form action="" method="post" name ="main" onsubmit="disable(this)">
+         <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <tr>
+                <td >
+                    <strong>PAY YOUR BILL  </strong>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <strong> {{varerr}} </strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Enter Year:
+                </td>
+                <td>
+                    {{ form.year}}
+                </td>
+                <td colspan="2" style="text-align:center;">
+                    <input name="submit" type= "submit" value="Pay Bill">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        document.getElementById('id_year').focus()
+    </script>
+{%endblock%}

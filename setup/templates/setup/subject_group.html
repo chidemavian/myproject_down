@@ -1,0 +1,52 @@
+{%extends 'setup/typography.html' %}
+{% block content %}
+            <td style="border:0px solid black;width:30%;vertical-align:top">
+
+            <form action="/setup/subject_group/" method="post" name ="main2" id="form2" onsubmit="disable(this)">
+                <table align ="left" style="border:1px solid black;width:100%;">
+                    <thead> <tr><td colspan=12 align="center" style="border-radius:10px;border:0px solid black;width:100%;font-weight: bod;background-color:#ccccc0;color: black;text-align:center;vertical-align:top;">Subject Group Set up
+                    </td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.subject_group.label }}:
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.subject_group}}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form2.arm.errors}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;"></td>
+                        <td align ="left" style="width:auto;">
+
+                            <input name="submit" type= "submit" value="   Create group ">
+                        </td>
+                        <td align ="left" style="width:auto;"></td>
+                    </tr>
+                 </form>
+
+                    <tr>
+                        <td align="center" valign="top" style = "border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> S/N</td>
+                        <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;width:auto; height:auto;background-color:#E6E6E6;font-size:14px;color:black;text-align:center;vertical-align:top"> Created  Groups </td>
+                        <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;width:auto; height:auto;background-color:#E6E6E6;font-size:14px;color:black;text-align:center;vertical-align:top"> Delete </td>
+                    </tr>
+
+                    {% for pincode in arm %}
+                        <tr>
+                        <td align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter}}</td>
+                        <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:;font-size:12px;width:auto;color:black">{{ pincode.subject_group}}</td>
+                        <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:;font-size:12px;width:auto;color:white"><a href="/setup/subjectgroup/delete/{{ pincode.id }}/" title="Delete {{ pincode.arm}}">{{ pincode.subject_group}}</a></td>
+
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table> 
+        </td>
+
+{% endblock %}

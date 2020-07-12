@@ -1,0 +1,85 @@
+
+
+
+
+    {% if data %}
+        <table style="width:100%;">
+            Obj Scores for <span style='color:blue'>{{exam_type}}</span> Exams ,<span style='color:blue'>{{term}}</span> term <span style='color:blue'>{{klass}}{{arm}}  {{subject}}   </span>
+
+            <tr>
+                <!-- <td colspan="10"> -->
+                        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                            <thead >
+                            <tr style="text-align:center;font-weight:bold">
+                                <td >S/N</td>
+                                <td >Name</td>
+                                <td > Obj</td>
+<!--                                 <td > Theory</td>
+                                <td > Exams Score</td> -->
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                
+                            {% for student in stlist %}
+                                <tr style="font-weight:bod;text-align:center">
+                                    <td >{{ forloop.counter }}.</td>
+                                    <td >{{ student.student.fullname}}.</td>
+                                    <td >{{ student.score }}</td>
+ <!--                                    <td>
+                                        <input type="text" name="ca4" id="ca4" size="1" value="{{ student.fourth_ca }}" keypress= "getdialogtry4({{ student.id  }})">
+                                    </td>
+                                                                        <td>
+                                        <input type="text" name="ca4" id="ca4" size="1" value="{{ student.fourth_ca }}" >
+                                    </td> -->
+                             
+                                </tr>
+                            {% endfor %}
+                    
+                        
+        
+                        </table>
+                <!-- </td> -->
+            </tr>
+        </table>
+        {% else %}
+        <div>There are no students offering this course. </div>
+        <div>if you think this is an error, kindly consult with the class teachers of the affected students</div>
+        {% endif %}
+
+
+<script >
+    function getdialogtrys(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+</script>
+
+
+</body>
+
+</html>

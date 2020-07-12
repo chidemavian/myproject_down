@@ -1,0 +1,101 @@
+<html>
+</html>
+<head>
+</head>
+
+
+
+<body>
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+    font-size: 10px;
+    border-collapse: collapse;
+    margin: 12px;
+    top: 10%;
+    padding: 10px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: laeft;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ddddd;
+}
+</style>
+</body>
+            {% for k in replist %}
+<table>
+  <table id='tab1'>
+    <tr>
+
+      <td>
+      </td>
+    
+        <td style= 'text-align:center'>
+              <a style='font-size:30px;font-weight-bold'>ADYSYS INT'L COLLEGE ABUJA</a><br/><a style='font-size:14px;text-align:center'>{{term}} TERM EXAM SCORESHEET {{session}}
+            </td>
+
+    </tr>
+
+
+  </table>
+<table id='tab2'>
+  {% for p in k.rec %}
+  <tr>
+    <td style='font-weight:bold; font-size:12px'>NAME OF STUDENT:</td>
+    <td colspan='5  '>{{ p.academic_rec.student.fullname }} </td>
+  </tr>
+  <tr>
+    <td style='font-weight:bold; font-size:12px'>SUBJECT: </td>
+    <td> {{subject}}</td>
+    <td style='font-weight:bold; font-size:12px'>CLASS:</td>
+    <td colspan='3'>{{class}}</td>
+
+  </tr>
+
+  <tr style='text-align:center;font-weight:bold; font-size:12px'>
+    <td>1ST CA<BR/>20%</td>
+  <td>2ND CA<BR/>20%</td>
+  <td>EXAM<BR/>60%</td>
+  <td>TOTAL<BR/>100%</td>
+  <td>GRADE</td>
+  <td>EFFORT</td>
+</tr>
+
+<tr style='text-align:center'>
+  <td>{{ p.first_ca }} </td>
+  <td>{{ p.second_ca }}</td>
+  <td>{{ p.examt_score }} </td>
+  <td>{{ p.term_score }} </td>
+  <td>{{ p.grade }} </td>
+  <td >{{ p.remark }} </td>
+</tr>
+
+</table>
+
+<table>
+  <tr>
+<td style='font-weight:bold; font-size:12px'>REMARKS: </td>
+<td colspan='5  '>{{ k.academic.class_teacher_comment }} </td>
+</tr>
+<tr>
+  <td style='font-weight:bold; font-size:12px'>NAME OF TEACHER:</td>
+  <td>{{p.subject_teacher}} </td>
+  <td style='font-weight:bold; font-size:12px'>SIGN:</td>
+  <td>{{jh}} </td>
+  <td style='font-weight:bold; font-size:12px'>DATE: </td>
+  <td>{{date}} </td>
+</tr>
+</table>
+{% endfor %}
+<table>
+  <td style='font-weight:bold;font-size:14px;text-align:right'>DCL ....... to be the best </td>
+</table>
+</table>
+{% endfor %}

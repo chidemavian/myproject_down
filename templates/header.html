@@ -1,0 +1,104 @@
+{% block content %}
+    {% load humanize  %}
+<table>
+        <tr class="header_nav_bar">
+            <td><a href="/welcome/">Home </a></td>
+            <td><a href="#" onClick= "getdialogtrynew();">Change Password </a></td>
+            <td><a href="/student_search/">Name Search </a></td>
+            <td>UserName :<span style="color:green;"> {{ useracc.username }}</span></td>
+            <td><a >Date :{{ vvtoday }}</a></td>
+            <td><a href="/logout/">Log Out</a></td>
+    </tr>
+    </table>
+    <div id="myDialognew" title="Change Password"> </div>
+    <div id="mynews" title="News">   </div>
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+            $("#mynews").hide();
+        });
+    </script>
+    
+      <script type="text/javascript" language="javascript">
+        function getdialogtrynew(){
+            //alert(vid);
+            var state = 'test';
+            var url = "/getchangepassword/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialognew").html(html);
+                    getdialognew();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialognew(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:250,
+                width:490,
+                title:'Change Your Password',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialognew").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+   <script type="text/javascript" language="javascript">
+        function getdialogtrynews(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/getnews/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#mynews").html(html);
+                    getdialognews();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getdialognews(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:300,
+                title:'Latest News',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#mynews").dialog(dialogOpts);
+        }
+
+    </script>
+
+{% endblock %}

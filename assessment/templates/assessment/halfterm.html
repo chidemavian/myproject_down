@@ -1,0 +1,133 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-book fa-1x"></i> HALF TERM REPORT</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+        <tr>
+            <td colspan="20" style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+              HALF TERM REPORT
+            </td>
+        </tr>
+        <tr>
+        </tr>
+<form action =""   method="POST">
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                <!-- <table style="width:auto;"> -->
+                    <tr >
+                        <td>
+                            Session:</td><td>{{ form.session }}</td>
+                        </tr>
+                        <tr>
+                        <td>
+                            Class:</td><td>{{ form.klass }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                            Arm:</td><td>{{ form.arm }} </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Term:</td><td>{{ form.term }}</td>
+                        </tr> 
+
+
+
+              <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+           <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Half Term Report"></td>
+                       
+                </table>
+</form>
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+            <tr>
+
+            <td colspan="25">
+                <div class="box2"></div>
+            </td>
+
+        </tr>
+</table>
+
+    </table>
+    <!--<div id="regform" style="width: 100%;"></div>-->
+
+ 
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            getclass();
+            getarm();
+            //autopost();
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getclassaff/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getarmaff/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+{% endblock %}

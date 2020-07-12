@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+ 
+<body>
+
+{% if sublist %}
+
+        
+        <div style = 'font-weight:bold;text-align:center;font-size:12px;color:red'>EDIT ENTRIES BY CLICKING ITEM</div>
+       
+             
+                {% for pin in sublist %}
+            
+                <table style=" margin-top:0%;margin-bottom:0.3%" width="100%" class="table  table-bordered " id="dataTables-example">
+                 
+                      <td >
+                        <b> {{forloop.counter}}.&nbsp;&nbsp;
+                          <a href="#" onClick= "getdialqst({{ pin.question.id}})"title="Edit Q{{ forloop.counter }}.">{{pin.question.qstn}}</a></b></td>
+
+{% if pin.question.image != '/ax/image' %}
+                    <td style='border:0px solid black' align='center'>
+                    <a href="#" onClick= "getimage({{ pin.question.id}})"title="Edit image for  Q{{ forloop.counter}}.">
+                  <img style="width: 70px; height: 40px;" src="/static/{{pin.question.image}}" alt="{{getdetails.question.image}}"></a>
+              </td>
+{% endif %}
+                     <td align="right" ><a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Edit Q{{ forloop.counter }}."><i class="fa fa-edit fa-2x"></i></a></td>
+            
+  
+        </table>
+</td>
+
+         {% if pin.options %}
+
+         <td>
+
+        {% if pin.image = 'low' %}
+                                 {% for p in pin.options  %}         
+     <tr >  
+
+       <table  width="100%" class="table  table-bordered " id="dataTables-example">                                   
+            <td > (A.)<a href="#" onClick= "getdialogopta({{ pin.question.id}})"title="Edit option A."> {{ p.a}}</a></td>
+
+            <td > (B.)<a href="#" onClick= "getdialogoptb({{ pin.question.id}})"title="Edit option B."> {{ p.b}}</a></td>
+
+            <td > (C.) <a href="#" onClick= "getdialogoptc({{ pin.question.id}})"title="Edit option C.">{{ p.c}}</a></td>
+
+            <td > (D.) <a href="#" onClick= "getdialogoptd({{ pin.question.id}})"title="Edit option D.">{{ p.d}}</a></td>
+
+        </table>
+    </tr>
+                        {% endfor %}
+    {% else %}
+    {% for p in pin.options  %}
+                            <tr>
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+<td>
+<a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Edit Option A.">
+  <img style="width: 70px; height: 40px;" src="/static/{{p.a}}" alt="{{getdetails.question.image}}">  
+            
+     </a>
+</td>
+
+<td>
+  <a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Edit Option B.">
+            <img style="width: 70px; height: 40px;" src="/static/{{p.b}}" alt="{{getdetails.question.image}}">
+          </a>
+     
+
+</td>
+
+<td>   
+<a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Edit Option C."> 
+                    <img style="width: 70px; height: 40px;" src="/static/{{p.c}}" alt="{{getdetails.question.image}}">
+                </a>
+</td>
+
+<td>
+      <a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Edit Option D."> 
+                    
+                  <img style="width: 70px; height: 40px;" src="/static/{{p.d}}" alt="{{getdetails.question.image}}">
+                </a>
+            
+    
+</td>
+</table>
+</tr>
+            {% endfor %}
+
+  {% endif %}         
+ {% else %}
+ <table style=" margin-top:0%;margin-bottom:0.9%" width="100%" class="table  table-bordered " id="dataTables-example">
+
+     <td colspan="7" class= 'null' >  .......No Options Found for {{pin.question.qstn}}.</td>
+</table>
+{% endif %}   
+
+   {% endfor %}
+
+
+
+
+
+
+
+
+            {% else %}
+            <td style = 'font-weight:bold;font-size:12px;color:red'colspan="7" class= 'null' >  .......No questions Found. Kindly use the 'set questions' menu on the left </td>
+        
+
+
+
+
+
+
+        {% endif %}
+              
+
+
+
+
+
+
+
+
+
+        
+    <div id="myDialognew" title="Enter Content"> </div>
+
+  <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+    function getdialogopt(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/editentry/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getdialqst(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/editqst/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getimage(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/imageqst/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogopta(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/edita/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogoptb(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/editb/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogoptc(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/editc/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogoptd(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/edit/editd/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:450,
+                    width:750,
+                    title:'<a>SchApp 8.0</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialognew").dialog(dialogOpts);
+            }
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+{% extends 'lesson/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+<div id = "submenu_cont">
+     <form  action="" method="POST"  onsubmit="disable(this)">
+        <table style= 'width:100%'>
+        <tr>
+            <td colspan="20" style="border-radius:0px;text-align:center;color:black;font-size:16px;background-color:#ccccc0">
+                 Set Up Lesson Plan
+            </td>
+        </tr>
+        <tr class ="submenu">
+            <td ><a title = "Set Up Subject Topic" href="/lesson/set_up/topic=?"> Topic</a></td>
+            <td ><a title = "Set Up Contents" href="/lesson/setup_sub/"> Contents </a></td>
+            <td ><a title ="Set Up Objectives" href="/lesson/set_up/obj"> Objectives</a></td>
+            <td ><a title = "Set Up Instructional Resource" href="/lesson/set_up/resources/">I.R</a></td>
+            <td ><a title ="Set Up Student Activity" href="/lesson/set_up/students_activities/"> S.A</a></td>
+            <td ><a title ="Set Up Teacher's Activity" href="/lesson/set_up/teacher_activities/">T.A</a></td>
+            <td ><a title ="Set Up Number of Weekly Lessons" href="/lesson/set_up/lesson_count/">W.L</a></td>
+        </tr> 
+         <tr style ="height:10%">
+            <td colspan="20" style="border-radius:0px;text-align:center;color:blue;font-size:16px;background-color:#ccc0">
+                 Set Up Objectives
+            </td>
+        </tr>
+</table>
+ <div style="border:0px solid black;height:35px;">
+        <tr>
+            <td>
+                {{ form.session.label }}:&nbsp; {{form.session}}
+            </td>
+            <td>
+                {{ form.klass.label }}:&nbsp;{{form.klass}}
+            </td>
+            <td>
+                {{ form.term.label }}:&nbsp;{{form.term}}
+            </td>
+            <td>
+                {{ form.subject.label }}:&nbsp;{{form.subject}}
+            </td>  
+        </tr>
+
+</div>
+</form>
+</table>
+</div>
+        <div>
+            {{varerr}}
+        </div>
+<tr><td colspan="10"><div class="box"> </div><div></div></td></tr>
+
+   <script>
+        $(document).ready(function() { 
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            getclass();
+        });
+  </script>
+
+ <script>
+        $(document).ready(function() {          
+            $("#id_klass").change(function () { getsubjectlesson();});
+            $("#id_term").change(function () { autopost();});
+            $("#id_subject").change(function () { autopost();});
+
+        });
+  </script>
+
+        <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ; // i need session to determine my class
+            //alert(state);
+            var url = "/assessment/getclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');   
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options); 
+                        getsubjectlesson();                  
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function getsubjectlesson(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val();
+            var url = "/assessment/getsubjectless/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost();                       
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_subject").val()+':'+ $("#id_klass").val()+':'+ $("#id_term").val();
+            var url = "/lesson/set_up/obj/subobjajax/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+               }
+            });
+            //alert("error");
+            return false;
+        }
+    </script>
+
+
+{% endblock %}

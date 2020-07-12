@@ -1,0 +1,309 @@
+{% extends 'CBT/base.html' %}
+{% block sectionTitle %}Success{% endblock %}
+
+
+{% block content %}
+
+
+
+    <div class ="row">
+        
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 EXAM DETAIL
+            </td>
+        </tr>
+    </table>
+</div>
+        <div style="panel-body">
+
+        <tr >
+            <td colspan="20">
+               <form action="/cbt/set_qstn/subject/" method="POST">
+                  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                   <tr >
+                       <td >Session:</td><td> {{ form.session }}</td>
+                                    </tr>
+                    <tr>
+                       <td >Term:</td><td>{{ form.term }}</td >
+                                </tr>
+                    <tr>
+                       <td >Class:</td><td>{{ form.klass }}</td>    
+                                </tr>
+                    <tr>          
+                       <td >Subject:</td><td>{{ form.subject }}</td >
+                                </tr>
+                    <tr>
+                        <td >Exam Type:</td><td>{{ form.exam_type }}</td >
+                        <!-- <td><input type="text" class="form-control" name='id_name' id='id_name' placeholder= "  Enter User..."></td> -->
+                       <!-- <td name='id_user' id='id_user' >User:</td><td>{{ form.user }}</td>                         -->
+                       <!-- <td ><input name="submit" type= "submit" value=" Add User " ></td> -->
+                       <table>
+                    </table>
+                   </tr>
+
+ <div class ="row">
+        <!-- <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log On    "> -->
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 INSTRUCTIONS
+            </td>
+        </tr>
+    </table>
+</div>
+
+      <td >                               
+          <textarea placeholder='Instructions' name='assignment' class="form-control" rows="3"></textarea>
+                 
+      </td>
+
+ <div class ="row">
+        <!-- <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log On    "> -->
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 QUESTION  {{no}}.
+            </td>
+        </tr>
+    </table>
+</div>
+
+                       <td >
+                        <textarea placeholder='Question' name='assignment' class="form-control" rows="3"></textarea>
+                        </td >
+ <div class ="row">
+        <!-- <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log On    "> -->
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 TOPIC AREA
+            </td>
+        </tr>
+    </table>
+</div>
+                        <td >
+                            <textarea placeholder='Topic' name='assignment' class="form-control" rows="3"></textarea>
+                        </td >
+                   </tr>
+
+               </table>
+               </form>
+            </td>
+
+        </tr>
+    </div>
+
+     <div class ="row">
+        <!-- <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log On    "> -->
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 UPLOAD FILE (IF APPLICABLE)
+            </td>
+        </tr>
+    </table>
+</div>
+          <div class="form-group"><input name="datafile" type="file" ></div>
+
+    <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Save    "> 
+
+<div class=="row">
+<tr>
+    <td>
+        </td><td>
+    </td>
+
+</tr>
+
+</div>
+     <td colspan="20" ><div class="box2"> </div></td>
+
+
+    
+    <div class="custom-control custom-radio">
+  <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+  <label class="custom-control-label" for="defaultUnchecked">Default name is unchecked</label>
+</div>
+
+<div class="custom-control custom-radio">
+  <input type="radio" class="custom-control-input" id="defaultU" name="defaultExampleRadios">
+  <label class="custom-control-label" for="defaultU">Default i am unchecked</label>
+</div>
+
+    </table>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+            cbtclass();
+            //getarm();
+            // getterm();
+        });
+    </script>
+    
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                // autopost2();
+            });
+            $("#id_arm").change(function () {
+                // getsubject();
+            });
+            // $("#id_klass").change(function () {
+                // getarm();
+            });
+            $("#id_term").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+
+   <script type="text/javascript" language="javascript">
+        function cbtclass(){
+            var state = $("#id_session").val() ; // i need session to determine my class
+            // alert(state);
+            var url = "/cbt/enter/ajaxclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');   
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+
+                        getcbtsubject();
+                    }
+                })
+            }
+        }
+
+    </script>
+ 
+
+   <script type="text/javascript" language="javascript">
+        function getterm(){
+            var state = $("#id_session").val() ;
+            // alert(state);
+            var url = "/assessment/getterm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_term").val('');
+            $("#id_term").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_term").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+ <script type="text/javascript" language="javascript">
+        function getcbtsubject(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val();
+            var url = "/cbt/getcbtsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        getexam();
+                        // autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+      <script type="text/javascript" language="javascript">
+        function getexam(){
+            var state = $("#id_session").val();
+            var url = "/cbt/getexam/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_exam_type").val('');
+            $("#id_exam_type").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_exam_type").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() ;
+            var url = "/assessment/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2").show();
+                    $(".box2").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+ </table>
+{% endblock %}

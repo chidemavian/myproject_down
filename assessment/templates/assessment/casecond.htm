@@ -1,0 +1,152 @@
+{% extends "assessment/base.htm" %}
+{%block head %}
+    {%block title %}SchApp{%endblock%}
+{%endblock %}
+{%block content%}
+
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-edit fa-1x"></i> Subject Scores</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+  <table width="100%" class="table  table-bordered " id="dataTables-example">
+    <!-- <table style="width:100%;"> -->
+        <tr>
+            <td colspan="10">
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                    <tr>
+                        <td>Session: {{ session }}</td>
+         
+                        <td >Class:{{ klass }}{{ arm }}</td>
+          
+                        <td>Subject:{{ subject }}</td>
+                  
+
+                        <td style="color:gray;font-size:15px;padding-left:10px;">Click  <a href="/assessment/secondary_print_assessment/{{ session1 }}/{{ klass1 }}/{{ arm1 }}/{{ name1 }}/{{ term1 }}/" style="color:blue;font-size:13px;font-weight:bold;">here </a>to rank student </td>
+                    </tr>
+                    
+                </table>
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <td style='text-align:center;color:grey'>
+        {{ rep }} REPORT SHEET
+        </td>
+    </table>
+
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="10">
+
+                  <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <!-- <table style="width:100%;background-color:white;border-collapse:collapse;"> -->
+                    <thead style="font-weight:bold;text-align:center" >
+                    <tr>
+                        <td >S/N</td>
+                        <td >Admission No</td>
+                        <td >Name</td>
+                        <td >Mid Term Scores</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in data %}
+                        <tr style="font-weight:bod;text-align:center">
+                            <td >{{ forloop.counter }}</td>
+                            <td >{{ student.admissionno }}</td>
+
+
+                            <!-- <td > {{ student.fullname }} </td> -->
+                     <td > <a href = "#" style = " color:blue" onclick = "getdialogtry1({{student.id}});">{{ student.fullname }}</a> </td>
+
+                              <td>
+                                <input style="text-align:center" type="text" name="ca3" id="ca3" size="1" value="{{ student.third_ca }}" onclick= "getdialogtry1({{ student.id  }})">
+                               </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+             <tr><a href = "/assessment/enterca/" style = " color:blue">next</a></tr>
+                </table>
+            </td>
+
+        </tr>
+    </table>
+    <div id="myDialog" title="Enter Assessment Score"></div>
+
+  
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+<script >
+    function getdialogtrys(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry1(vid){
+        //alert(vid);
+        var state = vid +':'+ "{{rep}}";
+        // alert(state)
+        var url = "/assessment/getsubjectscore1/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:450,
+                width:500,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+
+{%endblock%}

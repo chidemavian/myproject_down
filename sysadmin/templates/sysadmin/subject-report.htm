@@ -1,0 +1,204 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+    <div style="border:0px solid black;width:auto;height:10%;font-family: verdana;color:black">
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:30%; font-size:12px;color:black;text-align:center;">SUBJECT REPORT </div>
+        <div  style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:#ffffff;text-align:center;" > {{varerr}}</div>
+        <table>
+            <tr>
+                <td colspan="10">
+
+                    <form action="" method="post" name ="main" onsubmit="disable(this)">
+                        <table  style="border:0px solid black;width:100%">
+                            <tr>
+                                <td>{{form.session.label}}:</td>
+                                <td>{{form.session}}</td>
+                                <td>Class:</td>
+                                <td>{{ form.klass}}</td>
+                                <td></td>
+                                <td>{{form.subclass}}</td>
+                                <td>Subject:</td>
+                                <td>{{ form.subject}}</td>
+                                <td><input name="submit" type= "submit" value="View Subject Report"></td>
+                            </tr>
+                            <tr>
+                                <td>Term:</td>
+                                <td>{{ form.term}}</td>
+                          <!--      <td><input name="submit" type= "submit" value="View Subject Report"></td>-->
+                            </tr>
+                        </table>
+                    </form>
+                </td></tr>
+
+         </table>
+<td><input name="submit" type= "submit" value="Print Report" onclick="openrecprint();"></td>
+<div class = "printable"> 
+           <tr>
+                <table>
+                    <tr align ="center" style = "text-align:center"> subject ranking for {{klass}}, {{subject}} {{session}}</tr>
+                </table>
+            
+                <td colspan="10">
+                    <table style="width:100%;color:black;border-collapse:collapse;">
+                        <tr>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">S/N</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"> Adm No</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">subject</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Student's Name</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Gender</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Class</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Arm</td>       
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Term Score</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">house</td>
+                        </tr>
+                        {% for pincode in getdetails %}
+                        <tr>
+                            <td align="center" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ forloop.counter }} </td>
+                            <td align="center" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ pincode.academic_rec.student.admissionno }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:9%;color:#000000;border:1px solid black"> {{ pincode.subject }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:25%;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.fullname }} </td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.sex }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.klass }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.arm }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:10%;color:#000000;border:1px solid black"> {{ pincode.term_score }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.house }}</td>
+                        {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+           subclass();
+        });
+
+    </script>
+
+     <script>
+        $(document).ready(function() {
+
+            $("#id_klass").focus();
+          //  subclass();
+            //getsub();
+           $("#id_klass").change(function () {
+                subclass();
+            });
+            $("#id_subclass").change(function () {
+                getsub();
+            });
+            $("#id_subject").change(function () {
+                autopost();
+            });  
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function subclass(){
+            var state = $("#id_klass").val() ;
+            //alert(state);
+            var p = state.charAt(0).toUpperCase();
+            //alert(p);
+            var url = "/student/subclass/";
+            var i = 0;
+            var data='userid='+p;
+            $("#id_subclass").val('');
+            $("#id_subclass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subclass").append(options);
+                         getsub();
+                       
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getsub(){
+            var state = $("#id_subclass").val();  // i need subclass to determine my subject
+            var url = "/sysadmin/subject-reportajax/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');  // here is subject, values depend on subclass
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() ;
+            var url = "/sysadmin/rankstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+<script language="javascript" type="text/javascript">
+         function openrecprint()
+         {
+            //alert("welcome");
+             $( ".printable" ).print();
+       }
+     </script>
+
+{%endblock%}

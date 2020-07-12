@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}New Account {% endblock %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        <table style="width:auto;">
+            <tr>
+                <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;background-color:#336666;color:red">
+                    {{succ}}
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    <input name="submit" type= "submit" value="UPDATE ACCOUNT "/>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+{% endblock %}

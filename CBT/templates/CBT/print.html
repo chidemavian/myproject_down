@@ -1,0 +1,256 @@
+{% extends 'CBT/base.html' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+
+   
+              <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;background-color:#ccccc0;font-size:14px;">
+                 OBJECTIVE TEST SCORES
+            </td>
+        </tr>
+
+           <form action="" method="POST">
+        <table style="margin-top:0%;margin-bottom:10%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                       <tr >
+                               <td >{{form.session.label_tag}}:</td>
+                               <td>{{ form.session }}</td>
+                            </tr>
+                            <tr>
+                               <td >{{form.term.label_tag}}:</td>
+                                <td>{{ form.term }}</td >
+                            </tr>
+                            <tr>
+                               <td >{{form.klass.label_tag}}:</td>
+                               <td>{{ form.klass }}</td>
+                            </tr>
+                                    <tr>
+                            <td >{{form.arm.label_tag}}:</td>
+                            <td>{{ form.arm }}</td>
+                        </tr>
+                            <tr>  
+                               <td >{{form.subject.label_tag}}:</td>
+                               <td>{{ form.subject }}</td >
+                            </tr>
+                        <tr>
+                            <td >{{form.exam_type.label_tag}}:</td>
+                            <td>{{ form.exam_type }}</td >
+
+                       </tr>
+                   </table>
+
+<!-- <table style="margin-top:0%;margin-bottom:05%" width="100%" class="table  table-bordered" id="dataTables-example">
+        <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="View Subject Report"></td>
+
+</table> -->
+    </form>
+
+    </table>
+
+ <input name="submitprint" type= "submit" value="Print Scores" onclick = "openrecprint();">
+
+    <div class="printable">
+
+     <table width="100%" class="table  table-bordered" id="dataTables-example">
+        
+        <tr>
+            <td >
+                <div class="box2"></div>
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+            getclass();
+            // getarm();
+            // getterm();
+        });
+    </script>
+    
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost2();
+            });
+            $("#id_arm").change(function () {
+                getsubject();
+            });
+            $("#id_klass").change(function () {
+                getarm();
+            });
+
+            $("#id_term").change(function () {
+                autopost2();
+            });
+            
+            $("#id_reporttype").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ; // i need session to determine my class
+            // alert(state);
+            var url = "/assessment/getclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');   
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                        getarm();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+ 
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val();
+            // alert(state);
+            var url = "/assessment/getarmgrp/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                        getsubject();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript" language="javascript">
+        function getsubject(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val();
+            var url = "/assessment/getsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        getexam();
+                    }
+                })
+            }
+        }
+
+    </script>
+ 
+
+<script type="text/javascript" language="javascript">
+        function getexam(){
+            var state = $("#id_session").val();
+            var url = "/cbt/getexam/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_exam_type").val('');
+            $("#id_exam_type").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_exam_type").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() +':'+ $("#id_exam_type").val();
+             // alert(state);
+            var url = "/cbt/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2").show();
+                    $(".box2").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+
+<script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+</script>
+
+
+{% endblock %}

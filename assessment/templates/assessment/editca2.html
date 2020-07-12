@@ -1,0 +1,132 @@
+<html>
+<head>
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+    <style type="text/css">
+        .error2 { colo: red; }
+        .error1 { colr: red; }
+        .error { colr: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 21px;
+        }
+    </style>
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<form  action="/assessment/editcas2/{{ getdetails.id }}/" 
+method="post" onsubmit="disable(this)">
+   
+<tr style="font-weight:bold;">
+             
+            <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <td colspan="3" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center"> Press ESC to close this box</td>
+
+               </table>  
+
+
+             <tr>
+                <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+                                        
+                        <td rowspan="2">
+
+                        <img style="width: 80px; height: 80px;" src="/static/{{ getdetails.academic_rec.student.studentpicture }}" alt="{{ k.studentinfo.fullname  }}">
+                        </td>
+                     </table>
+            </tr>
+
+
+                    <tr >
+                        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+                    <td style="font-weight:bold;">{{ getdetails.session }} </td>
+                    <td style="font-weight:bold;"> {{ getdetails.academic_rec.student.fullname }}</td>
+                
+                        <!-- <td style="font-weight:bold;">{{ getdetails.academic_rec.student.admissionno }}</td> -->
+
+                      
+                    </table>
+
+                    </tr>
+
+
+
+            <tr>
+                 <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+                <td style="font-weight:bold;"> Term : </td>
+                <td>{{getdetails.term}}</td>
+                <td style="font-weight:bold;">  Class:</td>
+                <td>{{getdetails.klass}}{{getdetails.arm }}</td>
+            </table>
+            </tr>
+
+            <tr>
+                 <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+                <td style="font-weight:bold;"> Subject:</td>
+                <td>{{getdetails.subject }} </td>
+                <td style="font-weight:bold;"> Report Type:</td>
+                <td>{{ak }} </td>
+            </table>
+            </tr>
+
+
+
+
+            <tr>
+              <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+                <td style="font-weight:bold;">CA:</td>
+                        <td>
+                            <input style="text-align:center" type="text" name="fourthca" id="fourthca" size="5" value="{{ getdetails.fourth_ca }}" class ="loginTxtbox">
+                        </td>
+                         <td >
+                            EXAM:   
+                        </td>
+                        <td>
+                            <input style="text-align:center" type="text" name="sixthca" id="sixthca" size="5" value="{{ getdetails.sixth_ca }}" class ="loginTxtbox">
+                        </td>
+
+</table>
+</tr>
+
+<table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+  <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Update Score"></td>
+        
+             </table>
+            </tr>
+
+                        <input type="hidden" name="report" id="report" size="15" value="{{ ak }}" class ="loginTxtbox" readonly="readonly">
+                         </td>
+                        <tr>
+                        <td>
+                            <input type="hidden" name="fifthca" id="fifthca" size="1" value="{{ getdetails.fifth_ca }}" class ="loginTxtbox">
+                        </td>
+                        
+                    </tr>
+        </tr>
+            
+
+</body>
+</form>
+
+
+</body>
+</html>
+

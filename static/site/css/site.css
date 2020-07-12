@@ -1,0 +1,255 @@
+/**************************************************************/
+/*                         divs                               */
+/**************************************************************/
+
+.submit {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.adv {
+    border: 0px solid black;
+    background-color: #000;
+    width: 100%;
+    height: 10%;
+    padding: 0px;
+    left: 0%;
+}
+
+.adv1 {
+    border: 1px solid black;
+    background-color: #74a0e3;
+    width: 100%;
+    height: 3.8%;
+    position: relative;
+    left: 0%;
+    color: white;
+    font-size: 14px;
+    font-family: courier;
+    text-align: right;
+}
+
+.pmiddle {
+    border: 2px solid black;
+    background-color: #E5E5E5;
+    width: 76%;
+    min-height: 30%;
+    padding: 0px 0px 0px 2px;
+    font-family: verdana;
+    font-size: 11px;
+    float: right;
+    vertical-align: text-top;
+    text-align: left;
+}
+
+.topup {
+    background-color: #666666;
+    height: 60px
+}
+
+.pleft {
+    border: 1px solid black;
+    background-color: #e5e5e5;
+    width: 20%;
+    min-height: 20%;
+    padding: 0px;
+    float: left;
+}
+
+.foot {
+    background: gray;
+    width: 100%;
+    height: 20px;
+    color: white;
+    font-size: 13;
+    font-weight: bold;
+    text-align: center;
+}
+
+.comm {
+    background-color: gray;
+    font-family: verdana;
+    width: 100%;
+    color: black;
+    min-height: 49px;
+}
+
+.subcomm {
+    margin-left: 30px;
+    background-color: #006600;
+    font-family: verdana;
+    width: 95%;
+    color: white;
+    min-height: 49px;
+}
+
+.sectionCaption {
+    background-color: gray;
+    border: 0px solid black;
+    width: 100%;
+    height: 15px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+/**************************************************************/
+/*                      generic styles                        */
+/**************************************************************/
+
+body {
+    font-family: COURIER;
+    font-size: 12px;
+    color: #333333;
+    line-height: 1.166;
+    margin: 0px;
+    padding: 0px;
+    background-color: #E5E5E5;
+}
+
+a {
+    color: #006699;
+    text-decoration: none;
+}
+
+a:link {
+    color: #006699;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #006699;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #006699;
+    text-decoration: underline;
+}
+
+h1 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 120%;
+    color: #334d55;
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    font-family: Arial, sans-serif;
+    font-size: 114%;
+    color: #006699;
+    margin: 0px;
+    padding: 0px;
+}
+
+h3 {
+    font-family: Arial, sans-serif;
+    font-size: 100%;
+    color: #334d55;
+    margin: 0px;
+    padding: 0px;
+}
+
+h4 {
+    font-family: Arial, sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    color: #333333;
+    margin: 0px;
+    padding: 0px;
+}
+
+h5 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 100%;
+    color: #334d55;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul {
+    list-style-type: square;
+}
+
+ul ul {
+    list-style-type: disc;
+}
+
+ul ul ul {
+    list-style-type: none;
+}
+
+label {
+    font-family: Arial, sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    color: #334d55;
+}
+
+/**************************************************************/
+/*                          error lists                       */
+/**************************************************************/
+
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li {
+    background-color: red;
+    color: white;
+    display: block;
+    font-size: 14px;
+    margin: 0 0 3px;
+    padding: 4px 5px;
+}
+
+/**************************************************************/
+/*                          font styles                       */
+/**************************************************************/
+
+.style2 {
+    font-size: x-large;
+    color: #FFFFFF;
+}
+
+.style3 {
+    font-size: large;
+    color: #CCCCCC;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.style4 {
+    color: #006600
+}
+
+/**************************************************************/
+/*                      section links                         */
+/**************************************************************/
+
+#sectionLinks {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #cccccc;
+    font-size: 90%;
+}
+
+#sectionLinks h3 {
+    padding: 10px 0px 2px 10px;
+}
+
+#sectionLinks a {
+    display: block;
+    border-top: 1px solid #cccccc;
+    padding: 2px 0px 2px 10px;
+}
+
+#sectionLinks a:hover {
+    background-color: #dddddd;
+}

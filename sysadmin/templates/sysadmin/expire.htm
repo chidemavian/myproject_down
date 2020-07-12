@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>SchApp 8 Purchase License </title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <link rel="shortcut icon" href="/static/school-logo/log.jpg" />
+    <script type="text/javascript" src='/static/JS/jquery-1.5.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <style type="text/css">
+        .foot1{
+            background:#ffffff;
+            width:520px;
+            position:absolute;
+            top:35%;
+            left:30%;
+            border: 2px solid #000;
+        }
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 20px;
+        }
+
+    </style>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $("#id_pin").focus();
+
+        });
+    </script>
+</head>
+
+<body style="background:gray">
+
+<div class="foot1">
+    <table style="width:100%">
+        <tr>
+            <td colspan="10" style="background-color:#000;color:#ffffff;font-size:15px;padding-top:10px;height:25px;text-align:center;font-weight:bold;">
+                ENTER PIN
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%;vertical-align:top;float:left;">
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="disable(this)">
+                <table style="width:100%;">
+                    <tr>
+                        <td  style="font-size:14px;color:red;font-weight:bold;text-align:left;">
+                            {{ vardate1 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="normal-textct">{{ form.pin.label }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.pin }} </td>
+                    </tr>
+                    <tr>
+                        <td ><input name="submit" type= "submit" value=" Unlock "></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/login/" style="font-weight:bold;font-size:12px;color:blue;text-decoration:none;">Login Again</a>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </td>
+            <td style="width:40%;vertical-align:top;float:left;" valign="top">
+                Your validity period has elapsed, to continue using our product, request a PIN. Call Your Vendor on
+             <span style="color:red;font-weight:bold;">07031009036, 08035076979</span><br> OR <br> mail us at:  <span style="color:blue;font-weight:bold;">adysys@yahoo.com</span>  for your PIN and other details. <br>
+               <!-- <a href="/account/sysadmin/bill/{{ year }}/" style="color:blue;font-weight:bold;">For Your Bill Click Here(PDF is required)</a>-->
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+</body>
+</html>

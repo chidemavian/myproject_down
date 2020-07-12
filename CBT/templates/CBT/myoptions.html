@@ -1,0 +1,134 @@
+
+{% extends 'CBT/base.html' %}
+{% block sectionTitle %}Success{% endblock %}
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+ {%block content%}
+<body>
+
+
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+    <tr>
+
+      <td>
+        {% if sublist %}
+        <div style = 'font-weight:bold;text-align:center;font-size:12px;color:red'>ATTACH OPTIONS WITH THE PAPERCLIP</div>
+            <table width="100%" class="table  table-bordered " id="dataTables-example">    
+
+
+              
+                {% for pin in sublist %}
+
+                   <tr >
+                      <td colspan="3"> <b > {{forloop.counter}}.&nbsp;&nbsp;{{pin.question.qstn}}</b></td>
+
+                       <td align="right" colspan="3"><a href="#" onClick= "getdialogopt({{ pin.question.id}})"title="Enter options for {{ pin.question.qstn}}"><i class="fa fa-paperclip fa-2x"></i></a></td>
+                   </tr>
+
+                     {% if pin.options %}
+                          {% for p in pin.options  %}  
+                    <div>     
+                        <tr >
+                        
+                            <td > (A.) {{ p.a}}</td>
+                            <td > (B.) {{ p.b}}</td>
+                            <td > (C.) {{ p.c}}</td>
+                            <td > (D.) {{ p.d}}</td>
+                            <!-- <td ><a href="/lesson/setup_sub/delete/{{ p.id }}/"  title="Edit/Delete {{ p.subtopic}}">{{ p.a}}</a></td> -->
+                    </tr>
+                    </div>
+                            {% endfor %}
+                            {% else %}
+                                <td colspan="7" class= 'null' >  .......No Options Found for {{pin.question.qstn}}.</td>
+                            {% endif %}                      
+                       
+            {% endfor %}
+
+            {% else %}
+            <!-- <td colspan="7" class= 'null' >  .......No questions Found for {{sublist.question.subject}}.</td> -->
+            <td style = 'font-weight:bold;font-size:12px;color:red'colspan="7" class= 'null' >  .......No questions Found. Kindly use the 'set questions' menu on the left </td>
+        {% endif %}
+              
+            </table>
+        </td>
+    </tr>
+</table>
+    <div id="myDialognew" title="Enter Content"> </div>
+
+      <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+        });
+    </script>
+
+<script type="text/javascript" language="javascript">
+    function getdialogopt(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/options/enteropt/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+    function get(vid){
+        // alert(vid);
+        var state = vid;
+        var url = "/cbt/options/choose/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                $("#myDialognew").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+  <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:450,
+                    width:750,
+                    title:'<a>SchApp 8.0</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialognew").dialog(dialogOpts);
+            }
+        </script>
+
+</body>
+</html>
+{% endblock %}

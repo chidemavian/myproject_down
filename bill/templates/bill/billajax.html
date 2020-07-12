@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+</head>
+{% load humanize %}
+<body>
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+    <tr style='font-weight:bold;align:center' >
+        <td>S/N</td>
+        <td > Class</td>
+        <td > Description</td>
+        <td > Amount</td>
+        <td > GL Account Code</td>
+        <td > Day/Boarding</td>
+        <td >Term</td>
+        <td >Edit</td>
+    </tr>
+    {% if data %}
+        {% for pincode in data %}
+            <tr>
+
+            <td > {{ forloop.counter }}</td>
+            <td > {{ pincode.klass }}</td>
+            <td >  {{ pincode.desc }}</td>
+            <td >{{ pincode.billamount|intcomma }}</td>
+            <td > {{ pincode.acccode}}</td>
+            <td > {{ pincode.dayboarding}}</td>
+            <td > {{ pincode.term}}</td>
+            <td title="Delete This BillInfo"> <a href="/bill/deletebillajax/{{ pincode.id }}/" > Remove This Bill </a></td>
+
+        {% endfor %}
+    {% else %}
+        <td colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found.</td>
+    {% endif %}
+    </tr>
+
+</table>
+
+</body>
+</html>

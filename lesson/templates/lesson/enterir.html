@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+<form  action="/lesson/set_up/resources/enterir/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+    <table style="width:100%;background-color:#ccc000;">
+        <tr style="width:auto">
+            <td colspan="15">
+                <table style="width:auto">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Session:
+                        </td>
+                        <td>
+                            {{ getdetails.session }}
+                        </td>
+  
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Class:
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.klass }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Term:
+                        </td>
+                        <td>
+                            {{ getdetails.term }}
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Topic:
+                        </td>
+                        <td>
+                            {{getdetails.topic}}
+                        </td>
+                    </tr>
+         </table>
+         <table style="width:100%">
+
+             <tr>
+                <td><label>Instructional Resources:</label></td>
+                <td><textarea id="ir" rows="4" cols="20" name="ir"></textarea> </td>
+            </tr>
+            <tr>
+                <td><label>Examples:</label></td>
+                <td><input type="text" name="examples" class="loginTxtbox"/></td>
+            </tr>      
+              <tr>
+                  <td  style="text-align:center"><input  type="submit" value=":: Save ::" name="submit"></td>
+             </tr>
+    </table>
+</body>
+</form>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#content").focus();
+    });
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</body>
+</html>

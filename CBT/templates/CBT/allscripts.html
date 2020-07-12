@@ -1,0 +1,322 @@
+{% extends 'welcome1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IGBOBI COLLEGE YABA</title>
+        <link type="text/css" rel="Stylesheet" href="/static/CSS/new_lekan.css" />
+
+</head>
+          
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> My Scripts</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+{% for tkk in getdetails %}
+  <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered " id="dataTables-example"> 
+
+     <img style='width:100px;height:100px' src="/static/{{data.studentpicture}}" class="img-responsive" alt="Student Image">
+
+  </table>
+
+  <table  style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+      <thead>
+
+
+          <tr>
+              <th colspan='5'> Mid term scripts</th>
+
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td bgcolor="">Admission Number</td>
+              <td>{{ data.admissionno }}</td>
+              <td bgcolor="">Student Name</td>
+              <td>{{ data.fullname }}</td>
+          </tr>
+           <tr>
+              <td bgcolor="">Session</td>
+              <td>{{ data.admitted_session }}</td>
+              <td bgcolor="">Class</td>
+              <td>{{ data.admitted_class }}&nbsp;&nbsp;{{ data.admitted_arm }}</td>
+          </tr>
+          <tr>
+              <td bgcolor="">Subject</td>
+              <td> {{tkk.subject}} </td>
+
+              <td bgcolor="">Term</td>
+              <td>{{ term }} </td>
+          </tr>
+            <tr>
+              <td bgcolor="">Obtained</td>
+              <td style='color:blue'>{{ tkk.add }} </td>
+              <td bgcolor="">Obtainable</td>
+              <td>{{ tkk.total }} </td>
+          </tr>
+     </tbody>
+  </table>
+
+          {% for kl in tkk.details %}
+                <table style="margin-top:1%;margin-bottom:0%" width="100%" class="table  table-bordered " id="dataTables-example">  
+                          <tr>
+                              <td style= 'font-weight:bold'>
+                                  Q{{ forloop.counter }}. {{kl.question.question.qstn }}
+                              </td>
+                          </tr>   
+
+                            {% if kl.question.question.image != '/ax/image' %}
+
+                          <tr style='border:0px solid black' align='center'>
+                            <td>
+                        <img style="width: 230px; height: 180px" src="/static/{{kl.question.question.image}}" alt="{{getdetails.question.image}}">
+                      </td>
+                    </tr>
+                        {% endif %}
+                <!-- </table> -->
+           
+                {% for opt in kl.options %}
+<!-- <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered " id="dataTables-example">         -->
+
+  <tr>
+    <td>
+                    {% if kl.question.stu_ans == opt.a %}
+                            {% if opt.a == kl.answer.ans %}
+                                    {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(A.) </div>
+                                         <div style='display:inline; color:green'>{{opt.a}} </div>
+                                     {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                           <div style='text-decoration: line-through; display:inline'>(A.) </div>
+                                          <div style='border:0.8px solid green ; display:inline' align='center'>
+                                          <img style="width: 70px; height: 40px;" src="/static/{{opt.a}}" alt="{{getdetails.question.image}}">
+                                        </div>
+                              </table>
+                                     {% endif %}
+                            {% else %}
+                                   {% if kl.image = 'low' %}
+                                      <div style='text-decoration: line-through;display:inline'> (A.) </div>
+                                      <div style='display:inline; color:red'>{{opt.a}} </div>
+                                  {% else %}
+                        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                        <div style='text-decoration: line-through;display:inline'> (A.) </div>
+                                       <div style='border:0.8px solid red ;display:inline' align='center'>
+                                        <img style="width: 70px; height: 40px;" src="/static/{{opt.a}}" alt="{{getdetails.question.image}}">
+                                      </div>
+                          </table>
+                                  {% endif %}
+                            {% endif %}
+
+
+                     {% else %}
+                         {% if kl.image = 'low' %}
+                                <div > (A.)  {{opt.a}}</div>
+                          {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                               <div style='display:inline'> (A.) </div>
+                                <div style='border:2px solid white;display:inline' align='center'>
+                                <img style="width: 70px; height: 40px;" src="/static/{{opt.a}}" alt="{{getdetails.question.image}}"></div>  
+                            </table>    
+                          {% endif %}
+ 
+                      {% endif %}
+
+
+</td>
+</tr>
+        <tr>
+          <td>
+                  {% if kl.question.stu_ans == opt.b %} 
+                          {% if opt.b == kl.answer.ans %}
+                                    {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(B.) </div>
+                                         <div style='display:inline; color:green'>{{opt.b}} </div>
+                                     {% else %}
+                                   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                           <div style='text-decoration: line-through; display:inline'>(B.) </div>
+                                          <div style='border:0.8px solid green ; display:inline' align='center'>
+                                          <img style="width: 70px; height: 40px;" src="/static/{{opt.b}}" alt="{{getdetails.question.image}}">
+                                        </div>
+                                  </table>
+                                     {% endif %}                
+
+                          {% else %}
+                                    {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(B.) </div>
+                                         <div style='display:inline; color:red'>{{opt.b}} </div>
+                                     {% else %}
+                                      <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                           <div style='text-decoration: line-through;display:inline'> (B.) </div>
+                                            <div style='border:0.8px solid red ;display:inline' align='center'>
+                                               <img style="width: 70px; height: 40px;" src="/static/{{opt.b}}" alt="{{getdetails.question.image}}">
+                                               </div>
+                                        </table>
+                                     {% endif %} 
+                           {% endif %} 
+
+                  {% else %}
+                         {% if kl.image = 'low' %}
+                                <div > (B.)  {{opt.b}}</div>
+                          {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                               <div style='display:inline'> (B.) </div>
+                                <div style='border:2px solid white;display:inline' align='center'>
+                                <img style="width: 70px; height: 40px;" src="/static/{{opt.b}}" alt="{{getdetails.question.image}}"></div>  
+                            </table>      
+                          {% endif %}
+                  {% endif %}                                           
+
+
+
+</td>
+
+</tr>
+
+<tr>
+  <td>
+
+                      {% if kl.question.stu_ans == opt.c %} 
+                          {% if opt.c == kl.answer.ans %}
+                                    {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(C.) </div>
+                                         <div style='display:inline; color:green'>{{opt.c}} </div>
+                                     {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                           <div style='text-decoration: line-through; display:inline'>(C.) </div>
+                                          <div style='border:0.8px solid green ; display:inline' align='center'>
+                                          <img style="width: 70px; height: 40px;" src="/static/{{opt.c}}" alt="{{getdetails.question.image}}">
+                                        </div>
+                                </table>
+                                      {% endif %}
+                          {% else %}
+                                    {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(C.) </div>
+                                         <div style='display:inline; color:red'>{{opt.c}} </div>
+                                     {% else %}
+                                        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                        <div style='text-decoration: line-through;display:inline'> (C.) </div>
+                                       <div style='border:0.8px solid red ;display:inline' align='center'>
+                                        <img style="width: 70px; height: 40px;" src="/static/{{opt.c}}" alt="{{getdetails.question.image}}">
+                                      </div>
+                                    </table>
+                                      {% endif %}
+                           {% endif %} 
+
+                      {% else %}
+                         {% if kl.image = 'low' %}
+                                <div > (C.)  {{opt.c}}</div>
+                          {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                               <div style='display:inline'> (C.) </div>
+                                <div style='border:2px solid white;display:inline' align='center'>
+                                <img style="width: 70px; height: 40px;" src="/static/{{opt.c}}" alt="{{getdetails.question.image}}"></div>  
+                            </table>      
+                          {% endif %}
+                      {% endif %}
+
+</td>
+
+</tr>
+
+
+
+<tr>
+  <td>
+
+                       {% if kl.question.stu_ans = opt.d %} 
+                          {% if opt.d == kl.answer.ans %}
+                                     {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(D.) </div>
+                                         <div style='display:inline; color:green'>{{opt.d}} </div>
+                                     {% else %}
+                                        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                                         <div style='text-decoration: line-through; display:inline'>(D.) </div>
+                                                        <div style='border:0.8px solid green ; display:inline' align='center'>
+                                                        <img style="width: 70px; height: 40px;" src="/static/{{opt.d}}" alt="{{getdetails.question.image}}">
+                                                      </div>
+                                            </table>
+                                      {% endif %}
+                            {% else %}
+                                      {% if kl.image = 'low' %}
+                                          <div style='text-decoration: line-through; display:inline'>(D.) </div>
+                                         <div style='display:inline; color:red'>{{opt.d}} </div>
+                                     {% else %}
+                                      <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                                           <div style='text-decoration: line-through;display:inline'> (D.) </div>
+                                            <div style='border:0.8px solid red ;display:inline' align='center'>
+                                               <img style="width: 70px; height: 40px;" src="/static/{{opt.d}}" alt="{{getdetails.question.image}}">
+                                               </div>
+                                        </table>
+                                      {% endif %}
+                           {% endif %} 
+
+                      {% else %}
+                         {% if kl.image = 'low' %}
+                                <div > (D.)  {{opt.d}}</div>
+                          {% else %}
+                          <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                               <div style='display:inline'> (D.) </div>
+                                <div style='border:2px solid white;display:inline' align='center'>
+                                <img style="width: 70px; height: 40px;" src="/static/{{opt.d}}" alt="{{getdetails.question.image}}"></div>  
+                            </table>       
+                          {% endif %}
+                        {% endif %}
+</td>
+
+</tr>
+
+
+
+       {% if kl.answer.ans != kl.question.stu_ans %}
+<tr>
+
+
+         {% if kl.image = 'low' %}
+    <td>
+            
+             <div style="font-weight:bold;color:blue">Ans = {{kl.answer.ans}} ({{kl.answer.option}})</div>
+    </td>
+         {% else %}
+      
+        <td>
+        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                 <div style=' font-weight:bold;color:blue;display:inline'>Ans =  </div>
+                <div style='border:0.8px solid white ; display:inline' align='center'>
+                <img style="width: 70px; height: 40px;" src="/static/{{kl.answer.ans}}"  alt="{{getdetails.question.image}}"><span style='font-weight:bold;color:blue;display:inline'>({{kl.answer.option}})</span>
+              </div>
+         </table>
+    </td>
+       {% endif %}
+
+</tr>
+      {% endif %}
+
+
+</table>
+          {% endfor %}
+
+
+            {% endfor %}
+  {% endfor %}
+
+
+
+
+<div id="myDialog" title="Add Subject"></div>
+<div id="deletesubject" title="Delete Subject"></div>
+</body>
+
+</html>
+{% endblock %}

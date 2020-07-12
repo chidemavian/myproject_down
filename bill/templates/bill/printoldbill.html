@@ -1,0 +1,207 @@
+{% extends 'bill/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+    <table>
+        <tr>
+            <td colspan="10">
+                <form id="form1" action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+                    <table style="width:auto;text-align: left; vertical-align: text-top; border: 0px;" >
+                        <tr>
+                            <td colspan="10" style="text-align:center;color:white;background-color: #000;color:white;font-weight:bold;font-size:14px">
+                                PRINT OLD STUDENT BILL
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.session.label_tag }} &nbsp;{{ form.session }} &nbsp;{{ form.session.errors }}
+                            </td>
+                            <td>{{ form.klass.label_tag }}&nbsp;{{ form.klass }}&nbsp;{{ form.klass.errors }}</td>
+                            <td>{{ form.term.label_tag }}&nbsp;{{ form.term }}&nbsp;{{ form.term.errors }}</td>
+                            <td>{{ form.name.label_tag }}&nbsp;{{ form.name }}&nbsp;{{ form.name.errors }}</td>
+                           <!-- <td>{{ form.excelfile.label_tag }}&nbsp;{{ form.excelfile }}&nbsp;{{ form.excelfile.errors }}</td>-->
+                            <td><input  type="submit" value=":: View Report ::" name="submit"></td>
+                        </tr>
+
+                    </table>
+                </form>
+
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="10">
+                <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+                <div class="printable">
+                        <table style="width:595px;height:842px;vertical-align:top;">
+                            <tr style="vertical-align:top">
+                                <td colspan="10">
+                                    <table style="width:100%;vertical-align:top;" border="0">
+                                        <tr>
+                                            <td style=" text-align: right;" rowspan="3">
+                                                <img style="width: 120px; height: 80px;" src="/static/{{ school.logo }}" alt="{{ school.name }}">
+                                            </td>
+                                            <td style=" text-align: left; vertical-align:top;">
+                                                {{ school.name }}
+                                                <h4>{{ school.address }}</h4>
+                                                <h4>{{ school.website }}</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left;" colspan="10"><h2> School Bill </h2></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" >
+                                                <strong></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10">
+                                                <strong>Student Name: &nbsp;{{ stuname }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10">
+                                                <strong> Class: &nbsp;{{klass }}</strong>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left;">
+                                                <strong> Term: &nbsp;{{ term }}</strong>
+
+                                            </td>
+                                            <td style="text-align:right;">
+                                                <strong> Session: &nbsp;{{ session }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="vertical-align:top">
+                                            <td colspan="10">
+                                                <table style="width:100%;background-color:white;border-collapse:collapse;">
+                                                    <tr >
+                                                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                                                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Bill Description</td>
+                                                        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle;text-align:right;">Bill Amount</td>
+
+                                                    </tr>
+                                                    {% for b in bill %}
+                                                        <tr>
+                                                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }} </td>
+
+                                                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ b.desc }}</td>
+                                                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black;text-align:right">  {{ b.billamount }}
+                                                        </td>
+                                                    {% endfor %}
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="3" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black;text-align:right">
+                                                            <strong>Total : {{ totalbill }}</strong>
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+
+            getstudent();
+            $("#id_session").keyup(function () {
+                getstudent();
+            });
+
+            $("#id_klass").change(function () {
+                getstudent();
+            });
+
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() + ':'+ $("#id_excelfile").val();
+
+            alert(state);
+            var url = "/bill/addajax/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+                }
+            });
+            //alert("error");
+            return false;
+
+        }
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getstudent(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() ;
+            //alert(state);
+            var url = "/bill/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_name").val('');
+            $("#id_name").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_name").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+
+{% endblock %}

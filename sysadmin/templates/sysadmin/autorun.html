@@ -1,0 +1,179 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+    <div >
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%; font-size:10px;color:white;text-align:center;"> <strong>HOME ROOM TEACHERS' AUTO COMMENT TABLE  </strong> </div>
+        <div  style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:#ffffff;text-align:center;" > {{varerr}}</div>
+        <div>
+        </div>
+       <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+            <tr>
+                <td colspan="10">
+
+        <form action="" method="post" name ="main" onsubmit="disable(this)">
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <tr style='font-size:10px'>
+                    
+                    <td>Session </td>
+                    <td>{{ form.session}} </td>
+                    
+                    <td>{{form.term.label_tag}}: </td>
+                    <td>{{ form.term}} </td>
+                    <td></td>
+                    <td>{{form.ca.label_tag}}: </td>
+                    <td>{{ form.ca}} </td>
+                    <td>
+                        <input name="submit" type= "submit" value="::Run Auto Comment::">
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+        </td></tr>
+
+        <tr>
+            <td colspan="10">
+                <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    
+                        <td ><strong>Auto Run History</strong></td>
+                    
+                    <tr>
+                        <td ><strong>S/N</strong></td>
+                        <td ><strong>User ID </strong></td>
+                        <td ><strong>Date</strong></td>
+                        <td ><strong>Session</strong></td>
+                        <td ><strong> Assessment Type</strong></td>
+                        <td ><strong> Time</strong></td>     
+               </tr>
+                    {% for pincode in autocom %}
+
+                        <tr>
+                        <td >  {{forloop.counter}} </td>
+                        <td > {{varuser}} </td>                        
+                        <td > {{catu}} </td>
+                        <td > {{session}} </td>
+                        <td > {{assessment}}</td>
+                        <td > {{time}}</td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+    <div id="myDialog" title="Edit Teacher">
+    </div>
+
+
+    <script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            //appendText: "mm/dd/yy",
+            //defaultDate: "+5",
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            //showButtonPanel: true
+            // showOn: "button"
+        };
+
+ 
+
+        $("#id_surname").focus();
+        //$("id_birth_date").attr('disable','True');
+
+    });
+    </script>
+
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialog").hide();
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogtry(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getcommm/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:350,
+                width:510,
+                title:'Delete Class Teacher' ,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#id_comment").focus();
+           // range();
+            $("#id_category").change();
+            range();
+
+            $("#id_category").change(function () {
+                range();
+            });            
+
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function range(){
+            var state = $("#id_category").val() ;
+            var url = "/sysadmin/comauto/range/"; 
+            var i = 0;
+            var data='userid='+state;
+            $("#id_krang").val('');
+            $("#id_krang").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_krang").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+{%endblock%}

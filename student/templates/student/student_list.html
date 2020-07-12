@@ -1,0 +1,97 @@
+{% extends 'student/base.htm' %}
+{% block content %}
+    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">      
+                        <form action="" method="POST" onsubmit="disable(this)">
+                        <tr>
+                            
+                            <td>{{ form.session.label }}:{{ form.session }}</td>
+                            <td>{{ form.klass.label }}: {{ form.klass }}</td>
+                            <td>{{ form.arm.label }}: {{ form.arm }}</td>
+                            <td>{{ form.dayboarding.label }}: {{ form.dayboarding }}</td>
+                            <td>{{ form.filtermethod.label }}:{{ form.filtermethod }}</td>
+                            <td>{{ form.excelfile.label }}: {{ form.excelfile }}</td>
+
+                        </tr>
+    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <td  style="text-align: center; vertical-align: middle;"><input type="submit" value=":: View Report ::" name = "submit"></td>
+                        </table>
+                </form>
+</table>
+
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+        {% if students_list %}
+    <tr>  
+            <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+
+            <div class="printable">
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <tr>
+                    <td >
+                        <img style="width: 120px; height: 50px;" src="/static/{{ school.logo }}" alt="{{ school.name }}">
+                    </td>
+                    <td >
+                        <span style="font-size:20px;font-weight:bold;">{{ school.name }}</span><br>{{ school.address }}<br>{{ school.websited }}
+                    </td>
+                </tr>
+            </table>
+        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <tr style="text-align: center; vertical-align: middle;font-weight:bold;">
+                    <td>STUDENT LIST FOR {{ disclass }}&nbsp;{{ disarm }} {{ session }} SESSION</td>
+
+                </tr>
+        </table>
+        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                          <tr style="text-align: center;font-weight:bold;">
+                                <td >S/N</td>
+                                <td >Name</td>
+                                <td >Adm No</td>
+                                <td >Class</td>
+                                <td >House</td>
+                                <td >Day/Boarding</td>
+                                <td >Parent Phone </td>                                
+                                <td >Parent Mail</td>
+                           </tr>
+                            {% for student in students_list %}
+                                <tr>
+                                    <td >{{ forloop.counter }}</td>
+                                    <td >{{ student.fullname }}</td>
+                                    <td >{{ student.admissionno }}</td>
+                                    <td >{{ student.admitted_class }} {{ student.admitted_arm }}</td>
+                                    <td >{{ student.house }}</td>
+                                    <td >{{ student.dayboarding }}</td>
+                                    <td >{{ student.fathernumber }}</td>
+                       
+                                    <td >{{ student.fatheremail|lower }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+            </div>
+ </tr>     
+        {% endif %}
+
+    </table>
+<script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+</script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+<!--
+<div style="width: 100%;">
+    <input type="button" value="Print">
+    <em style="text-decoration: infotext; ">Download report as <a href="/students/report/download?format=pdf">pdf</a>&nbsp;
+    or&nbsp;<a href="/students/report/download?format=xls">xls</a>&nbsp;(MS Excel format)</em>
+</div>
+-->
+
+{% endblock %}

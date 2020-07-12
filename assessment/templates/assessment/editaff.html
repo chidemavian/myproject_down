@@ -1,0 +1,506 @@
+<html>
+<head>
+    <title> {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .error2 { color: red; }
+        .error1 { color: red; }
+        .error3 { color: red; }
+        .error4 { color: red; }
+        .error5 { color: red; }
+        .error6 { color: red; }
+        .error7 { color: red; }
+        .error8 { color: red; }
+        .error9 { color: red; }
+        .error10 { color: red; }
+        .error11 { color: red; }
+        .error12 { color: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 21px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form action="/assessment/editaffective/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+    <table style="width:100%;background-color:#f5f5f5;">
+        <tr style="width:100%;">
+            <td colspan="15">
+                <table style="width:auto;">
+                    <tr>
+                        <td colspan="5" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Adm. No
+                        </td>
+                        <td>
+                            {{ getdetails.academic_rec.student.admissionno }}
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Student Name
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.academic_rec.student.fullname }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Session
+                        </td>
+                        <td>
+                            {{ getdetails.academic_rec.student.admitted_session}}
+                        </td>
+                        <td rowspan="4">
+                            <img style="width: 100px; height: 100px;"src="/static/{{ getdetails.academic_rec.student.studentpicture  }} " alt="{{ k.studentinfo.fullname  }}">
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Term
+                        </td>
+                        <td>
+                            {{getdetails.academic_rec.term}}
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Class
+                        </td>
+                        <td>
+                            {{getdetails.academic_rec.klass}}
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Arm
+                        </td>
+                        <td>
+                            {{getdetails.academic_rec.arm}}
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Punctuality
+                        </td>
+                        <td>
+                            <input type="text" name="punctuality" id="punctuality" size="5" value="{{ getdetails.punctuality }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error1"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Neatness
+                        </td>
+                        <td>
+                            <input type="text" name="neatness" id="neatness" size="5" value="{{ getdetails.neatness }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error2"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Honesty
+                        </td>
+                        <td>
+                            <input type="text" name="honesty" id="honesty" size="5" value="{{ getdetails.honesty }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error3"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Initiative
+                        </td>
+                        <td>
+                            <input type="text" name="initiative" id="initiative" size="5" value="{{ getdetails.initiative }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error4"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Self Control
+                        </td>
+                        <td>
+                            <input type="text" name="self_control" id="self_control" size="5" value="{{ getdetails.self_control }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error5"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Reliability
+                        </td>
+                        <td>
+                            <input type="text" name="reliability" id="reliability" size="5" value="{{ getdetails.reliability }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error6"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Perseverance
+                        </td>
+                        <td>
+                            <input type="text" name="perseverance" id="perseverance" size="5" value="{{ getdetails.perseverance }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error7"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Politeness
+                        </td>
+                        <td>
+                            <input type="text" name="politeness" id="politeness" size="5" value="{{ getdetails.politeness }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error8"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Attentiveness
+                        </td>
+                        <td>
+                            <input type="text" name="attentiveness" id="attentiveness" size="5" value="{{ getdetails.attentiveness }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error9">Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Relationship With People
+                        </td>
+                        <td>
+                            <input type="text" name="rel_with_people" id="rel_with_people" size="5" value="{{ getdetails.rel_with_people }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error10"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Co-operation
+                        </td>
+                        <td>
+                            <input type="text" name="cooperation" id="cooperation" size="5" value="{{ getdetails.cooperation }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error11">Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Organizational Ability
+                        </td>
+                        <td>
+                            <input type="text" name="organizational_ability" id="organizational_ability" size="5" value="{{ getdetails.organizational_ability }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error12"> Can Not Be Empty</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center;"><input type="submit" value=":: Submit Affective ::" name ="submit"></td>
+                    </tr>
+                </table>
+
+            </td>
+
+        </tr>
+    </table>
+
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error1').hide();
+        $('.submit').click(function(event){
+            var data1=$("#punctuality").val();
+            var len1=data1.length;
+            if (len1 > 0){
+                $('.error1').hide();
+            }
+            else
+            {
+                $("#punctuality").focus();
+                $('.error1').show();
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error2').hide();
+        $('.submit').click(function(event){
+            var data2=$("#neatness").val();
+            var len2=data2.length;
+            if (len2 <= 0){
+                // alert('Second CA Score can not be Empty');
+                $("#neatness").focus();
+                $('.error2').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error2').hide();
+            }
+
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error3').hide();
+        $('.submit').click(function(event){
+            var data=$("#honesty").val();
+            var len=data.length;
+            if (len <= 0){
+                $("#honesty").focus();
+                $('.error3').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error3').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error4').hide();
+        $('.submit').click(function(event){
+            var data4=$("#initiative").val();
+            var len4=data4.length;
+            if (len4 <= 0){
+                $("#initiative").focus();
+                $('.error4').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error4').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error5').hide();
+        $('.submit').click(function(event){
+            var data5=$("#self_control").val();
+            var len5=data5.length;
+            if (len5 <= 0){
+                $("#self_control").focus();
+                $('.error5').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error5').hide();
+            }
+        });
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error6').hide();
+        $('.submit').click(function(event){
+            var data6=$("#reliability").val();
+            var len6=data6.length;
+            if (len6 <= 0){
+                $("#reliability").focus();
+                $('.error6').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error6').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error7').hide();
+        $('.submit').click(function(event){
+            var data7=$("#perseverance").val();
+            var len7=data7.length;
+            if (len7 <= 0){
+                $("#perseverance").focus();
+                $('.error7').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error7').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error8').hide();
+        $('.submit').click(function(event){
+            var data8=$("#politeness").val();
+            var len8=data8.length;
+            if (len8 <= 0){
+                $("#politeness").focus();
+                $('.error8').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error8').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error9').hide();
+        $('.submit').click(function(event){
+            var data9=$("#attentiveness").val();
+            var len9=data9.length;
+            if (len9 <= 0){
+                $("#self_control").focus();
+                $('.error9').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error9').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error10').hide();
+        $('.submit').click(function(event){
+            var data10=$("#rel_with_people").val();
+            var len10=data10.length;
+            if (len10 <= 0){
+                $("#rel_with_people").focus();
+                $('.error10').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error10').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error11').hide();
+        $('.submit').click(function(event){
+            var data11=$("#cooperation").val();
+            var len11=data11.length;
+            if (len11 <= 0){
+                $("#cooperation").focus();
+                $('.error11').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error11').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error12').hide();
+        $('.submit').click(function(event){
+            var data12=$("#organizational_ability").val();
+            var len12=data12.length;
+            if (len12 <= 0){
+                $("#organizational_ability").focus();
+                $('.error12').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error12').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#punctuality").keyup(function () {
+            $('.error1').hide();
+        });
+        $("#neatness").keyup(function () {
+            $('.error2').hide();
+        });
+        $("#honesty").keyup(function () {
+            $('.error3').hide();
+        });
+        $("#initiative").keyup(function () {
+            $('.error4').hide();
+        });
+        $("#self_control").keyup(function () {
+            $('.error5').hide();
+        });
+
+        $("#reliability").keyup(function () {
+            $('.error6').hide();
+        });
+        $("#perseverance").keyup(function () {
+            $('.error7').hide();
+        });
+        $("#politeness").keyup(function () {
+            $('.error8').hide();
+        });
+        $("#attentiveness").keyup(function () {
+            $('.error9').hide();
+        });
+        $("#rel_with_people").keyup(function () {
+            $('.error10').hide();
+        });
+        $("#cooperation").keyup(function () {
+            $('.error11').hide();
+        });
+        $("#organizational_ability").keyup(function () {
+            $('.error12').hide();
+        });
+
+    });
+</script>
+</body>
+</html>

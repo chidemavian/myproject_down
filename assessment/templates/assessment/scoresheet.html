@@ -1,0 +1,301 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% load humanize %}
+{% block content %}
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-edit fa-1x"></i> Scores Sheet</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+  <table style="width:100%; background-color:gry;font-size:9px">
+    <form action="" method="POST">
+          <tr style='border:1px solid black'>
+            <td>Session&nbsp;{{ form.session }}</td>
+            <td>Class&nbsp;{{ form.klass }}</td>
+            <td>Arm&nbsp;{{ form.arm }}</td>
+            <td>Term&nbsp;{{ form.term }}</td>
+            <td>Subject&nbsp;{{ form.subject }}</td>
+            <td><input name="submit" type= "submit" value="View Score Sheet" ></td>
+         </tr>
+      </form>   
+  </table>                       
+            
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+    font-size: 80%;
+    border-collapse: collapse;
+    margin-right: 1%;
+    padding: 10px;
+}
+
+td, th {
+    border: 2px solid black;#dddddd;
+    text-align: laeft;
+    padding: 8px;
+    color: :black;
+}
+
+tr:nth-child(even) {
+    background-color: #ddddd;
+}
+</style>
+
+<body>
+   <div style="text-align:center;color:black;font-size:14px;background-color:#ccccc0">
+                  <td>   SCORE SHEET FOR  {{subject}} {{term}} TERM {{session}}</td> </div>
+
+<input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+            <div class="printable">
+            {% for k in replist %}
+<table  style='margin-top:60px;width=100%'>
+  <table style='border:0.9px solid black'>
+    <tr>
+      <td rowspan="3">
+          <img style="width: 120px; height: 100px;" src="/static/{{school.logo }}" alt="{{ k.studentinfo.fullname  }}">
+      </td>    
+        <td style='border:0px solid black'>
+          <tr>          
+              <td style='border:0px solid black;text-align:center;font-size:30px;font-weight-bold'>IGBOBI COLLEGE YABA</td>
+          </tr>
+          <tr>
+              <td style='border:0px solid black;font-size:14px;text-align:center'>{{term}} TERM EXAM SCORESHEET {{session}}</td>
+          </tr>
+        </td>
+    </tr>
+
+</table>
+
+<table style='margin-bottom:10px'>
+  {% for p in k.rec %}
+  <tr>
+    <td style='font-weight:bold; font-size:12px'>NAME OF STUDENT:</td>
+    <td colspan='5  '>{{ p.academic_rec.student.fullname }} </td>
+  </tr>
+  <tr>
+    <td style='font-weight:bold; font-size:12px'>SUBJECT: </td>
+    <td> {{subject}}</td>
+    <td style='font-weight:bold; font-size:12px'>CLASS:</td>
+    <td colspan='3'>{{class}}</td>
+
+  </tr>
+
+  <tr style='text-align:center;font-weight:bold; font-size:12px'>
+    <td>1ST CA<BR/>20%</td>
+  <td>2ND CA<BR/>20%</td>
+  <td>EXAM<BR/>60%</td>
+  <td>TOTAL<BR/>100%</td>
+  <td>GRADE</td>
+  <td>EFFORT</td>
+</tr>
+
+<tr style='text-align:center'>
+  <td>{{ p.first_ca }} </td>
+  <td>{{ p.second_ca }}</td>
+  <td>{{ p.exam_score }} </td>
+  <td>{{ p.term_score }} </td>
+  <td>{{ p.grade }} </td>
+  <td >{{ p.remark }} </td>
+</tr>
+
+</table>
+
+    <table style='margin-bottom:30px'>
+
+      <tr>
+    <td style='font-weight:bold; font-size:12px'>REMARKS: </td>
+    <td colspan='5  '>{{ p.remarks}} </td>
+    </tr>
+
+    <tr>
+      <td style='font-weight:bold; font-size:12px'>NAME OF TEACHER:</td>
+      <td>{{p.subject_teacher}} </td>
+      <td style='font-weight:bold; font-size:12px'>SIGN:</td>
+      <td style='width:40%'>{{jh}} </td>
+      <td style='font-weight:bold; font-size:12px'>DATE: </td>
+      <td>{{date}} </td>
+    </tr>
+    </table>
+{% endfor %}
+    <table style='margin-bottom:120px'>
+      <td style='border:0px solid black;font-weight:bold;font-size:14px;text-align:right'>DCL ....... to be the best </td>
+    </table>
+</table>
+{% endfor %}
+</div>
+</body>
+
+
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+
+
+  <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // $("#id_birth_date").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+            //$("#id_studentname").focus();
+            //$("id_birth_date").attr('disable','True');
+
+            getclass();
+            //getarm();
+            getterm();
+            //getsubject();
+            //autopost();
+
+           // $(".ass").hide();
+        });
+    </script>
+    
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost();
+            });
+            $("#id_arm").change(function () {
+                getsubject();
+            });
+            $("#id_klass").change(function () {
+                getarm();
+            });
+            $("#id_term").change(function () {
+                autopost();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ; // i need session to determine my class
+            //alert(state);
+            var url = "/assessment/getclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');   
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                        getarm();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getterm(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getterm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_term").val('');
+            $("#id_term").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_term").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() ;
+            //alert(state);
+            var url = "/assessment/getarm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                        getsubject();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getsubject(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val();
+            var url = "/assessment/getsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+    {% endblock %}

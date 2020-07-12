@@ -1,0 +1,55 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}New Account {% endblock %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+        <table style="width:70%;">
+            <tr>
+                <td colspan="15" style="font-size:15px;text-align:center;font-weight:bold;background-color:#FFF;color:red">
+                    {{succ}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="15" style="font-size:15px;text-align:center;font-weight:bold;background-color:#FFF;">
+                    TEMPORARY PROMOTION
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    OLD CLASS
+                </td>
+                <td>
+                    {{ form.oldclass }}
+                </td>
+                <td>
+                    NEW CLASS
+                </td>
+                <td>
+                    {{ form.newclass }}
+                </td>
+                <td>
+                    SESSION
+                </td>
+                <td>
+                    {{ form.session }}
+                </td>
+                <td>
+                    <input name="submit" type= "submit" value="Promote Class "/>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+{% endblock %}

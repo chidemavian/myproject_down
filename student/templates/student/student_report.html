@@ -1,0 +1,48 @@
+<table style="width: 100%">
+
+
+    <tr>
+        <td style="width:auto; text-align: right; vertical-align: middle;">
+            <img style="width: 120px; height: 120px;" src="/static/{{ school.logo }}" alt="{{ school.name }}">
+        </td>
+        <td style="width:auto; text-align: left;">
+            <span style="font-size:18px;font-weight:bold;">{{ school.name }}</span><br>
+            {{ school.address }}<br>
+            {{ school.website }}
+
+        </td>
+    </tr>
+    <tr>
+
+        <td style="text-align:center;width:100%;" colspan="8"><h2>{{ disclass }}&nbsp;{{ disarm }} Student List for </h2> <h3>{{ session }} Session</h3></td>
+
+    </tr>
+    <tr style="border-bottom:solid #000000">
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">S/N</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Name</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Sex</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Admission No</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Class</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Arm</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">House</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Day/Boarding</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">Phone Number</td>
+        <td style="font-weight: bold; background-color: #008b8b; text-align:left;color:white;">E-Mail</td>
+    </tr>
+
+    {% for student in students_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ student.fullname }}</td>
+            <td>{{ student.sex }}</td>
+            <td>{{ student.admissionno }}</td>
+            <td>{{ student.admitted_class }}</td>
+            <td>{{ student.admitted_arm }}</td>
+            <td>{{ student.house }}</td>
+            <td>{{ student.dayboarding }}</td>
+            <td>{{ student.fathernumber }}</td>
+            <td>{{ student.fatheremail }}</td>
+        </tr>
+    {% endfor %}
+
+</table>

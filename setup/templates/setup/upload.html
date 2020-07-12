@@ -1,0 +1,21 @@
+{%extends 'setup/typography.html' %}
+{% block content %}
+
+
+
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    {{succ}}
+
+      <form action="" 
+      enctype="multipart/form-data" 
+      method="POST">
+            <tr>
+                <td> <div><input type="file" name="input_excel" size="20"/> </div></td>
+                <td> <button type="submit">Upload File</button></td>      
+
+            </tr>
+     </form>
+             
+</table>
+    
+    {% endblock %}

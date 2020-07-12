@@ -1,0 +1,88 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}{{ head }}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div style ="color:#000;font-size:14px;" align ="left">{{ note }}</div>
+    <div style ="color:red;font-size:20px;font-family:verdana;text-decoration:blink" align ="left">{{succ}}</div>
+
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+        <p><input name="submit" type= "submit" value="{{ head }}"/></p>
+    </form>
+    <table style="width:100%;">
+        <tr>
+            <td>
+
+                {% if data %}
+
+
+                    <table align ="left" style="border:0px solid #336666;width:auto;">
+                        <tr>
+                            <td colspan="10">
+                                <table style="width:100%;border-collapse:collapse;font-size:12px;">
+                                    <tr>
+                                        <!--
+                                        <td colspan="1" rowspan="2" style="vertical-align:top">
+                                            <img  style = "vertical-align:top;float:right;padding:5px;width:70px;height:80px" src ="/static/state.jpg" >
+                                        </td>-->
+                                        <td style="font-weight:bold;font-size:14px;color:red;text-align:left;" colspan="4">
+                                            {{ comp }}
+                                        </td>
+                                        <!--
+                                        <td colspan="2" rowspan="2" style="vertical-align:top">
+                                            <img  style = "vertical-align:top;float:right;padding:5px;width:70px;height:80px" src ="/static/{{ logo }}" >
+                                        </td>-->
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="font-weight:bold;font-size:11px;color:#000000;text-align:left;font-style:italic;">
+                                            {{ address }}
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td style="border:1px solid black;font-weight:bold;"> S/N</td>
+                                        <td style="border:1px solid black;font-weight:bold;padding:3px;">Due Date</td>
+                                        <td style="border:1px solid black;text-align:right;font-weight:bold;">PIN </td>
+                                        <td style="border:1px solid black;text-align:right;font-weight:bold;">Code </td>
+                                    </tr>
+                                    {% for p in data  %}
+                                    <tr>
+
+                                        <td style="font-weight:normal;text-align:left;color:#000000;border:1px solid black;">{{ forloop.counter}}</td>
+                                        <td style="font-weight:bold;text-align:left;color:#000000;border:1px solid black;padding:3px;">{{p.ydate|date:"d-m-Y" }}</td>
+                                        <td style="font-weight:normal;text-align:right;color:#000000;border:1px solid black;text-align:right;">{{ p.pin }}</td>
+                                        <td style="font-weight:normal;text-align:right;color:#000000;border:1px solid black;text-align:right;">{{ p.used }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                {% endif %}
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    function disable(f)
+    {
+        var button = f.elements['submit'];
+        button.value = 'Processing';
+        button.disabled = 'true';
+        return true;
+    }
+</script>
+
+<script language="javascript" type="text/javascript">
+    function openrecprint()
+    {
+        $( ".printable" ).print();
+    }
+</script>
+{% endblock %}

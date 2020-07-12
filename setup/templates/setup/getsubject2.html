@@ -1,0 +1,197 @@
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .error { color: red; }
+        .error1 { color: red; }
+        .error2 { color: red; }
+        .error3 { color: red; }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<div align ="center" style="background-color:white;width:100%;height:10%; font-size:12px;color:red;font-style:italic;"> <strong>Press ESC to close  </strong> </div>
+<div align ="center" style="background-color:gray;border:0px solid black;width:100%;height:10%; font-size:12px;color:white"> <strong>EDIT SUBJECT  </strong> </div>
+<div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+<form action="/setup/editsubject/{{ getdetails.id }}/" method="post" name ="main" onsubmit="disable(this)">
+    <table align ="left" style="width:100%;">
+        <tr>
+            <td>
+                Class:
+            </td>
+            <td><input type ="text" id="class" size="20" name="class" readonly="readonly" value ="{{getdetails.category}}" style="border: #4772A9 1px solid;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #000;text-align: left;height:16px;">
+                &nbsp;<span class="error"> Class is required</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Subject :
+            </td>
+            <td>
+                <input type ="text" id="subject" size="35" name="subject" value ="{{getdetails.subject}}" style="border: #4772A9 1px solid;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #000;text-align: left;height:16px;">
+                &nbsp;<span class="error1"> Subject is required</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Category:
+            </td>
+            <td><input type ="text" id="class" size="20" name="class" readonly="readonly" value ="{{getdetails.category2}}" style="border: #4772A9 1px solid;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #000;text-align: left;height:16px;">
+                &nbsp;<span class="error"> Category is required</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+               CA :
+            </td>
+            <td>
+                <input type ="text" id="ca" size="25" name="ca" value ="{{getdetails.ca}}" style="border: #4772A9 1px solid;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #000;text-align: left;height:16px;">
+                &nbsp;<span class="error2"> CA is required</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Exam :
+            </td>
+            <td>
+                <input type ="text" id="exam" size="25" name="exam" value ="{{getdetails.exam}}"  style="border: #4772A9 1px solid;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #000;text-align: left;height:16px;">
+                &nbsp;<span class="error3"> EXAM is required</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <input name="submit" type= "submit" value="  Update Subject  ">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="hidden" name="hcode"
+                       value="{{getdetails.subject}}">
+            </td>
+        </tr>
+    </table></form>
+<!-- parti-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#ca").focus();
+        $('.error2').hide();
+        $('.error').hide();
+        $('.submit').click(function(event){
+            var data=$("#ca").val();
+            var len=data.length;
+            if (len <= 0){
+                $('.error2').show();
+                $("#ca").focus();
+                //$('.error').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error2').hide();
+            }
+
+            //*********************************************************
+            if (jQuery.isNumeric(data) == true){
+
+            }
+            else
+            {
+                alert('Number is required');
+                $("#ca").focus();
+                event.preventDefault();
+            }
+            //**********************************************************
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#exam").focus();
+        $('.error3').hide();
+        $('.submit').click(function(event){
+            var data=$("#exam").val();
+            var len=data.length;
+            if (len <= 0){
+                $('.error3').show();
+                $("#exam").focus();
+                //$('.error').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error3').hide();
+            }
+
+            //*********************************************************
+            if (jQuery.isNumeric(data) == true){
+
+            }
+            else
+            {
+                alert('Number is required');
+                $("#exam").focus();
+                event.preventDefault();
+            }
+            //**********************************************************
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#subject").keyup(function () {
+            $('.error1').hide();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#subject").focus();
+        $('.error1').hide();
+        $('.submit').click(function(event){
+            var data=$("#subject").val();
+            var len=data.length;
+            if (len <= 0){
+                $('.error1').show();
+                $("#subject").focus();
+                //$('.error').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error1').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#exam").keyup(function () {
+            $('.error3').hide();
+        });
+    });
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#ca").keyup(function () {
+            $('.error2').hide();
+        });
+    });
+</script>
+</body>
+</html>

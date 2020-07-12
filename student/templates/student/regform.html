@@ -1,0 +1,318 @@
+
+
+{%  load humanize %}
+<form id="form1" action="/student/editregistration/" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+
+<table style="text-align: left; width:100%;" >
+
+<tr >
+    <td colspan="7"  style="background-color: #ccccc0;color:#000000;text-align:center;" > Bio Data</td>
+</tr>
+<tr>
+    <td><label for="id_surname">Surname</label></td>
+    <td><input id="id_surname" type="text" name="surname" maxlength="75" value="{{ data.surname }}" class="loginTxtbox"/></td>
+    <td><label for="id_firstname">First Name</label></td>
+    <td><input id="id_firstname" type="text" name="firstname" maxlength="75" value="{{ data.firstname }}" class="loginTxtbox" /></td>
+    <td rowspan =5><img style = "border:1px solid black;width:100px;height:100px" src ="/static/{{data.studentpicture}}" ><br><input id="id_studentpicture" type="file" name="studentpicture" size="5"><br><strong> Upload Picture</strong> </td>
+</tr>
+<tr>
+    <td><label for="id_othername">Other Names</label></td>
+    <td><input id="id_othername" type="text" name="othername" maxlength="75" value="{{ data.othername }}" class="loginTxtbox" /></td>
+    <td><label for="id_address">Address</label></td>
+    <td><textarea id="id_address" rows="1" cols="30" name="address" class="loginTxtbox1">{{ data.address }}</textarea> </td>
+</tr>
+<tr>
+    <td><label for="id_sex">Gender</label></td>
+    <td><select name="sex" id="id_sex">
+        <option selected = "selected" value="{{data.sex}}">{{data.sex}}</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+    </select>&nbsp;</td>
+    <td><label for="id_birth_date">Date Of Birth</label></td>
+    <td><input id="id_birth_date" readonly="readonly" type="text" name="birth_date" maxlength="12" value="{{ data.birth_date|date:'Y-m-d' }}" class="loginTxtbox"/></td>
+</tr>
+<tr>
+    <td><label for="id_birth_place">Place of Birth</label></td>
+    <td><input id="id_birth_place" type="text" name="birth_place" maxlength="75"  value="{{ data.birth_place }}" class="loginTxtbox"/></td>
+    <td><label for="id_state_of_origin">State of Origin</label></td>
+    <td><select name="state_of_origin" id="id_state_of_origin">
+        <option selected = "selected" value="{{data.state_of_origin}}">{{data.state_of_origin}}</option>
+        <option value="Abia">Abia</option>
+        <option value="Adamawa">Adamawa</option>
+        <option value="Akwa Ibom">Akwa Ibom</option>
+        <option value="Anambra">Anambra</option>
+        <option value="Bauchi">Bauchi</option>
+        <option value="Bayelsa">Bayelsa</option>
+        <option value="Benue">Benue</option>
+        <option value="Borno">Borno</option>
+        <option value="Cross River">Cross River</option>
+        <option value="Delta">Delta</option>
+        <option value="Ebonyi">Ebonyi</option>
+        <option value="Edo">Edo</option>
+        <option value="Ekiti">Ekiti</option>
+        <option value="Enugu">Enugu</option>
+        <option value="Federal Capital Territory">Federal Capital Territory</option>
+        <option value="Gombe">Gombe</option>
+        <option value="Imo">Imo</option>
+        <option value="Jigawa">Jigawa</option>
+        <option value="Kaduna">Kaduna</option>
+        <option value="Kano">Kano</option>
+        <option value="Katsina">Katsina</option>
+        <option value="Kebbi">Kebbi</option>
+        <option value="Kogi">Kogi</option>
+        <option value="Kwara">Kwara</option>
+        <option value="Lagos">Lagos</option>
+        <option value="Nassarawa">Nassarawa</option>
+        <option value="Niger">Niger</option>
+        <option value="Non-Nigeria">Non-Nigeria</option>
+        <option value="Ogun">Ogun</option>
+        <option value="Ondo">Ondo</option>
+        <option value="Osun">Osun</option>
+        <option value="Oyo">Oyo</option>
+        <option value="Plateau">Plateau</option>
+        <option value="Rivers">Rivers</option>
+        <option value="Sokoto">Sokoto</option>
+        <option value="Taraba">Taraba</option>
+        <option value="Yobe">Yobe</option>
+        <option value="Zamfara">Zamfara</option>
+    </select>&nbsp;</td>
+</tr>
+<tr>
+<td><label for="id_lga">L.G.A.</label></td>
+<td><select name="lga" id="id_lga">
+<option selected = "selected" value="{{data.lga}}">{{data.lga}}</option>
+    {% for pincode in lgaorigin %}
+        <option value="{{pincode.lga}}">{{pincode.lga}}</option>
+    {% endfor %}
+</select>&nbsp;</td>
+<!-- <td><label for="id_studentpicture">Studentpicture</label></td>
+<td><input id="id_studentpicture" type="file" name="studentpicture" size="5" />&nbsp;</td> -->
+</tr>
+<tr>
+    <td colspan="7" class="sectionCaption" style="background-color: #ccccc0;color:#000000;text-align:center;font-weight:ld;">Parent/Guardian</td>
+</tr>
+<tr>
+    <td><label for="id_fathername">Name</label></td>
+    <td><input id="id_fathername" type="text" name="fathername" maxlength="275" value="{{data.fathername }}" class="loginTxtbox"/></td>
+    <td><label for="id_fatheraddress">Address</label></td>
+    <td><input id="id_fatheraddress" type="text" name="fatheraddress" maxlength="200" value="{{data.fatheraddress }}" class="loginTxtbox"/></td>
+</tr>
+<tr>
+    <td><label for="id_fathernumber">Phone Number</label></td>
+    <td><input id="id_fathernumber" type="text" name="fathernumber" maxlength="35" value="{{data.fathernumber }}" class="loginTxtbox"/></td>
+    <td><label for="id_fatheroccupation">Occupation</label></td>
+    <td><input id="id_fatheroccupation" type="text" name="fatheroccupation" maxlength="175"  value="{{data.fatheroccupation }}" class="loginTxtbox"/></td>
+</tr>
+<tr>
+    <td><label for="id_fatheremail">Father E-mail</label></td>
+    <td><input id="id_fatheremail" type="text" name="fatheremail" maxlength="200" value="{{data.fatheremail }}" class="loginTxtbox"/></td>
+</tr>
+<tr>
+    <td colspan="7" class="sectionCaption" style="background-color: #ccccc0;color:#000000;text-align:center;">Academics</td>
+</tr>
+<tr>
+    <td><label for="id_prev_school">Former School</label></td>
+    <td><input id="id_prev_school" type="text" name="prev_school" maxlength="200" value="{{ data.prev_school }}" class="loginTxtbox"/></td>
+    <td><label for="id_prev_class">Former Class</label></td>
+    <td><input id="id_prev_class" type="text" name="prev_class" maxlength="25"  value="{{ data.prev_class }}" class="loginTxtbox"/></td>
+</tr>
+<tr>
+    <td><label for="id_admitted_class">Admitted Class</label></td>
+    <td><select name="admitted_class" id="id_admitted_class">
+        <option selected = "selected" value="{{data.admitted_class}}">{{data.admitted_class}}</option>
+        {% for pincode in getclass %}
+            <option value="{{pincode.klass}}">{{pincode.klass}}</option>
+        {% endfor %}
+    </select>&nbsp;</td>
+    <td><label for="id_admitted_arm">Arm</label></td>
+    <td><select name="admitted_arm" id="id_admitted_arm">
+        <option selected = "selected" value="{{data.admitted_arm}}">{{data.admitted_arm}}</option>
+        {% for pincode in getarm %}
+            <option value="{{pincode.arm}}">{{pincode.arm}}</option>
+        {% endfor %}
+    </select>&nbsp;<select name="subclass" id="id_subclass">
+        <option selected = "selected" value="{{data.subclass}}">{{data.subclass}}</option>
+
+        <option value="JS">JS</option>
+        <option value="Science">Science</option>
+        <option value="Art">Art</option>
+        <option value="Commercial">Commercial</option>
+        <option value="Commercial">Science/Math</option>
+        <option value="Commercial">Technology</option>
+        <option value="Commercial">Humanities</option>
+        <option value="Commercial">Business</option>
+        <option value="Year">Year</option>
+    </select>&nbsp;</td>
+</tr>
+<tr>
+    <td><label for="id_house">House</label></td>
+    <td><select name="house" id="id_house">
+        <option selected = "selected" value="{{data.house}}">{{data.house}}</option>
+
+        {% for pincode in gethouse %}
+            <option value="{{pincode.house}}">{{pincode.house}}</option>
+        {% endfor %}
+    </select>&nbsp;</td>
+    <td><label for="id_dayboarding">Day/Boarding</label></td>
+    <td><select name="dayboarding" id="id_dayboarding">
+        <option selected = "selected" value="{{data.dayboarding}}">{{data.dayboarding}}</option>
+
+        <option value="Day">Day</option>
+        <option value="Boarding">Boarding</option>
+    </select>&nbsp;</td>
+</tr>
+<tr>
+    <td><label for="id_admitted_session">Admitted Session</label></td>
+    <td><input name="admitted_session" value="{{ session }}" readonly="readonly" maxlength="12" type="text" id="id_admitted_session" class="loginTxtbox"/></td>
+    <td><label for="id_admissionno">Admission Number</label></td>
+    <td><input id="id_admissionno" type="text" name="admissionno" maxlength="25"  value="{{ data.admissionno }}" class="loginTxtbox"/></td>
+</tr>
+<!--
+<tr>
+
+    <td></td>
+    <td></td><td></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr>
+    <td colspan="4"><hr></td>
+</tr>-->
+<tr>
+    <td colspan="4" style="text-align: center; vertical-align: middle;"><input type="submit" value=":: Save Changes ::" name="submit"></td>
+</tr>
+    <tr>
+
+        <td><input id="id_admissionnoold" type="hidden" name="admissionnoold" maxlength="25"  value="{{ data.admissionno }}"/></td>
+        <td><input id="id_oldclass" type="hidden" name="oldclass" maxlength="25"  value="{{ data.admitted_class }}"/></td>
+        <td><input id="id_oldarm" type="hidden" name="oldarm" maxlength="25"  value="{{ data.admitted_arm }}"/></td>
+        <td><input id="id_oldname" type="hidden" name="oldname" maxlength="25"  value="{{ data.fullname }}"/></td>
+    </tr>
+</table>
+<script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            //appendText: "mm/dd/yy",
+            //defaultDate: "+5",
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            //showButtonPanel: true
+            // showOn: "button"
+        };
+        $("#id_birth_date").datepicker(pickerOpts);
+        //$("#id_dateofresum").datepicker(pickerOpts);
+        $("#id_surname").focus();
+        //$("id_birth_date").attr('disable','True');
+
+       // getLGAs();
+       // subclass()
+
+    });
+</script>
+<script type="text/javascript" language="javascript">
+    function getLGAs(){
+        var state = $("#id_state_of_origin").val() ;
+        //alert(state);
+        var url = "/student/ajaxlga/";
+        var i = 0;
+        var data='userid='+state;
+        $("#id_lga").val('');
+        $("#id_lga").html('');
+        if (state != undefined){
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:data,
+                success: function(data){
+                    var options = '';
+                    for (i=0; i<data.length; i++){
+                        options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                    }
+                    $("#id_lga").append(options);
+                }
+            })
+        }
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function admno(){
+        var state = $("#id_admitted_session").val() ;
+        //alert(state);
+        var url = "/student/admno/";
+        var i = 0;
+        var data='userid='+state;
+        $("#id_admissionno").val('');
+        $("#id_admissionno").html('');
+        if (state != undefined){
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:data,
+                success: function(data){
+                    var options = data;
+                    $("#id_admissionno").val(options) ;
+                }
+            })
+        }
+    }
+
+</script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#id_state_of_origin").change(function () {
+            getLGAs();
+        });
+        $("#id_admitted_class").change(function () {
+            subclass();
+        });
+    });
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function subclass(){
+        var state = $("#id_admitted_class").val() ;
+        //alert(state);
+        var p = state.charAt(0).toUpperCase();
+        //alert(p);
+        var url = "/student/subclass/";
+        var i = 0;
+        var data='userid='+p;
+
+        $("#id_subclass").val('');
+        $("#id_subclass").html('');
+        if (state != undefined){
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:data,
+                success: function(data){
+                    var options = '';
+                    for (i=0; i<data.length; i++){
+                        options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                    }
+                    $("#id_subclass").append(options);
+                }
+            })
+        }
+
+
+
+    }
+
+</script>
+<script language="javascript" type="text/javascript">
+    function disable(f)
+    {
+        var button = f.elements['submit'];
+        button.value = 'Processing';
+        button.disabled = 'true';
+        return true;
+    }
+</script>
+
+</form>

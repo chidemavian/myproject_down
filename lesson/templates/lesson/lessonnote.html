@@ -1,0 +1,151 @@
+
+{% extends 'lesson/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{%load humanize}
+{% block content %}
+
+
+<div id = "submenu_cont">
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+        <tr>
+            <td colspan="20" style="padding-top:1px;text-align:left;color:red;font-size:18px">
+                  Lesson Notes Module
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{form.session.label}}: &nbsp; {{form.session}}
+            </td>
+            <td>{{form.klass.label}}:&nbsp; {{form.klass}} </td>
+            <td>{{form.term.label}}:&nbsp;{{form.term}} </td>
+            <td>{{form.subject.label}}:&nbsp;{{form.subject}} </td>
+           <!-- <td  style="text-align: center; vertical-align: middle;"><input type="submit" value=":: View ::" name = "submit"></td> -->
+        </tr> 
+</table>  
+</div>
+
+
+<div style = 'color:red'> {{varerr}}</div>
+
+<tr>
+    <td>
+        &nbsp;
+    </td>
+
+</tr>
+
+<td colspan="10"><div class="boxu"> </div> </td>
+ <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+            getclass();
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ; // i need session to determine my class
+            //alert(state);
+            var url = "/assessment/getclass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');   
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);     
+                         getsubjectlesson();               
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getsubjectlesson(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val();
+            //alert(state)
+            var url = "/assessment/getsubjectless/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost2();
+            });
+            $("#id_klass").change(function () {
+                getsubjectlesson();
+            });
+            $("#id_term").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = 
+                $("#id_subject").val()+':'+ 
+                $("#id_klass").val()+':'+ 
+                $("#id_term").val();
+            var url = "/lesson/note/getnote/";
+            var i = 0;
+            var data='userid='+state;
+           // alert(autopost2)
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".boxu").show();
+                    $(".boxu").html(html);
+               }
+            });
+            //alert("error");
+            return false;
+        }
+    </script>
+
+
+{% endblock %}

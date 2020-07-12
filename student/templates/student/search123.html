@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{%block content%}
+{% load humanize %}
+
+<table style="width:100%;background-color:white;border-collapse:collapse;" >
+
+    <tr>
+        <td colspan="10" style = "width:auto; height:20px;background-color:#000;font-size:18px;border:1px solid black;color:#ffffff;text-align:center;font-weight:bold;">Student Record</td>
+
+    </tr>
+
+    <tr>
+
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Student Name</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fullname }}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Admission Number</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.admissionno }}</td>
+    </tr>
+
+        <tr>
+
+        <td  style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Session</td>
+
+        <td  style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.admitted_session }}</td>
+
+        <td  style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Day/Boarding</td>
+        <td  style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.dayboarding }}</td>
+        <td rowspan ="5" ><img style = "border:1px solid black;width:100px;height:100px" src ="/static/{{data.studentpicture}}" ></td>
+
+    </tr>
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Class</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.admitted_class }}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Arm</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.admitted_arm }} </td>
+
+    </tr>
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Address</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.address }}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Sex</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.sex }} </td>
+    </tr>
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Birth Date</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.birth_date|date:"d/m/Y" }}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Place Of Birth</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.birth_place }} </td>
+    </tr>
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">State Of Origin</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.state_of_origin}}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Local Government</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.lga }} </td>
+    </tr>
+
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent/Guardian</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fathername}}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent/Guardian Address</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fatheraddress }} </td>
+    </tr>
+
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent/Guardian Phone</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fathernumber}}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent/Guardian Occupation</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fatheroccupation }} </td>
+    </tr>
+
+    <tr>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent/Guardian E-mail</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.fatheremail|lower}}</td>
+        <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">House</td>
+        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ data.house }} </td>
+    </tr>
+
+</table>
+
+{%endblock%}

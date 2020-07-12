@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp 8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+    {% if data %}
+        <table style="width:100%;">
+            <span style='color:blue'>{{report}}</span> Accessment Scores for <span style='color:blue'>{{term}}</span> term <span style='color:blue'>{{klass}}{{arm}}  {{subject}}   </span>
+
+            <tr>
+                <td colspan="10">
+                        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                            <thead >
+                            <tr style="text-align:center;font-weight:bold">
+                                <td >S/N</td>
+                                <td >Name</td>
+                                <td > Mid term Score</td>
+                            </tr>
+                            </thead>
+
+                          
+                                
+                    {% for student in data %}
+                        <tr style="font-weight:bod;text-align:center">
+                            <td >{{ forloop.counter }}.</td>
+                           <td title = "enter {{ student.subject }} score for {{student.fullname}}"><a href="#" onClick= "getdialogtry1({{ student.id  }})">{{ student.fullname }}</td>
+                            <td>
+                                <input style="text-align:center" type="text" name="ut" id="ut" size="4" value="{{ student.third_ca}}" onclick= "getdialogtry1({{ student.id  }})">
+                            </td>
+                        </tr>
+                    {% endfor %}
+            
+                        
+        
+                        </table>
+                </td>
+            </tr>
+        </table>
+        {% else %}
+        <div>There are no students offering this course. </div>
+        <div>if you think this is an error, kindly consult with the class teachers of the affected students</div>
+        {% endif %}
+<div id="myDialog" title="Enter Assessment Score"></div>
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+<script >
+    function getdialogtrys(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script >
+    function getdialogtry1(vid){
+        // alert(vid);
+        var state = vid +':'+ $("#id_reporttype").val();
+         // alert(state)
+        var url = "/assessment/getsubjectscore1/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:450,
+                    width:550,
+                    title:'<a>SchApp 8.0 Student Score</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+
+</script>
+
+</body>
+
+</html>

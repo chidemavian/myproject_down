@@ -1,0 +1,226 @@
+{% extends 'student/base.htm' %}
+{% block sectionTitle %}Student Registration{% endblock %}
+{% block content %}
+
+        <form id="form1" action="/student/register/" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+
+            <table style="width: 100%; borde:0.8px solid black;text-align: left; vertical-align: text-top" >
+                <tr>
+                    <td colspan="10" style="text-align:center;color:blue;background-color: #ffffff;font-size:14px;">
+                         New Registraion
+                    </td>
+                </tr>
+
+              
+                <tr >
+                <td colspan="4"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                </tr>
+
+<table width="100%" class="table  table-bordered" id="dataTables-example">
+                <tr >
+                    <td colspan="4"  style="background-color: #ccccc0;color:#000000;text-align:center;" > Bio Data</td>
+                </tr>
+                <tr>
+                    <td>{{ form.surname.label_tag }}</td>
+                    <td>{{ form.surname }}&nbsp;{{ form.surname.errors }}</td>
+                    <td>{{ form.firstname.label_tag }}</td>
+                    <td>{{ form.firstname }}&nbsp;{{ form.firstname.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.othername.label_tag }}</td>
+                    <td>{{ form.othername }}&nbsp;{{ form.othername.errors }}</td>
+                    <td>{{ form.address.label_tag }}</td>
+                    <td>{{ form.address }}&nbsp;{{ form.address.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.sex.label_tag }}</td>
+                    <td>{{ form.sex }}&nbsp;{{ form.sex.errors }}</td>
+                    <td>{{ form.birth_date.label_tag }}</td>
+                    <td>{{ form.birth_date }}&nbsp;{{ form.birth_date.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.birth_place.label_tag }}</td>
+                    <td>{{ form.birth_place }}&nbsp;{{ form.birth_place.errors }}</td>
+                    <td>{{ form.state_of_origin.label_tag }}</td>
+                    <td>{{ form.state_of_origin }}&nbsp;{{ form.state_of_origin.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.lga.label_tag }}</td>
+                    <td>{{ form.lga }}&nbsp;{{ form.lga.errors }}</td>
+                    <td>{{ form.studentpicture.label_tag }}</td>
+                    <td>{{ form.studentpicture }}&nbsp;{{ form.studentpicture.errors }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="sectionCaption" style="background-color: #ccccc0;color:#000000;text-align:center;">Parent/Guardian</td>
+                </tr>
+                <tr>
+                    <td>{{ form.fathername.label_tag }}</td>
+                    <td>{{ form.fathername }}&nbsp;{{ form.fathername.errors }}</td>
+                    <td>{{ form.fatheraddress.label_tag }}</td>
+                    <td>{{ form.fatheraddress }}&nbsp;{{ form.fatheraddress.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.fathernumber.label_tag }}</td>
+                    <td>{{ form.fathernumber }}&nbsp;{{ form.fathernumber.errors }}</td>
+                    <td>{{ form.fatheroccupation.label_tag }}</td>
+                    <td>{{ form.fatheroccupation }}&nbsp;{{ form.fatheroccupation.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.fatheremail.label_tag }}</td>
+                    <td>{{ form.fatheremail }}&nbsp;{{ form.fatheremail.errors }}</td>
+                    </tr>
+                               <tr>
+                    <td colspan="4" class="sectionCaption" style="background-color: #ccccc0;color:#000000;text-align:center;">Academics</td>
+                </tr>
+                <tr>
+                    <td>{{ form.prev_school.label_tag }}</td>
+                    <td>{{ form.prev_school }}&nbsp;{{ form.prev_school.errors }}</td>
+                    <td>{{ form.prev_class.label_tag }}</td>
+                    <td>{{ form.prev_class }}&nbsp;{{ form.prev_class.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.admitted_class.label_tag }}</td>
+                    <td>{{ form.admitted_class }}&nbsp;{{ form.admitted_class.errors }}</td>
+                    <td>{{ form.admitted_arm.label_tag }}</td>
+                    <td>{{ form.admitted_arm }}&nbsp;{{ form.subclass }}&nbsp;{{ form.admitted_arm.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.house.label_tag }}</td>
+                    <td>{{ form.house }}&nbsp;{{ form.house.errors }}</td>
+                    <td>{{ form.dayboarding.label_tag }}</td>
+                    <td>{{ form.dayboarding }}&nbsp;{{ form.dayboarding.errors }}</td>
+                </tr>
+         <tr>
+                    <td>{{ form.admitted_session.label_tag }}</td>
+                    <td>{{ form.admitted_session }}&nbsp;{{ form.admitted_session.errors }}</td>
+             <td>{{ form.admissionno.label_tag }}</td>
+             <td>{{ form.admissionno }}<img src="/static/add.png" style="width:15px;height:15px" onclick="admno();"> &nbsp;{{ form.admissionno.errors }}</td>
+         </tr>
+ 
+                 <tr>
+                    <td colspan="4" style="text-align: center; vertical-align: middle;"><input name="submiy t" type="submit" value=":: Register ::"></td>
+                </tr>
+            </table>
+        </form>
+
+
+    <script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            //appendText: "mm/dd/yy",
+            //defaultDate: "+5",
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            //showButtonPanel: true
+            // showOn: "button"
+        };
+        $("#id_birth_date").datepicker(pickerOpts);
+        //$("#id_dateofresum").datepicker(pickerOpts);
+        $("#id_surname").focus();
+        //$("id_birth_date").attr('disable','True');
+
+        getLGAs();
+        subclass()
+
+    });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getLGAs(){
+            var state = $("#id_state_of_origin").val() ;
+            //alert(state);
+            var url = "/student/ajaxlga/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_lga").val('');
+            $("#id_lga").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_lga").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function admno(){
+            var state = $("#id_admitted_session").val() ;
+            //alert(state);
+            var url = "/student/admno/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_admissionno").val('');
+            $("#id_admissionno").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = data;
+                        $("#id_admissionno").val(options) ;
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#id_state_of_origin").change(function () {
+                getLGAs();
+            });
+            $("#id_admitted_class").change(function () {
+                subclass();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function subclass(){
+            var state = $("#id_admitted_class").val() ;
+            //alert(state);
+            var p = state.charAt(0).toUpperCase();
+            //alert(p);
+            var url = "/student/subclass/";
+            var i = 0;
+            var data='userid='+p;
+            $("#id_subclass").val('');
+            $("#id_subclass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subclass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+{% endblock %}

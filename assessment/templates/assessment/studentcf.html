@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp 8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+{{term}}
+  <table width="100%" class="table  table-bordered " id="dataTables-example">
+    <tr>
+        <td colspan="10">
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <thead >
+                <tr>
+                    <td >S/N</td>
+                    <td >Subject </td>
+                    <td >Subject Group</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in getdetails %}
+                    <tr>
+                        <td >{{ forloop.counter }}</td>
+                        <td >{{ student.subject }}</td>
+                        <td ><a href="#" onClick= "subgroups({{ student.id  }});">{{ student.subject_group}}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+<body>
+
+
+<div id="myDialog" title="Add Subject"></div>
+<div id="deletesubject" title="Delete Subject"></div>
+</body>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+           
+            // getterm();
+        });
+    </script>
+
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#myDialog").hide();
+        $("#deletesubject").hide();
+    });
+</script>
+
+<script type="text/javascript" language="javascript">
+    function subgroups(vid){
+        var state = vid; 
+        // alert(state)
+        var url = "/assessment/getsubgroup/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script type="text/javascript" language="javascript">
+    function getdialog(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:450,
+            width:610,
+            title:'<a>SchApp 8.0 | Assign Subject Group</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#myDialog").dialog(dialogOpts);
+    }
+
+</script>
+
+
+</html>

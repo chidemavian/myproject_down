@@ -1,0 +1,74 @@
+
+<div id="myDialog" >
+
+
+   <table width="50%" class="table  table-bordered table-hover" id="dataTables-example">
+                           
+                            <tr style='font-weight:bold;text-align:center' >
+                                <td >S/N</td>
+                                <td >Subject</td>
+                                <td >Assessment</td>
+                                <td >Class</td>
+ 
+                                <td>Status</td>               
+                            </tr>                    
+                            {% for k in sub %}
+                                <tr style='text-align:center'>
+                                    <td >{{ forloop.counter }}.</td>
+                                    <td >{{ k.subject }}</td> 
+                                    <td >{{ k.exam_type}}</td>  
+                                    <td >{{ k.klass }}</td>
+                                    <td ><a href="#" onClick= "getdiary1({{ k.id  }})">Delete</td>                                    
+                                </tr>
+                            {% endfor %}
+                
+
+
+    </table>
+</div>
+
+ </table>
+
+ <script >
+    function getdiary1(vid){
+        var state = vid;
+        // + ':' + $("#id_sfrom").val()+ ':' + $("#id_session").val();
+         // alert(state)
+        var url = "/cbt/delete/schedule/ajax/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:250,
+                    width:350,
+                    title:'Delete schedule' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+
+        </script>

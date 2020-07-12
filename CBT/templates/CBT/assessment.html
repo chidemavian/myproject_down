@@ -1,0 +1,102 @@
+{% extends "CBT/base.html" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+ 
+
+        
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:25px; font-size:14px;color:black;text-align:center;padding-top:5px;"> SET ASSESSMENT PREFERENCES  </div>
+
+
+
+       <table style="margin-top:01%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center">
+        <td style='background:blue'>
+           <a href="/cbt/assessment/set" style='color:white' ><i class="fa fa-gear fa-fw"></i>Assessment Type</a>
+        </td>
+        <td>
+            <a href="/cbt/set_user/subject"><i class="fa fa-gear fa-fw"></i>Exam Officer</a>
+        </td>
+        <td >
+           <a href="/cbt/schedulling/active"><i class="fa fa-tasks fa-fw"></i> Scheduling</a>
+        </td>
+        <td>
+           <a href="#"><i class="fa fa-tasks fa-fw"></i> Accreditation</a>
+        </td>
+    </tr>
+
+
+</table>
+
+            <tr>
+                  <form action="" method="post" name ="main" onsubmit="disable(this)">
+                      <table width="100%" class="table  table-bordered" id="dataTables-example">
+                            <tr>
+
+                                <td>{{ form.status.label_tag}}:</td>
+                                                     
+                                <td>{{ form.status}}</td>
+                        
+                    </tr>
+                    <tr>   
+                            <td>  {{ form.assess.label_tag }}:</td>   
+                      <td> {{ form.assess }}</td>
+                     </tr>
+                     </table>
+                    <table width="100%" class="table  table-bordered" id="dataTables-example">
+                        
+                            <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Change Status">
+                            </table>
+                        
+                    </form>
+              
+            </tr>
+        
+
+            <tr>
+                <td colspan="10">
+                 {% if getdetails %}
+
+                    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <div style="background-color:#ccccc0;border:0px solid black;width:100%;height:25px; font-size:14px;color:black;text-align:center;padding-top:5px;"> ASSESSMENT STATUS </div>
+                        <tr style='text-align:center'>
+                            <td ><strong>S/N</strong></td>
+                            <td ><strong>Assessment </strong></td>
+                            <td ><strong>Status</strong></td>
+
+                        </tr>
+                        {% for pincode in getdetails %}
+
+                            <tr style='text-align:center'>
+
+                            <td >  {{ forloop.counter }} </td>
+                            <td >  {{ pincode.exam_type}}</td>
+                            <td > {{ pincode.status }} </td>
+
+
+                        {% endfor %}
+                        </tr>
+                    </table>
+
+                {% endif %}
+                </td>
+            </tr>
+      
+  
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+
+{%endblock%}

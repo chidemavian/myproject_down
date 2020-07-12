@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>SchApp 8.0 Enterprise School Software</title>
+
+<style type="text/css">
+<!--
+.style11 {
+	font-size: 100px;
+	color: #FF3300;
+}
+.style1 {
+	color: #000000;
+	font-weight: bold;
+	font-size: 16px;
+}
+.style2 {font-size: 9px}
+.labeltax {
+	color: #0F0;
+	text-decoration: blink;
+	text-emphasis: accent;
+	font-weight: bold;
+}
+.l {
+	font-size: 16px;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div align="center"><table width="101">
+        <td width="90" align="center"><span class="style11">DOWEN</span><a >SchApp</a></td>
+ <form  action="" method="post" name ="main" id ="main" onsubmit="disable(this)">
+  <tr>
+    <td><table width= "714"><tr>
+      <br/>
+          <td width="5"><span class="style1">{{ form.username.label }}</span></td>
+          <td width="93" class="l">{{ form.username }}</td>
+          <td width="103">{{ form1.username.lbel }}</td>
+          <td width="5"><span class="style1">{{ form.password.label }}</span></td>
+          <td width="93">{{ form.password }}</td>
+          <td width="100"><input name="submit" type= "submit" value=" Enter "id="submit" style="width: 100px; height: 25px; border-bottom-left-radius: 15px;"/></td>
+    </table>
+      
+    <tr>
+    <td align="center"style="background-color:#fffff;font-size:13px;color:red;font-weight:bold;text-decoration:blink;">{{ varerr }}</td>
+  </table> 
+
+   <script type="text/javascript">
+    document.getElementById('id_username').focus()
+</script> 
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Please wait...';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+  
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#submit').click(function(){
+          });
+    });
+</script>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body>
+<div align="center" class="style1">Enterprise School Application Software V8.0
+  </div>
+</html>

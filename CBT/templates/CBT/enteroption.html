@@ -1,0 +1,218 @@
+
+<html>
+<head>.
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+
+
+
+
+
+<form  action="/cbt/options/options/{{ getdetails.question.id }}/" method="post"
+enctype= "multipart/form-data"
+onsubmit="disable(this)">
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Session:
+                        </td>
+                        <td>
+                            {{ getdetails.question.session }}
+                        </td>
+  
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Class:
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.question.klass }}
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Term:
+                        </td>
+                        <td>
+                            {{ getdetails.question.term }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Exam Type:
+                        </td>
+                        <td>
+                            {{ getdetails.question.exam_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="color:blue;">
+                            Question
+                        </td>
+                        <td >
+                            {{getdetails.question.qstn}}
+                        </td>
+                    </tr>
+         </table>
+
+{% if image != '/ax/image' %}
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+            <tr rowspan="2" style='border:0px solid black' align='center'>
+          <img style="width: 230px; height: 230px;" src="/static/{{getdetails.question.image}}" alt="{{getdetails.question.image}}">
+      </tr>
+</table>
+
+{% endif %}
+
+
+         <table width="100%" class="table  table-bordered " id="dataTables-example">
+
+    {% if getdetails.options %}
+
+
+                    {% if getdetails.answer %}
+
+  
+
+
+                        <div class="form-group">
+                                 
+                                    {% if getdetails.answer.ans == getdetails.options.a %}                          
+                                <input type="radio" name="myoptions" value='{{ k.a}}' checked >
+                                <label style='color:rede'>(A) {{ getdetails.options.a}} </label>
+                                {% else %}
+
+                                <label style='color:rede'>(A) {{ getdetails.options.a}} </label>
+                                 {% endif %}
+                        </div>
+
+ 
+                        <div class="form-group">
+                                  
+                                    {% if getdetails.answer.ans == getdetails.options.b %}                          
+                                <input type="radio" name="myoptions" value='{{ k.b}}' checked >
+                                <label style='color:rede'>(B) {{ getdetails.options.b}} </label>
+                                {% else %}
+                                <label style='color:rede'>(B) {{ getdetails.options.b}} </label>                                
+                                {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                                 
+                                    {% if getdetails.answer.ans == getdetails.options.c %}                          
+                                <input type="radio" name="myoptions" value='{{ k.c}}' checked >
+                                <label style='color:rede'>(C) {{ getdetails.options.c}} </label>
+                                {% else %}                           
+                                 <label style='color:rede'>(C) {{ getdetails.options.c}} </label>
+                                 {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                                 
+                                    {% if getdetails.answer.ans == getdetails.options.d %}                          
+                                <input type="radio" name="myoptions" value='{{ k.d}}' checked >
+                                 <label style='color:rede'>(D) {{ getdetails.options.d}} </label> 
+                                {% else %}                             
+                                 <label style='color:rede'>(D) {{ getdetails.options.d}} </label> 
+                                 {% endif %}
+                        </div>
+                {% endif %}
+
+        
+{% else %}
+
+
+            <div class="form-group">
+
+
+                <tr>
+                    <div class="form-group">
+                        <input type="radio" name="option" value='A' >A
+                        <input class="form-control" placeholder= "Option A" name="optiona" type="text" autofocus>
+
+                    </div>
+                    <div><input type='file' name='filetoupload' ></div>
+
+              </tr>
+
+                <div class="form-group">
+                    <input type="radio" name="option" value='B' >B
+                    <input class="form-control" placeholder="Option B" name="optionb" type="text" >
+                </div>
+                <div><input type='file' name='filetoupload' ></div>
+
+
+                <div class="form-group">
+
+                    <input type="radio" name="option" value='C' >C
+                    <input class="form-control" placeholder="Option C" name="optionc" type="text" >
+                    
+
+                </div>
+                 <div><input type='file' name='filetoupload' ></div>
+
+
+                <div class="form-group">
+                    <input type="radio" name="option" value='D' >D
+                    <input class="form-control" placeholder="Option D" name="optiond" type="text" >
+                    
+                </div>
+                <div><input type='file' name='filetoupload' ></div>
+
+            </div>
+
+
+{% endif %}
+
+                <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Continue    "> 
+
+     {{g}}
+
+</form>
+
+</table>
+
+
+            </td>
+
+        </tr>
+    </table>
+    </form>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#content").focus();
+    });
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</body>
+</html>

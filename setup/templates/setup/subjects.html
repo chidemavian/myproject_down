@@ -1,0 +1,219 @@
+{%extends 'setup/typography.html' %}
+{% block content %}
+    <div align ="center" style="border-radius:10px;height:20px;background-color:#ccccc0; font-size:12px;color:black;text-align:center"> Subject Set Up </div>
+    <div align="center" style="color:red;font-family:verdana;font-size:15px;text-decoration:blink;background-color:#ccccc0; " > {{varerr}}</div>
+    <table align ="left" style="border:1px solid black;width:40%;">
+        <tr style="text-align:left;vertical-align:top;" >
+          <td style="text-align:left;vertical-align:top;width:auto">
+            <form action="/setup/subject/" method="post" name ="main" id="form1" onsubmit="disable(this)">
+                <table align ="left" style="border:0px solid black;width:100%">
+                    <thead> <tr><td colspan=5 align="center" style="border:0px solid black;font-weight:;background-color:#ccccc0;color:black;text-align:center" > Subject</td></tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.category.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.category}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.subject.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.subject}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+                     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.category2.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.category2}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+         
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.ca.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.ca}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+               
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.exam.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.exam}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+                  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+                            {{ form.status.label }}
+                        </td>
+                        <td align ="left" style="width:auto;">
+                            {{form.status}}
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+                  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align ="left" style="width:auto;">
+
+                        </td>
+                        <td align ="left" style="width:auto;">
+
+                            <input name="submit" type= "submit" value="   ADD SUBJECT  ">
+                        </td>
+                        <td align ="left" style="width:auto;">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+
+        </td>
+    </tr>
+</table>
+             <table align ="left" style="background-color:white;border-collapse:collapse;">               
+                        <tr>
+                            <td>
+                                <table style ="width:120%;border:1px solid black">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="5" style="text-align:left;vertical-align:top;width:auto">
+                                                <input name="submitprint" type= "submit" value="Print Subject" class = "submit"onclick = "openrecprint();"><div class="printable"></div>               
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+    
+
+                                          {% for pincode in suball %}
+                                          {% if pincode.subject %}
+                                          
+                                         <tr>
+                                            <td colspan="6" align="center" valign="top" style = "background-color:#ccccc0;font-size:15px;width:auto;color:#000000;border-radius:5px;border:1px solid black">{{ pincode.category }}  Subject Category</td>
+                                        </tr>
+                                                                                <tr>
+                                            <!--  <td align="left" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>-->
+                                            <td align="center" valign="top" style = "width:35px; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;border-radius:5px;color:#000000;vertical-align:middle"> S/N </td>
+                                            <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;border-radius:5px;color:#000000;vertical-align:middle"> Subject </td>
+                                            <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;border-radius:5px;color:#000000;vertical-align:middle"> Category</td>
+                                            <td align="center" valign="top" style = "border-radius:5px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> CA Score </td>
+                                            <td align="center" valign="top" style = "border-radius:5px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Exam Score</td>
+                                        </tr>
+                                      
+                                        {% for j in pincode.subject %}
+
+
+                                        <tr>
+                                            <!--<td align="left" valign="top" style = "background-color:#d3d3d3;font-size:12px;width:auto;color:#000"> <strong><a href="/deletestate/{{ j.id }}/" style ="color:blue;" title="Edit This Subject">{{ j.subject}}</a></strong></td>-->
+                                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <strong>{{ forloop.counter}}</strong></td>
+                                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:10px;width:auto;color:#000000;border:1px solid black"> <strong><a href="#" style ="color:blue;" title="Edit This Subject" onClick= "getdialogtry({{ j.id }});">{{ j.subject}}</a></strong></td>
+                                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <strong><a href="#" style ="color:blue;" title="Edit This Subject" onClick= "getdialogtry({{ j.id }});">{{ j.category2}}</a></strong></td>
+                                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> <strong>{{ j.ca}}</strong></td>
+                                            <td align="center" valign="top" style = "border-radius:5px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <strong>{{ j.exam}}</strong></td>
+                                            <!--       <td style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> <a href="#" style="color:blue" onClick= "getdialogtry({{ j.id  }});"> Edit Category </a> </td> -->
+                                            {% endfor %}
+                                            </tr>
+                                            {% endif %}
+                                         {% endfor %}
+                                </tbody>
+                         </table>
+                            </td>
+
+                        </tr>                      
+        </table>
+ 
+    <div id="myDialog" title="Edit Account">
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialog").hide();
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogtry(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/setup/getsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:350,
+                width:490,
+                title:'Edit Subject',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+{% endblock %}

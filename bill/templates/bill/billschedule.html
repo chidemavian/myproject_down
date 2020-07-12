@@ -1,0 +1,80 @@
+{% extends 'bill/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+    <table>
+        <tr>
+            <td colspan="10">
+                <form id="form1" action="" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+                    <table style="width:auto;text-align: left; vertical-align: text-top; border: 0px;" >
+                        <tr>
+                            <td colspan="10" style="text-align:center;color:black;background-color: #ccccc0;font-weight:bd;font-size:14px;">
+                                  Bill Schedule
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="4"  style="background-color:#d3d3d3;font-size:13px;color:red;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.session.label_tag }} &nbsp;{{ form.session }} &nbsp;{{ form.session.errors }}
+                            </td>
+                            <td>{{ form.klass.label_tag }}&nbsp;{{ form.klass }}&nbsp;{{ form.klass.errors }}</td>
+                            <td>{{ form.term.label_tag }}&nbsp;{{ form.term }}&nbsp;{{ form.term.errors }}</td>
+
+                            <td><input type="submit" value=":: View Report ::" name="submit"></td>
+                        </tr>
+
+                    </table>
+                </form>
+
+            </td>
+        </tr>
+<tr>
+    <td>
+       <strong>Note:</strong><br>This report is downloadable in Excel format only.
+    </td>
+</tr>
+    </table>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+
+           // getstudent();
+           // $("#id_session").keyup(function () {
+             //   getstudent();
+            //});
+
+//            $("#id_klass").change(function () {
+  //              getstudent();
+   //        });
+
+       });
+    </script>
+    <script type="text/javascript">
+        function disbutton(){
+            $("input[type=submit]").attr("disabled", "disabled");
+            return false;
+        }
+
+    </script>
+
+{% endblock %}

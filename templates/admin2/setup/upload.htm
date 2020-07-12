@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}File Upload{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h1>Upload Only EXCEL FILE (2007 Is not Supported )</h1>
+<form action="/admin/sms/upload/" method="post" enctype="multipart/form-data">
+    <p>{{form.as_p}} <input name="submit" type= "submit" value="Upload to Database "/></p>
+</form>
+
+</div>
+{% endblock %}

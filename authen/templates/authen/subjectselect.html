@@ -1,0 +1,54 @@
+<html>
+
+
+<script type="text/javascript" src='/static/JS/jquery-1.5.js'></script>
+
+
+{% extends 'authen/base.html' %}
+{% block sectionTitle %}Success{% endblock %}
+
+{% block content %}
+
+ <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:25px; font-size:14px;color:black;text-align:center;padding-top:5px;">Acount Activation </div>
+
+
+
+       <table style="margin-top:01%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center">
+        <td >
+           <a href="#"  >Signed Up <i class="fa fa-check fa-fw"></i></a>
+        </td>
+        <td >
+            <a href="/authen/activate/user/" >Acivate<i class="fa fa-check fa-fw"></i></a>
+        </td>
+        <td  style='background:blue'>
+           <a href="/authen/subject/choice/" style='color:white'> Subject Choice</a>
+        </td>
+
+    </tr>
+
+
+</table>
+
+
+<tr>
+    <table style="margin-top:0%;margin-bottom:0%"  width="100%" class="table  table-bordered" id="dataTables-example">
+        <div>your account is not yet activated</div>
+    </table>
+</tr>
+
+ <tr>
+     <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+      <div>To activate your account, pay the sum of <span style='color:blue'>N1,000</span> to the account below</div>
+    </table>
+</tr>
+<div style="font-weight:bold">
+    <div>Bank: UBA Bank</divi>
+    <div>Account: 2080861508</div>
+    <div>Account Name: Okeke Collins</div>
+    <div>After payment, click here <a href="https://wa.me/23409061287894">  09061287894  </a>to activate your account</div>
+</div>
+</html>
+
+{% endblock %}

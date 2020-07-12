@@ -1,0 +1,114 @@
+{% extends "assessment/base.htm" %}
+{%block head %}
+    {%block title %}SchApp v8.0 {%endblock%}
+{%endblock %}
+{%block content%}
+
+    <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+    <div class="printable">
+        
+     <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>            
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                <!-- <table style="width:100%;vertical-align:top;text-align:left;"> -->
+                    <tr style="width:100%;">
+
+                        <td style='border:0px solid black' rowspan="2">
+
+                            <img style="width: 100px; height: 100px;text-align:right" src="/static/{{ school.logo }}" alt="{{ school.name }}" >
+                        </td>
+                        <td  style='border:0px solid black'>
+                            <span style="font-weight:bold;font-size:21px;color:#8b0000;"> {{ school.name }}</span> <br><span style="font-size:11px"> {{ school.address }}</span><br><span style="font-size:11px"> {{ school.website }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:0px solid black;text-align:center;font-weight:bold; color:#000;" colspan="3">SUBJECT TEACHER'S REPORT</td>
+                    </tr>
+                </table>
+          
+        </tr>
+        
+        <tr>
+            <td colspan="10">
+                <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <!-- <table style="border:1px solid #000;width:100%"> -->
+                    <tr >
+                        <td >
+                            <span style='font-weight:bold;color:blue'>Subject:</span>{{ subject }}</td>
+                       
+
+                        <td>
+                            <span style='font-weight:bold;color:blue'>Session:</span>{{ session }}</td>
+                        
+
+                        <td >
+                            <span style='font-weight:bold;color:blue'>Class:</span>{{ klass }}&nbsp;{{ arm }}</td>
+                        
+                         <td>
+                            <span style='font-weight:bold;color:blue'>Term:</span>{{ term }}</td>
+                       
+                         <td>
+                            <span style='font-weight:bold;color:blue'>Teacher's Name:</span> {{ teacher }}</td>
+                       
+                    </tr>
+                </table>
+               <table width="100%" class="table  table-bordered table-hover" id="dataTables-example"> 
+                <!-- <table style="border:1px solid #000;width:100%"> -->
+                    <tr>
+                  <!--      <td>Teacher's Name</td>
+                        <td style="font-size:15px;font-weight:bold;color:blue;">{{ teacher }}</td>
+                    </tr> -->
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="10">
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <!-- <table style="width:100%;background-color:white;border-collapse:collapse;"> -->
+                    <thead >
+                    <tr style='text-align:center;font-weight:bold'>
+                        <td >S/N</td>
+                        <td >Admission No</td>
+                        <td >Name</td>
+                        <td >Class</td>
+                        <td >Mid Term</td>
+                        <td >Grade</td>
+                        <td >Position</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in data %}
+                        <tr style='text-align:center'>
+                            <td >{{ forloop.counter }}</td>
+                            <td >{{ student.admissionno }}</td>
+                            <td >{{ student.fullname }}</td>
+                            <td >{{ student.klass }}&nbsp;{{student.arm}}</td>
+                            <td >{{ student.exam_score }}</td>
+                            <td >{{ student.remark }}</td>
+                            {% if student.position = '1st' %} 
+                            <td style='color:red'>  {{ student.position }}</td>
+                            {% elif student.position = '2nd' %}
+                            <td style='color:blue'>  {{ student.position }}</td>
+                            {% elif student.position = '3rd' %}
+                            <td style='color:green'>  {{ student.position }}</td>
+                            {% else %}
+                            <td >  {{ student.position }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+{%endblock%}

@@ -1,0 +1,81 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% load humanize %}
+{% block content %}
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-edit fa-1x"></i> BroadSheet</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+    <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <tr>
+        <td colspan="20" style="text-align:center;color:black;font-size:14px;background-color:#ccccc0">
+            BROAD SHEET REPORT
+        </td>
+    </tr>
+    <tr>
+        <td colspan="20"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}
+        </td>
+    </tr>
+    <tr style="width:100%;">
+        <td colspan="20">
+            <form action="" method="POST" onsubmit="disable(this)">
+                <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <tr>
+                        <td>
+                            {{ form.session.label_tag }}&nbsp;{{ form.session }}
+                        </td>
+                        <td>
+                            {{ form.klass.label_tag }}&nbsp;{{ form.klass }}
+                        </td>
+
+                        <td>
+                            {{ form.term.label_tag }}&nbsp;{{ form.term }}
+                        </td>
+                        <td>
+                            {{ form.arm.label_tag }}&nbsp;{{ form.arm }}
+                        </td>
+                        <td><input name="submit" type= "submit" value=" Download Report " ></td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    <tr>
+    <td colspan="20">
+    <table style="width:100%;height:auto;vertical-align:top;background-color:white;" >
+    <tr style="vertical-align:top;">
+    <td colspan="50">
+    <span style="font-weight:bold;font-size:14px;color:blue;">NOTE</span>
+    </td>
+    </tr>
+        <tr style="vertical-align:top;">
+            <td colspan="50">
+                This report is downloaded in Excel.
+            </td>
+        </tr>
+    </table>
+    </td>
+    </tr>
+    </table>
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+{% endblock %}
+

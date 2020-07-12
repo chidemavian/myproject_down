@@ -1,0 +1,22 @@
+this is the overall documentationfor the schapp8.0 project
+
+setting things up
+1. setup school
+2. to set up lga, editregistration privilege must be given
+3. insert <link rel="shortcut icon" href="/static/school-logo/log.jpeg" />
+on all base html files
+4. activate currrent term in controllers
+
+5. on registration, these tables are filled: 
+A. student table, 
+B.StudentAcademicRecord, 
+C.AffectiveSkill, 
+D. PsychomotorSkill 
+E. subjectscore
+F. tblaccount from ruffwal.rsetup.models
+
+subject score throws up access denied unless u assign the user a subject and/or appused.secondary = true
+
+
+
+REPORTSHEET APP

@@ -1,0 +1,317 @@
+<html>
+<head>
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <!--<link rel="shortcut icon" href="/static/school-logo/log.jpeg" />-->
+    <link type="text/css" rel="Stylesheet" href="/static/JS/jquery-ui.css" />
+    <script type="text/javascript" src='/static/JS/jquery-1.5.js'></script>
+    <script type="text/javascript" src='/static/JS/jquery.validate.js'></script>
+    <script type='text/javascript' src='/static/JS/csrf_tokenizer.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-1.7.1.min.js'></script>
+    <script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/JS/css/hot-sneaks/jquery-ui-1.8.18.custom.css" />
+    <style type="text/css">
+        .error2 { color: red; }
+        .error1 { color: red; }
+        .error { color: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 21px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form  action="/assessment/editca/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+    <table style="width:80%;background-color:#ccc000;">
+        <tr style="width:auto">
+            <td colspan="15">
+                <table style="width:auto">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Adm. No
+                        </td>
+                        <td>
+                            {{ getdetails.academic_rec.student.admissionno }}
+                        </td>
+  
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Student Name
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.academic_rec.student.fullname }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Session
+                        </td>
+                        <td>
+                            {{ getdetails.session }}
+                        </td>
+                        
+                        <td rowspan="2">
+                        <img style="width: 60px; height: 50px;" src="/static/{{ getdetails.academic_rec.student.studentpicture }}" alt="{{ k.studentinfo.fullname  }}">
+                        </td>
+
+                      <!--  <td rowspan="4">
+                            <img src="/static/{{ getdetails.academic_rec.student.studentpicture  }}" alt="" width="100px" height="80px">
+                        </td>-->
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Term
+                        </td>
+                        <td>
+                            {{getdetails.term}}
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="color:blue;">
+                            Class
+                        </td>
+                        <td>
+                            {{getdetails.klass}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Arm
+                        </td>
+                        <td>
+                            {{getdetails.arm }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Subject
+                        </td>
+                        <td>
+                            {{getdetails.subject }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            First CA
+                        </td>
+                        <td>
+                            <input type="text" name="firstca" id="firstca" size="5" value="{{ getdetails.first_ca }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error1"> Not empty or more than 20</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Second CA
+                        </td>
+                        <td>
+                            <input type="text" name="secondca" id="secondca" size="5" value="{{ getdetails.second_ca }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error2"> Not empty or more than 20</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Third CA
+                        </td>
+                        <td>
+                            <input type="text" name="thirdca" id="thirdca" size="5" value="{{ getdetails.third_ca }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error2"> Not empty or more than 20</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Fouth CA
+                        </td>
+                        <td>
+                            <input type="text" name="fourthca" id="fourthca" size="5" value="{{ getdetails.fourth_ca }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error2"> Not empty or more than 20</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:blue;">
+                            Exam Score
+                        </td>
+                        <td>
+                            <input type="text" name="exam" id="exam" size="5" value="{{getdetails.exam_score }}" class ="loginTxtbox"> &nbsp;
+
+                        </td>
+                        <td><span class="error"> Not empty or more than 60</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center"><input  type="submit" value=":: Update Score ::" name="submit"></td>
+                    </tr>
+                </table>
+
+            </td>
+
+        </tr>
+    </table>
+</body>
+</form>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#firstca").focus();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error1').hide();
+        $('.submit').click(function(event){
+            var data1=$("#firstca").val();
+            var len1=data1.length;
+            //alert(len);
+            if (len1 > 0){
+                $('.error1').hide();
+            }
+            else
+            {
+                alert('First CA Score can not be Empty');
+                $("#firstca").focus();
+                $('.error1').show();
+                event.preventDefault();
+            }
+            //*********************************************************
+            if (jQuery.isNumeric(data1) == true){
+
+            }
+            else
+            {
+                alert('A valid Number is required');
+                $("#firstca").focus();
+                event.preventDefault();
+            }
+            //**********************************************************
+            if (data1 > 20) {
+                //$('.error1').show();
+                alert('First CA Score can not be more than 20');
+                $("#firstca").focus();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error1').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error2').hide();
+        $('.submit').click(function(event){
+            var data2=$("#secondca").val();
+            var len2=data2.length;
+            if (len2 <= 0){
+                alert('Second CA Score can not be Empty');
+                $("#secondca").focus();
+                //$('.error2').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error2').hide();
+            }
+            //*********************************************************
+
+            if (jQuery.isNumeric(data2) == true){
+
+            }
+            else
+            {
+                alert('A valid Number is required');
+                $("#secondca").focus();
+                event.preventDefault();
+
+            }
+            //**********************************************************
+            if (data2 > 20) {
+                $('.error2').show();
+                //alert('Second CA Score can not br more than 20');
+                $("#secondca").focus();
+                event.preventDefault();
+             }
+            else
+            {
+                $('.error2').hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.error').hide();
+        $('.submit').click(function(event){
+            var data=$("#exam").val();
+            var len=data.length;
+            if (len <= 0){
+                alert('Exam Score can not be Empty');
+                //$('.error').show();
+                $("#exam").focus();
+                //$('.error').show();
+                event.preventDefault();
+            }
+            else
+            {
+                $('.error').hide();
+            }
+            //*********************************************************
+            if (jQuery.isNumeric(data) == true){
+
+            }
+            else
+            {
+                alert('A valid Number is required');
+                $('.error').show();
+                $("#exam").focus();
+                event.preventDefault();
+
+            }
+
+            //**********************************************************
+            if (data > 60) {
+                $('.error').show();
+                //alert('Exam Score can not be more than 60');
+                $("#exam").focus();
+                event.preventDefault();
+               // break;
+
+            }
+            else
+            {
+                $('.error').hide();
+            }
+        });
+    });
+</script>
+</body>
+</html>
+

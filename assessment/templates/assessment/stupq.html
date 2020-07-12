@@ -1,0 +1,93 @@
+{% extends 'welcome1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+                <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> My {{varerr}}</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+<form action =""  method="post" role="form">
+
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                     
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Session:&nbsp;{{ form.session }}</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        
+                            <fieldset>
+                                <div class="form-group">
+                                   <td >Class:&nbsp;{{ form.klass }}</td>    
+                                </div>
+                                <div class="form-group">
+                                   <td >Term:&nbsp;{{ form.term }}</td>    
+                                </div>
+                                <div class="form-group">
+                                   <td >Subjects:&nbsp;{{ form.subject }}</td>    
+                                </div>
+                               <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    View    "> 
+                            </fieldset>
+                       
+
+                    </div>
+                    
+
+                </div>
+            </div>
+             </form>
+      
+</body>
+
+</html>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+            getsubject();
+
+            $("#id_subject").change(function () {
+                autopost2();
+            });
+            $("#id_term").change(function () {
+                getsubject();
+            });
+        });
+    </script>  
+
+    <script type="text/javascript" language="javascript">
+        function getsubject(){
+            // alert("{{varuser}}") ;
+            var state = $("#id_session").val() + ':'+ $("#id_term").val() + ':' + "{{varuser}}";
+            var url = "/assessment/getstusubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+{% endblock %}

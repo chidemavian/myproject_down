@@ -1,0 +1,62 @@
+{% extends 'setup/base.htm' %}
+{% block title %}:: Setup School{% endblock %}
+{% block css %}
+{% endblock %}
+{% block jscript %}
+    <script type="text/javascript" src="/static/setup/js/index.js"></script>{% endblock %}
+{% block userinfo %}
+    {{ user.username.upper }}
+{% endblock %}
+{% block sectionTitle %}
+    Setup School
+{% endblock %}
+{% block content %}
+    {% if school %}
+        <table style="width: 100%; border: none; text-align: left; vertical-align: text-top;">
+            <tr>
+                <td style="width: 80%;">
+                    <table style="width: 100%; border: none; text-align: left; vertical-align: text-top;">
+                        <tr>
+                            <td style="width: 20%;"><label>Name</label></td>
+                            <td>{{ school.name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>Address</label></td>
+                            <td>{{ school.address }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>City</label></td>
+                            <td>{{ school.city }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>State</label></td>
+                            <td>{{ school.state }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>Telephone</label></td>
+                            <td>{{ school.phonenumber }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>Email</label></td>
+                            <td>{{ school.email }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;"><label>Website</label></td>
+                            <td>{{ school.website }}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 20%; text-align: right; vertical-align: text-top;">
+                    <img src="{{ school.logo }}" alt="{{ school.name }}" style="width: 200px; height: 200px;"><br>
+                    <label>Logo</label>
+                    <br><label>Click image to edit school information</label>
+                    <img src="/static/setup/img/edit.png" style="width: 10px; height: 10px;" alt="Edit school info" onclick="javascript: processAction(true)">
+                </td>
+            </tr>
+        </table>
+    {% else %}
+        <label>It appears that you have not yet setup your school. Click the plus sign to continue.</label>
+        <img src="/static/setup/img/add.png" style="width: 10px; height: 10px;" alt="Setup your school" onclick="javascript: processAction(false)">
+    {% endif %}
+    <div id="schoolFormDialog"></div>
+{% endblock %}

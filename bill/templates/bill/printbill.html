@@ -1,0 +1,139 @@
+{% extends 'bill/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+    <table style="width:100%">
+        <tr>
+            <td colspan="10">
+                <form id="form1" action="" method="POST">
+                    <table style="text-align:left;width:60%;background-color:bue " >
+                        <tr>
+                            <td colspan="10" style="text-align:center;color:white;background-color: #ccccc0;color:black;font-weight:b;font-size:14px">Print Bill</td>
+                        </tr>
+                        <tr >
+                            <td colspan="4"  style="background-color:#d3d3d3;font-size:13px;color:red;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.session.label_tag }} &nbsp;{{ form.session }}</td>
+                        </tr>
+                        <tr>
+                             <td>{{ form.klass.label_tag }}&nbsp;{{ form.klass }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.term.label_tag }}&nbsp;{{ form.term }}</td> 
+                        </tr>
+                        <tr>
+
+                           <td>{{ form.name.label_tag }}&nbsp;{{ form.name }}</td> 
+                         </tr>
+                    </table>
+                    <table>
+
+                         <tr style='width=20%'>                              
+                            <td>Print whole Class &nbsp;{{ form.excelfile }}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td> Export to PDF &nbsp;{{ form.pdffile }}</td>
+                            <td><input name="submit"  type="submit" value=":: View Bill ::"></td>
+                        </tr>
+                     <tr>
+                           
+                        </tr>
+
+                    </table>
+                </form>
+
+            </td>
+        </tr>
+               <!-- <tr>
+
+            <td colspan="10">
+                <div class="box">
+
+
+                </div>
+            </td>
+        </tr>-->
+    </table>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+
+            getstudent();
+            $("#id_session").keyup(function () {
+                getstudent();
+            });
+
+            $("#id_klass").change(function () {
+                getstudent();
+            });
+
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() + ':'+ $("#id_excelfile").val();
+
+            alert(state);
+            var url = "/bill/addajax/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+                }
+            });
+            //alert("error");
+            return false;
+        }
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getstudent(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val() ;
+            //alert(state);
+            var url = "/bill/getstudent/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_name").val('');
+            $("#id_name").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_name").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+{% endblock %}

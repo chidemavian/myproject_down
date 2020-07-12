@@ -1,0 +1,26 @@
+.formrow {
+    width: 100%;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.formcol {
+    width: 50%;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.tablecol {
+    width: 50%;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.errorclass {
+    color: green;
+    font-weight: bold;
+    font-style: italic;
+}

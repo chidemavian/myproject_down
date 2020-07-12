@@ -1,0 +1,50 @@
+{% extends 'welcome1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+                <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-book fa-1x"></i> My Scripts</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+<form action = ""  method="post" role="form">
+
+      <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <tr >
+                        <td>
+                            {{ form.session.label_tag }}</td>
+                            <td>{{ form.session }}</td>
+                    </tr>
+                       <tr> 
+                        <td>{{ form.term.label_tag }}</td>
+                        <td>{{ form.term }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.exam_type.label_tag }}</td>
+                        <td>{{ form.exam_type }}</td>
+                    <tr>
+
+                        <td>
+                            {{ form.subject.label_tag }}</td>
+                            <td>{{ form.subject }}</td>
+                    </tr>
+
+
+    </table>
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+                               <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    View Scripts    "> 
+
+
+
+</table>
+             </form>
+      
+</body>
+
+</html>
+{% endblock %}

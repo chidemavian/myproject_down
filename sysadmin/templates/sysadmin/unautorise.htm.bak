@@ -1,0 +1,13 @@
+{% extends "controllers/base.htm" %}
+{%block head %}
+{%block title %}{%endblock%}
+{%endblock %}
+{% load humanize %}
+{%block content%}
+
+    <div style = "color:white;font-size:16px;border:0px solid black;background-color:#000;height:25px;padding:2px;font-weight:bold;" align = "center">UNAUTHORISED ACCESS </div>
+    <p><span style="color:#000;font-weight:bold;font-size:18px;">{{ varuser|upper }}, </span>
+        <span style="font-size:16px;font-weight:bold;color:red">You are not permitted on this page
+        </span>
+    </p>
+ {%endblock%}

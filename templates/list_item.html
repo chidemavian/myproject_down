@@ -1,0 +1,47 @@
+<script type="text/javascript">
+    function getPage(url, page, canvas) {
+        $.ajax({
+            url:url + "?page=" + page,
+            type:"GET",
+            success:function (html) {
+                $(this.canvas).html(html)
+            }
+        });
+    }
+</script>
+{% if items %}
+    <table id="item_list" style="width: 100%; text-align: left; vertical-align: text-top;">
+        {% block item_header %}{% endblock %}
+        <tr style="width: 100%; text-align: left; vertical-align: text-top; border-style: solid; border-width: thin; border-color: gray;">
+            <td>
+                <table style="width: 100%; text-align: left; vertical-align: text-top; border: none; margin: 0px; padding: 0px;">
+                    <thead style="text-align: center; width: 100%; background-color: #696969; color: white; font-weight: bold;">
+                    {% block table_header %}{% endblock %}
+                    </thead>
+                    <tbody style="width: 100%; text-align: left; vertical-align: text-top;">
+                    {% block table_body %}{% endblock %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {% if items.num_pages > 1 %}
+            <tfoot style="text-align: center; height: 15px; width: 100%; background-color: gray;">
+            <td>
+                <img src="/static/setup/img/first.png" alt="Page 1" onclick="javascript: getPage(url, 1, canvas)"
+                     style="width: 20px; height: 20px; vertical-align: middle; padding: 4px;">|
+                <img src="/static/setup/img/prev.png" alt="Page {{ items.previous_page_number }}"
+                     onclick="javascript: getPage(url, {{ items.previous_page_number }}, $('#item_list').parent())"
+                     style="width: 20px; height: 20px; vertical-align: middle; padding: 4px;">|
+                <img src="/static/setup/img/next.png" alt="Page {{ items.next_page_number }}"
+                     onclick="javascript: getPage(url, {{ items.next_page_number }}, $('#item_list').parent())"
+                     style="width: 20px; height: 20px; vertical-align: middle; padding: 4px;">|
+                <img src="/static/setup/img/last.png" alt="Page {{ items.num_pages }} (Last)"
+                     onclick="javascript: getPage(url, {{ items.num_pages }}, $('#item_list').parent())"
+                     style="width: 20px; height: 20px; vertical-align: middle; padding: 4px;">
+            </td>
+        {% endif %}
+        </tfoot>
+    </table>
+{% else %}
+    <p style="color: green; font-style: italic; font-weight: bold; font-family: monospace cursive;">No Items</p>
+{% endif %}

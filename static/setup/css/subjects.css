@@ -1,0 +1,36 @@
+.errorclass {
+    color: green;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#message-list {
+
+}
+
+.message-item {
+
+}
+
+#parent {
+    width: 100%;
+    padding: 2px;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.form-container {
+    width: 100%;
+}
+
+#swap-data-table {
+    width: 400px;
+}
+
+#subject-form-dialog {
+
+}
+
+#edit-complete-dialog {
+
+}

@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+    <style type="text/css">
+        .error2 { colo: red; }
+        .error1 { colr: red; }
+        .error { colr: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 21px;
+        }
+    </style>
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<form  action="/cbt/delete/user/yes/{{ user.id }}/" 
+method="post" onsubmit="disable(this)">
+   
+<tr style="font-weight:bold;">
+             
+            <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <td colspan="3" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center"> Press ESC to close this box</td>
+
+               </table>  
+
+                    <tr >
+                        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+                <td style="font-weight:bold;">Delete {{ user.user}}  as {{user.subject}}  exam officer 
+                </td>
+                                      
+                    </table>
+
+                    </tr>
+
+
+
+<table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+  <td ><button class="btn btn-lg btn-success btn-block" type ='submit'><i class="fa fa-check fa-1x"></i></button></td>
+
+  <td ><button class="btn btn-lg btn-success btn-block" type ='submit' formaction="/cbt/delete/user/no/" ><i class="fa fa-close fa-1x"></i></button></td>
+</table>
+</tr>
+
+</form>
+</body>
+
+
+
+</body>
+</html>
+

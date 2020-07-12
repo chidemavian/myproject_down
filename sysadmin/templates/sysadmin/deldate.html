@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional/EN">
+<html>
+
+
+<head>
+
+    <title>IGBOBI COLLEGE YABA</title>
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+<link type="text/css" rel="Stylesheet" href="/static/JS/jquery-ui.css" />
+
+<link rel="stylesheet" type="text/css" href="/static/JS/css/hot-sneaks/jquery-ui-1.8.18.custom.css" />
+
+<script type='text/javascript' src='/static/JS/jquery-ui-1.8.18.custom.min.js'></script>
+</head>
+
+
+<body>
+
+<form action="/sysadmin/deletedate/{{ getdetails.id }}/" method="post" name ="main" onsubmit="disable(this)">
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+        <tr>
+            <td colspan="3" style="background-color:white;width:100%;font-size:12px;color:red;font-style:italic;text-align:center">
+                <strong>Press ESC to close  </strong>
+            </td>
+        </tr>
+
+        <tr>
+            <td> Term: </td>
+            <td>{{ getdetails.term }} </td>
+        </tr>
+        <tr>
+            <td>Date :</td>
+            <td>{{ getdetails.start_date}}</td>
+        </tr>
+
+                <tr>
+            <td>Resumption Date:</td>
+            <td>{{ form.mydate }}</td>
+        </tr>
+
+</table>
+ <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+
+
+        <tr>
+           <td >
+            <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+
+
+    <script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            //appendText: "mm/dd/yy",
+            //defaultDate: "+5",
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            //showButtonPanel: true
+            // showOn: "button"
+        };
+        $("#id_mydate").datepicker(pickerOpts);
+        $("#id_mydate").focus();
+    });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"dd-mm-yy"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            $("#id_mydate").datepicker(pickerOpts);
+            // alert("welcome");
+
+            getclass();
+            //getarm();
+            // getterm();
+
+        });
+    </script>
+
+
+    <style type="text/css">
+        .error { color: red; }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$("#accname").focus();
+            $('.error').hide();
+            $('.submit').click(function(event){
+                var data=$("#staffname").val();
+                var len=data.length;
+                if (len <= 0){
+                    $('.error').show();
+                    $("#staffname").focus();
+                    //$('.error').show();
+                    event.preventDefault();
+                }
+                else
+                {
+                    $('.error').hide();
+                }
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 26px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</html>

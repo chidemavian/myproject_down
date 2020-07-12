@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+</head>
+{% load humanize %}
+<body>
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+                        <tr >
+                            <td colspan="4"  style="background-color:#d3d3d3;font-size:13px;color:red;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                        </tr>
+
+    <tr style='font-weight:bold'>
+        <td >S/N</td>
+        <td >Class</td>
+        <td > Arm</td>
+        <td > Term</td>
+        <td > Session</td>
+        <td > Student Name</td>
+        <td > Bill Description</td>
+        <td >Bill Amount</td>
+        <td > GL Account Code</td>
+
+    </tr>
+
+    {% if data %}
+        {% for pincode in data %}
+            <tr style="border:1px   solid #008b8b">
+
+            <td > {{ forloop.counter }}</td>
+            <td > {{ pincode.klass }}</td>
+            <td > {{ pincode.arm }}</td>
+            <td > {{ pincode.term }}</td>
+            <td >{{ pincode.session }}</td>
+            <td > {{ pincode.name }}</td>
+            <td > <a href="/bill/deleteaddbill/{{ pincode.id }}/" style ="color:blue;" title="Delete This Additional Bill">   {{ pincode.desc }} </a></td>
+            <td >{{ pincode.billamount|intcomma }}</td>
+            <td >{{ pincode.acccode}}</td>
+        {% endfor %}
+    {% else %}
+        <td colspan="12" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found.</td>
+    {% endif %}
+    </tr>
+
+</table>
+
+</body>
+</html>

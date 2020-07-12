@@ -1,0 +1,167 @@
+{% extends 'student/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+
+    <table style="width:100%;text-align: left; vertical-align: middle;background-color:#ffffff">
+        <tr>
+            <td colspan="6" style="text-align:center;color:black;font-size:14px;text-align:center;background-color:#ccccc0;">
+                 WITHDRAW STUDENT
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}
+            </td>
+        </tr>
+        <table width="100%" class="table  table-bordered" id="dataTables-example">
+        <tr style="color:w;">
+            <td>
+                {{ searchform.admitted_class1.label_tag }}:{{ searchform.admitted_class1 }}
+            </td>
+            <td>
+                {{ searchform.admitted_arm1.label_tag }}:{{ searchform.admitted_arm1 }}
+            </td>
+            <td>
+                {{ searchform.studentname.label_tag }}:{{ searchform.studentname }}
+            </td>
+        </tr>
+        </table>
+        <table width="100%" class="table  table-bordered" id="dataTables-example">
+        <tr>
+
+            <td colspan="6"><div class="box2"></div></td>
+        </tr>
+        </table>
+    </table>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            // $("#id_birth_date").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+            //$("#id_studentname").focus();
+            //$("id_birth_date").attr('disable','True');
+
+            //getLGAs();
+            //subclass();
+            getstudents();
+
+            //  $(".box").hide();
+        });
+    </script>
+
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_admitted_class1").change(function () {
+                getstudents();
+            });
+            $("#id_admitted_arm1").change(function () {
+                getstudents();
+            });
+            $("#id_studentname").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function subclass(){
+            var state = $("#id_admitted_class").val() ;
+            //alert(state);
+            var p = state.charAt(0).toUpperCase();
+            //alert(p);
+            var url = "/student/subclass/";
+            var i = 0;
+            var data='userid='+p;
+
+            $("#id_subclass").val('');
+            $("#id_subclass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subclass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_admitted_class1").val() + ':'+ $("#id_admitted_arm1").val()+':'+ $("#id_studentname").val() ;
+            // alert(state);
+            // var p = state.charAt(0).toUpperCase();
+            //alert(p);
+            var url = "/student/withdrawajax/";
+            var i = 0;
+            var data='userid='+state;
+
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2").show();
+                    $(".box2").html(html);
+                }
+            });
+            //alert("error");
+            return false;
+
+
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getstudents(){
+            var state = $("#id_admitted_class1").val() + '-'+ $("#id_admitted_arm1").val();
+            //alert(state);
+            var url = "/student/studentinfo/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_studentname").val('');
+            $("#id_studentname").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_studentname").append(options);
+                        autopost2();
+                    }
+
+                })
+            }
+        }
+
+    </script>
+
+
+
+{% endblock %}

@@ -1,0 +1,157 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+{% for k in replist %}
+
+    <table border="0" style="background: white; padding: 0.5em;">
+
+        <tr style="font-weight: bold">
+            <td colspan="3">
+                <table style="width:100%">
+                    <tr>
+                        <td style=" text-align:center;" rowspan="3">
+                            <img style="width: 120px; height: 100px;" src="/static/{{ school.logo }}" alt="{{ school.name }}">
+                        </td>
+                        <td style=" text-align: left; vertical-align:top;">
+                            <h3>{{ school.name }}</h3>
+                            <h4>{{ school.address }}</h4>
+                            <h4>{{ school.website }}</h4>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:left;font-weight:bold; color:blue;" colspan="10"><h2> {{ term }} Term Report </h2></td>
+                    </tr>
+
+                </table>
+
+            </td>
+
+        </tr>
+    <tr>
+        <td>
+        <tr style="width:100%">
+            <td colspan="3" style="width:100%">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="3" style="width:100%">
+                            <strong> <span style="color:blue;"> Student Name:</span> &nbsp;{{ k.studentinfo.fullname }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100%">
+                            <strong> <span style="color:blue;"> Class:</span> &nbsp;{{k.studentinfo.admitted_class }}</strong>
+
+                        </td>
+                        <td style="text-align:left;width:100%">
+                            <strong> <span style="color:blue;"> Sex:</span> &nbsp;{{ k.studentinfo.sex }}</strong>
+                        </td>
+                        <td style="text-align:left;width:100%">
+                            <strong> <span style="color:blue;"> Position:</span> &nbsp;{{ k.academic.position }}</strong>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> Arm:</span>&nbsp;{{ k.studentinfo.admitted_arm }}</strong>
+
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> Session:</span> &nbsp;{{ k.studentinfo.admitted_session }}</strong>
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> No. Of Student in Class:</span> &nbsp;{{ stuno }}</strong>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> Admission No:</span> &nbsp;{{ k.studentinfo.admissionno }}</strong>
+
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> No. of Times School Opened:</span>&nbsp;{{ k.academic.days_open }}</strong>
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> No. Of Times Present:</span>&nbsp;{{ k.academic.days_present }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> House:</span> &nbsp;{{ k.studentinfo.house }}</strong>
+
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> Next Term Begins:</span> &nbsp;{{ k.academic.next_term_start|date:"d-m-Y" }}</strong>
+                        </td>
+                        <td style="text-align:left;">
+                            <strong> <span style="color:blue;"> Percentage(%):</span>  &nbsp;{{ k.academic.percentage }}</strong>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table style="width:auto;border-collapse:collapse;font-size:9px;">
+                                <tr>
+                                    <td style="border:1px solid black">S/N</td>
+                                    <td style="border:1px solid black">Subject</td>
+                                    <td style="border:1px solid black">CA <br>20</td>
+                                    <td style="border:1px solid black">CA <br>20</td>
+                                    <td style="border:1px solid black">Exam<br>60</td>
+                                    <td style="border:1px solid black">Term<br> Score</td>
+                                    <td style="border:1px solid black">Subject<br> Average</td>
+                                    <td style="border:1px solid black">Subject<br>Position</td>
+                                    <td style="border:1px solid black">Grade</td>
+                                    <td style="border:1px solid black">Remark</td>
+                                    <td style="border:1px solid black">Teacher's Name</td>
+                                </tr>
+                                {% for p in k.subject %}
+                                    <tr>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ forloop.counter }}</td>
+                                        <td style="font-weight:bold;text-align:left;color:#000000;font-size:9px;border:1px solid black">{{ p.subject }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.first_ca }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.second_ca }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.exam_score }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.term_score }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.subject_avg }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.subposition }}</td>
+                                        <td style="font-weight:normal;text-align:center;color:#000000;border:1px solid black">{{ p.grade }}</td>
+                                        <td style="font-weight:normal;text-align:left;color:#000000;font-size:9px;border:1px solid black">{{ p.remark }}</td>
+                                        <td style="font-weight:normal;text-align:left;color:#000000;font-size:9px;border:1px solid black">{{ p.subject_teacher }}</td>
+                                    </tr>
+
+                                {% endfor %}
+                                <tr>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black;text-align:center;font-weight:bold;">Total Score</td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black;font-weight:bold;text-align:center;">{{ k.totalmark }}</td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                    <td style="border:1px solid black"></td>
+                                </tr>
+
+                            </table>
+
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+
+        </td>
+    </tr>
+    </table>
+
+{% endfor %}
+</body>
+</html>

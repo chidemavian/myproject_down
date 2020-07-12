@@ -1,0 +1,169 @@
+<style type="text/css">
+.style1 {
+	color: #990000;
+	font-weight: bold;
+}
+</style>
+
+
+{% block content %}
+
+    {% load humanize  %}
+
+    <div  style="width:100%;font-family:times;" >
+    </div>
+
+    <table>
+        <tr class="header_nav_bar">
+            <td>
+                <div>
+                    <span>Logged in as :</span> 
+                    <span style="color:red;"> {{ useracc.username }}</span>
+                </div>
+            </td>
+
+            <td>
+                <div title="Change Your Password">
+                <a href="#" onClick= "getdialogtrynew();">
+                Change Password </a>
+                </div>
+            </td>
+
+            <td>
+                <div title="Main Page">
+                <a href="/welcome/">Home
+                </a>
+                </div>
+            </td>
+
+            <td>
+                <div title="Search For Student">
+                <a href="/student_search/">Name Search </a>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                <a href="/assessment/wel/"> Report Sheet </a>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                <a href="/SchApp/account/posting/receipt/">Receipt</a>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                <a href="/SchApp/account/stock/newstock/">Stock</a>
+                </div>
+            </td>
+
+            <td> 
+                <div title="Log Out">
+                <a href="/logout/">Log Out</a>
+                </div>
+             </td>
+            <td>
+                <div>
+                System Date :
+                <span style="">{{ vvtoday }} </span>
+                </div>
+            </td>
+    </tr>
+
+</table>
+    
+    <div id="myDialognew" title="Change Password">    </div>
+    <div id="mynews" title="News">    </div>
+
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialognew").hide();
+            $("#mynews").hide();
+        });
+    </script>
+   <script type="text/javascript" language="javascript">
+        function getdialogtrynew(){
+            //alert(vid);
+            var state = 'test';
+            var url = "/getchangepassword/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialognew").html(html);
+                    getdialognew();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialognew(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:250,
+                width:490,
+                title:'Change Your Password',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialognew").dialog(dialogOpts);
+        }
+
+    </script>
+
+   <script type="text/javascript" language="javascript">
+        function getdialogtrynews(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/getnews/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#mynews").html(html);
+                    getdialognews();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getdialognews(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:300,
+                title:'Latest News',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#mynews").dialog(dialogOpts);
+        }
+
+    </script>
+
+{% endblock %}

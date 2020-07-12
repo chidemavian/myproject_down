@@ -1,0 +1,246 @@
+
+
+<script type="text/javascript" src='/static/JS/jquery-1.5.js'></script>
+
+
+{% extends 'authen/signupbase.html' %}
+{% block sectionTitle %}Success{% endblock %}
+
+{% block content %}
+
+
+       <table style="margin-top:01%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center">
+        <td style='background:blue'>
+           <div style='color:white'>Sign Up Form</div>
+        </td>
+<!--         <td>
+            <a href="/authen/activate/user/"><i class="fa fa-gear fa-fw"></i>Acivate</a>
+        </td>
+        <td >
+           <a href="/authen/subject/choice/" ><i class="fa fa-tasks fa-fw"></i> Subject Choice</a>
+        </td> -->
+
+    </tr>
+
+
+</table>
+
+
+
+
+               <form action="" method="POST">
+                  <table width="100%" class="table  table-bordered" id="dataTables-example">
+                   <tr >
+                       <td >{{ form.username.label_tag }}:</td>
+                       <td> {{ form.username }}</td>
+                    </tr>
+                    <tr>
+                       <td >{{ form.email.label_tag }}:</td>
+                       <td> {{ form.email }}</td>
+                    </tr>
+                    <tr>
+                     <td >{{ form.exam.label_tag }}:</td>
+                     <td>{{ form.exam }}</td>
+                </tr>
+                <tr>
+                       <td >{{ form.password.label_tag }}:</td>
+                       <td>{{ form.password }}</td >
+
+                </tr>
+                <tr>
+             <table style="margin-top:0%;margin-bottom:3%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Sign Up">
+                    </table>
+
+                   </tr>
+               </table>
+               </form>
+                    <a href="/logout/"><i class="fa fa-sign-out fa-fw"></i>Log in</a>
+
+    <table width="100%" class="table  table-bordered" id="dataTables-example">
+
+            <td colspan="20" >
+
+                <div class="box2">
+                </div>
+            </td>
+
+    </table>
+
+    <div id="regform" style="width: 100%;"></div>
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+            };
+
+            getclass();
+            //getarm();
+            // getterm();
+        });
+    </script>
+
+   <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_subject").change(function () {
+                autopost2();
+            });
+            $("#id_arm").change(function () {
+                getsubject();
+            });
+            $("#id_sfrom").change(function () {
+                getclass();
+            });
+            $("#id_term").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_sfrom").val(); // i need session to determine my class
+            // alert(state);
+            var state = state.substr(0,1);
+            // alert(state);
+            var url = "/cbt/getcbtklass/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_sto").val('');
+            $("#id_sto").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_sto").append(options);
+                        getterm();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+
+
+   <script type="text/javascript" language="javascript">
+        function getterm(){
+            var state = $("#id_session").val() ;
+            // alert(state);
+            var url = "/assessment/getterm/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_term").val('');
+            $("#id_term").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_term").append(options);
+                        accessment();
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function accessment(){
+            var state = $("#id_session").val();
+            var url = "/cbt/assess/getassess/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_exam_type").val('');
+            $("#id_exam_type").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_exam_type").append(options);
+                        getsubject();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getsubject(){
+            //var state = $("#id_session").val() ;
+            var state = $("#id_sfrom").val();
+            var state = state.substr(0,2);
+            // alert(state);
+            var url = "/cbt/getsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_subject").val('');
+            $("#id_subject").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_subject").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_sfrom").val()+':'+ $("#id_exam_type").val() +':'+ $("#id_term").val()+':'+ $("#id_subject").val() ;
+            var url = "/cbt/getscheduledsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2").show();
+                    $(".box2").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+{% endblock %}

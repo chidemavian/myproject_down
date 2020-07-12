@@ -1,0 +1,393 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% load humanize %}
+{% block content %}
+
+
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr>
+            <td style="text-align:center;color:black;font-size:14px;background-color:#ccccc0">
+                 SUMMARY SHEET
+            </td>
+        </tr>  
+
+    </table> 
+
+
+
+
+
+  <table width="100%" class="table  table-bordered" id="dataTables-example">
+            <form action="" method="POST">
+                    <tr>
+                        <td>
+                            {{ form.session.label_tag }}&nbsp;{{ form.session }}
+                        </td>
+                        <td>
+                            {{ form.klass.label_tag }}&nbsp;{{ form.klass }}
+                        </td>
+                        <td>
+                            {{ form.arm.label_tag }}&nbsp;{{ form.arm }}
+                        </td>
+
+                        <td>
+                            {{ form.term.label_tag }}&nbsp;{{ form.term }}
+                        </td>
+                        <td>
+                            {{ form.pdffile.label_tag }}&nbsp;{{ form.pdffile }}
+                        </td>
+                        <td><input name="submit" type= "submit" value=" View Report "></td>
+                    </tr>
+               
+            </form>
+         </table>
+
+
+
+
+
+     <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+    <div class="printable">
+    {% for k in replist %}
+
+
+
+
+
+
+  <table style="margin-top:6%;margin-bottom:0%;border:2px solid black" width="100%" class="table  table-bordered table" id="dataTables-example">
+    <tr > 
+      <td rowspan="2" style='border:0px solid black'>
+          <img style="width: 130px; height: 130px;" src="/static/{{school.logo }}" alt="{{ k.studentinfo.fullname  }}">
+      </td>
+           <td  style="border:0px solid black">
+
+            <table >
+              <span style="letter-spacing:1px;border:0px solid black;font-weight:bold;text-align:center;font-family:verdana;font-size:26px;">BRIGHT FUTURE COLLEGE </span>
+            </table> 
+
+            <table colspan='3' style="font-weight:bold;margin-top:-1.4%;margin-bottom:0%">
+                <span style="letter-spacing:12px;font-size:12px;background-color:red;color:white">GOVERNMENT APPROVED </span>
+            </table>
+
+        <table style="margin-top:-1.3%;margin-bottom:0%">
+            <span  style="font-weight:bold;letter-spacing:11px;font-size:11px">WAEC & NECO ACCREDITED</span> 
+        </table>
+    </td>
+
+        <td rowspan="2" style='border:0px solid black'>
+          <img style="width: 130px; height: 130px;" src="/static/{{k.studentinfo.studentpicture }}" alt="{{ k.studentinfo.fullname  }}">
+      </td>
+    
+    </tr>
+
+    <tr >
+      <td style='font-weight:bold;border:0px solid black;font-size:14px;text-align:center'>THIRD TERM SUMMARY RESULT SHEET {{ k.studentinfo.admitted_session }}
+      </td>
+
+    </tr>
+</table>
+
+
+<tr >
+        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table" id="dataTables-example">
+        <td style="border:2px solid black;font-weight:bold;font-size:14px"> NAME: </td>
+        <td style="border:2px solid black">  {{ k.studentinfo.fullname}} </td>
+        <td style="border:2px solid black;font-weight:bold;font-size:14px"> ADMISSION NO: </td>
+        <td style="border:2px solid black">  {{ k.studentinfo.admissionno}} </td>
+     <td style='border:2px solid black;font-weight:bold'>GENDER:</td>
+    <td style="border:2px solid black">{{ k.studentinfo.sex }}</td> 
+        </table>
+    </tr>
+
+    <tr >
+   <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table" id="dataTables-example">
+   
+
+    <td style='border:2px solid black;font-weight:bold' > CLASS:</td>
+    <td style="border:2px solid black">{{k.studentinfo.admitted_class }}{{ k.studentinfo.admitted_arm }}</td>  
+
+      <td style='border:2px solid black;font-weight:bold'> STUDENT AVERAGE:</td>
+    <td style="border:2px solid black">{{ k.academic.stu_ave2 }}</td>
+
+    <td style='border:2px solid black;font-weight:bold'>CLASS AVERAGE:</td>
+    <td colspan='3' style="border:2px solid black">{{ k.academic.class_ave2 }}</td>
+
+    </table>
+    </tr>
+
+
+
+
+
+  <tr>
+      <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table" id="dataTables-example">
+  <td style='border:2px solid black;font-weight:bold'>TIMES SCHOOL OPENED:</td>
+    <td colspan='3' style="border:2px solid black">{{k.academic.days_open}}</td>
+      <td style='border:2px solid black;font-weight:bold'>TIMES PRESENT:</td>
+    <td colspan='3' style="border:2px solid black">{{k.academic.days_present}}</td>
+       <td style='border:2px solid black;font-weight:bold'>TIMES ABSENT</td>
+    <td style="border:2px solid black">{{k.academic.days_absent}}</td>
+  </table>
+</tr>
+
+  <tr >
+      <table style="margin-top:0%;margin-bottom:1%" width="100%" class="table  table-bordered table" id="dataTables-example">
+
+      <td colspan='2'style='border:2px solid black;font-weight:bold'>NEXT TERM BEGINS</td>
+    <td colspan='8' style="border:2px solid black">{{k.academic.next_term_start}}</td>
+
+      </table>
+  </tr>
+
+
+
+
+
+
+
+
+                    
+ <tr>
+
+ <table style="border:2px solid black;text-align:center;margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered table" id="dataTables-example">
+        <tr style="font-weight:bold;border:2px solid black">
+            <td style="border:2px solid black">S/N</td>
+            <td style="border:2px solid black">Subject</td>
+            <td style="border:2px solid black">Mid Term <br>20</td>
+            <td style="border:2px solid black">CA <br>20</td>
+            <td style="border:2px solid black">Exam<br>60</td>
+            <td style="border:2px solid black">3rd Term<br> 100</td>
+            <td style="border:2px solid black">2nd Term<br> 100</td>
+            <td style="border:2px solid black">1st Term<br> 100</td>
+            <td style="border:2px solid black">Annual<br> Average</td>            
+            <td style="border:2px solid black">Grade</td>
+            <td style="border:2px solid black">Remark</td>
+            
+        </tr>
+        {% for p in k.subject %}
+            <tr style="font-weight:normal;border:2px solid black">
+                <td style="border:2px solid black">{{ forloop.counter }}</td>
+                <td style="font-weight:bold;text-align:left;font-size:9px;border:2px solid black">{{ p.thirdterm.subject }}</td>
+                <td style="border:2px solid black">{{ p.thirdterm.third_ca }}</td>
+                <td style="border:2px solid black">{{ p.thirdterm.fourth_ca }}</td>
+                <td style="border:2px solid black">{{ p.thirdterm.sixth_ca }}</td>
+                <td style="border:2px solid black">{{ p.thirdterm.end_term_score }}</td>
+                <td style="border:2px solid black">{{ p.secondterm }}</td>
+                <td style="border:2px solid black">{{ p.firstterm }}</td>
+                <td style="border:2px solid black">{{ p.thirdterm.annual_avg }}</td>
+                      {% if p.thirdterm.grade = 'F' %}
+                <td style='border:2px solid black;color:red'>{{ p.thirdterm.grade}}</td>
+                        {% else %}
+                <td style="border:2px solid black">{{ p.thirdterm.grade}}</td>
+                {% endif %}
+                <td style="text-align:left;font-size:9px;border:2px solid black">{{ p.thirdterm.remark }}</td>
+
+            </tr>
+
+        {% endfor %}
+        <tr>
+            <td style="border:2px solid black"></td>
+            <td style="border:2px solid black;text-align:center;font-weight:bold;">Total Score</td>
+            <td style="border:2px solid black"></td>
+            <td style="border:2px solid black"></td>
+            <td style="border:2px solid black"></td>
+            <td style="border:2px solid black;font-weight:bold;text-align:center;">{{ k.totalmark }}</td>
+            <td style="border:2px solid black;font-weight:bold;text-align:center;">{{ k.totalmark2 }}</td>
+            <td style="border:2px solid black;font-weight:bold;text-align:center;">{{ k.totalmark1 }}</td>
+            <td style="border:2px solid black;font-weight:bold;text-align:center;">{{ k.annualavg }}</td>
+            <td style="border:2px solid black"></td>
+            <td style="border:2px solid black"></td>
+            <!-- <td style="border:1px solid black"></td> -->
+           <!-- <td style="border:1px solid black"></td>-->
+        </tr>
+
+    </table>
+
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+        <tr style="vertical-align:top">
+            <td>
+                <table style="width:100%;vertical-align:top;font-size:9px;" >
+                    <tr>
+                        <td style="width:20%;vertical-align:top;">
+                            <table style="width:auto;border-collapse:collapse;">
+                                <tr>
+                                    <td style="border:1px solid black;color:blue;">AFFECTIVE SKILLS</td>
+                                    <td style="border:1px solid black;color:blue;">RATING</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Punctuality </td>
+                                    <td style="text-align:center;border:1px solid black"> {{ k.affective.punctuality }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Neatness </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.neatness }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Honesty </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.honesty }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Initiative </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.initiative }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Self-Control </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.self_control }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Reliability </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.reliability }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Perseverance </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.perseverance }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Politeness </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.politeness }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Attentiveness </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.attentiveness }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Relationship with people </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.rel_with_people }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Co-operation</td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.cooperation }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Organizational ability</td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.affective.organizational_ability }}
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+
+                        <td style="width:20%;vertical-align:top;">
+                            <table style="width:auto;border-collapse:collapse;">
+                                <tr>
+                                    <td style="border:1px solid black;color:blue;">PSYCHOMOTOR SKILLS</td>
+                                    <td style="border:1px solid black;color:blue;">RATING</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Handwriting </td>
+                                    <td style="text-align:center;border:1px solid black"> {{ k.pyscho.handwriting }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Games </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.pyscho.games }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Art </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.pyscho.art }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Painting </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.pyscho.painting }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;border:1px solid black">Music </td>
+                                    <td style="text-align:center;border:1px solid black">{{ k.pyscho.music }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b> Rating Scale</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        A-Exceptionally Exhibited<br>B-Appreciably Demonstrated<br>C-Satisfactorily Displayed<br>D-Needs Improvement
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </td>
+
+                        <td style="width:20%;vertical-align:top;">
+                            <table style="width:auto;border-collapse:collapse;">
+                                <tr>
+                                    <td style="color:#000000;font-weight:bold;text-align:center" colspan="2">Grading System</td>
+
+                                </tr>
+                                {% for j in k.getgrading %}
+                                    <tr>
+                                    <td style="text-align:right;font-weight:normal;">{{ j.grade }} </td>
+                                    <td style="text-align:center;font-weight:normal;"> {{ j.remark }}
+                                    </td>
+                                {% endfor %}
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="15" style="vertical-align:top">
+                <table style="width:100%;vertical-align:top">
+                    <tr>
+                        <td style="width:60%;font-size:12px;">{{ k.academic.class_teacher_comment }}<br><b><span style="text-decoration:underline;text-align:center">Class Teacher's Comment</span></b> </td>
+                        <td style="text-align:center">Class Teacher's Name,Signature and Date</td>
+                    </tr>
+                    <tr>
+                        <td> {{ k.academic.principal_comment }}<br><b> <span style="text-decoration:underline;text-align:center">Principal's Comment</span></b></td>
+                        <td style="text-align:center">Principal's Name,Signature and Date</td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+        </table>
+        </td>
+        </tr>
+        </table>
+    {% endfor %}
+    </div>
+    </td>
+    </tr>
+    </table>
+    </td>
+    </tr>
+    <!-- </table> -->
+    <script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+    </script>
+
+{% endblock %}
+

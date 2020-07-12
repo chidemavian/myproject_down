@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>SchApp 8.0 Enterprise School Software</title>
+  <link type="text/css" rel="Stylesheet" href="/static/CSS/new_body_style.css" />
+</head>
+<div style='height:81%;background-color:#ddc5d0;border: 2px solid #dddddd;margin:0% 0% 0% 0%'>
+     <div style='width:100%;background-color:#dd500;border: 0px solid #dddddd;margin:0% 0% 0% 0%'>        
+         <img style="margin:0% 0% 0% 0%;width: 100%; height: 100%;" src= "http://127.0.0.1/static/school-logo/grey.png">{{day}}
+    </div>  
+    <form  style='right:1%;background-color:black;color:white;position:absolute;top:2%;text-align:right;width:auto' method='post'>
+      <td >UserName</td>
+      <td > {{ form.username }}</td>
+      <td>Password:</td>
+      <td >{{ form.password }}</td>
+      <td ><input name="submit" type= "submit" value="::  Log On  ::"> </td>
+    </form>
+    <div style='top:2%;color:white;position:absolute'> <input name="checkbox" type= "checkbox">Reset Password</div>
+</div>
+<div style='height:17%;background-color:#000004;text-align:center;font-size:100%;color:white;font-weight:bold;border: 2px solid #dddddd;margin:0% 0% 0% 0%'>Enterprise School Application Software V8.0
+</div>
+</html>
+<script type="text/javascript">
+    document.getElementById('id_username').focus()
+</script> 
+
+// <script language="javascript" type="text/javascript">
+//         function disable(f)        {
+//             var button = f.elements['submit'];
+//             button.value = 'Please wait...';
+//             button.disabled = 'true';
+//             return true;
+//         }
+// </script>
+  
+// <script type="text/javascript">
+//     $(document).ready(function() {
+//     $('#submit').click(function(){
+//           });
+//     });
+// </script>

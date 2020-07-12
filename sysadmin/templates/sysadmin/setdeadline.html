@@ -1,0 +1,98 @@
+{% extends "sysadmin/base.htm" %}
+{% load humanize %}
+{%block content%}
+
+<div align ="center" style="background-color:#ccccc0;border-radius:20px;width:100%;height:25px;; font-size:14px;color:black;padding-top:5px;">{{access}}  Access {{commence}} Set up</div>
+<div align="center" style="color:red;font-family:courier;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+<tr><td>
+<form action="" method="post" name ="main" id = "form1" onsubmit="disable(this)">
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+
+<tr>
+     <td>Session :</td>
+      <td>{{ form.session}}</td>
+</tr>
+<tr>
+        <td >
+           Term :
+        </td>
+        <td >{{ form.term}}
+        </td>
+</tr>
+
+<tr>
+    <td>Deadline :</td>
+    <td>{{ form.date}}</td>
+</tr>
+</table>
+
+<tr>
+        <td >
+        <input name="submit" type= "submit" value="Submit" style="width:150px;height:25px;">
+         </td>
+</tr>
+
+
+
+</form>
+
+<tr>
+<td>
+{% if getdetails %}
+ <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+<tr></tr>
+ <tr>
+             <td S/N</td>
+             <td Session</td>
+             <td Term</td>
+              <td Dead line</td>
+
+</tr>
+
+         {% for pincode in getdetails %}
+
+           <tr>
+               <td > {{ forloop.counter}}</td>
+              <td > {{ pincode.session }}</td>
+             <td >{{ pincode.term}}</td>
+
+              <td > {{ pincode.deadline}}</td>
+
+           {% endfor %}
+            </tr>
+</table>
+{% endif %}
+</td>
+</tr>
+</table >
+
+    <div id="myDialog" title="Edit Account"></div>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            var pickerOpts = {
+                appendText: "mm/dd/yy",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"mm/dd/yy"
+            };
+            $("#id_date").datepicker(pickerOpts);
+            //alert("welcome");
+            $("#id_session").focus();
+            autocomplete();
+        });
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+
+{%endblock%}

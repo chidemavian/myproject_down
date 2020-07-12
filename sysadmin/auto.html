@@ -1,0 +1,155 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+    <div style="border:1px solid black;width:100%;height:10%;font-family: verdana;color:black">
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:30%; font-size:12px;color:white;text-align:center;"> <strong>AUTO COMMENT TABLE  </strong> </div>
+        <div  style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:#ffffff;text-align:center;" > {{varerr}}</div>
+        <table>
+            <tr>
+                <td colspan="10">
+
+        <form action="" method="post" name ="main" onsubmit="disable(this)">
+            <table  style="border:1px solid black;width:100%">
+                <tr>
+                    <td>
+                        Category:
+                    </td>
+                    <td>{{ form.category}}
+                    </td>
+                    <td>
+                        Range:
+                    </td>
+                    <td>{{ form.krang}}
+                    </td>
+
+                    <td>
+                        Comment :
+                    </td>
+                    <td>{{ form.comment}}
+                    </td>
+                    <td>
+
+                        <input name="submit" type= "submit" value="::Save Comment::">
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+        </td></tr>
+
+        <tr>
+            <td colspan="10">
+                <table style="width:100%;color:black;border-collapse:collapse;">
+                    <tr>
+                        <td align="center" valign="top" style = "width : auto;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"><strong>S/N</strong></td>
+                        <td align="center" valign="top" style = "width : auto;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"><strong>Category </strong></td>
+                        <td align="center" valign="top" style = "width : auto;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"><strong>Range</strong></td>
+
+                        <td align="center" valign="top" style = "width : auto;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"><strong> Comment</strong></td>
+                        <td align="center" valign="top" style = "width : auto;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"></td>
+                    </tr>
+                    {% for pincode in autocom %}
+
+                        <tr>
+                        <!-- <td align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <strong><a href="/sysadmin/edituser/{{ pincode.id }}/" style ="color:red" onclick="admno({{ pincode.id }});" title="Edit This User"> {{ pincode.username|upper }} </a></strong></td>-->
+                        <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ forloop.counter }} </td>
+                        <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ pincode.category }}</td>
+                        <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.krang }} </td>
+                        <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.comment }}</td>
+                        
+                        <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  <a href="#" style="color:blue" onClick= "getdialogtry({{ pincode.id  }});">Remove Teacher</a></td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+    </div>
+    <div id="myDialog" title="Edit Teacher">
+    </div>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialog").hide();
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogtry(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getteacher/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:250,
+                width:310,
+                title:'Delete Class Teacher' ,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#id_teachername").focus();
+            autocomplete();
+
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function autocomplete(){
+            $("#id_teachername").autocomplete({
+                //minLength: 0
+                source: "/sysadmin/getuser/",
+                select: function( event, ui ) {
+                    $( "#id_teachername" ).val( ui.item.username );
+                    return false;
+                }
+            })
+                    .data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                        .data( "item.autocomplete", item )
+                        .append( "<a>" + item.label + "</a>" )
+                        .appendTo( ul );
+            };
+
+        }
+    </script>
+
+{%endblock%}

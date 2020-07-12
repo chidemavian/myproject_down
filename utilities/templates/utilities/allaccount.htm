@@ -1,0 +1,74 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}All Account {% endblock %}
+
+{% block content %}
+    <table style="width:100%;">
+        <tr>
+            <td>
+                <table style="width:auto;">
+                    <tr>
+                        <td><a href="/utils/" style="color: red;">View All Account </a>|</td>
+                        <td><a href="/utils/trans/" style="color:red;">View Transaction </a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    <tr>
+        <td>
+
+
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <table style="width:auto;">
+            <tr>
+                <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;color:red">
+                    {{succ}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" style="font-size:15px;text-align:center;font-weight:bold;">
+                    VIEW ALL EXISTING ACCOUNTS
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <input name="submit" type= "submit" value="View Account "/>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width:100%;">
+                <tr>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Group Name</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Sub-Group Name</td>
+                    <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Account Name </strong></td>
+                    <td align="center" valign="top" style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"><strong>Account Code</strong></td>
+                </tr>
+                {% for pincode in acc %}
+                    <tr>
+                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black" align ="left">{{ forloop.counter }}</td>
+                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.groupname }} </td>
+                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.subgroupname }} </td>
+                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> {{ pincode.accname }} </td>
+                    <td  valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black;"> {{ pincode.acccode}}</td>
+                {% endfor %}
+
+
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    </table>
+
+{% endblock %}

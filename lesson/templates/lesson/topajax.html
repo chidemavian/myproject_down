@@ -1,0 +1,24 @@
+<table class="table  table-bordered " id="dataTables-example">
+    <tr>
+        <td>
+            <table class="table  table-bordered " id="dataTables-example">
+                
+                <div> Topics for  {{subject}} {{term }} term, {{klass}}</div>
+                       <tr style='text-align:center'>
+                        <td> S/N</td>
+                        <td > Topic </td>
+                    </tr>
+                     {% if sett %}
+            {% for pincode in sett %}
+                        <tr style='text-align:center'>
+                            <td >{{ forloop.counter}}</td>
+                            <td> <a  href="/lesson/set_up/delete/{{ pincode.id }}/"  title="Delete '{{ pincode.topic}}' from {{ pincode.subject}}"> {{ pincode.topic}}</a></td>
+                            {% endfor %}
+                     {% else %}
+        <td colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found</td>
+    {% endif %}
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,152 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+    {%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+    <!-- <div align ="center" style = "width:100%;heigth:10%;background:black;color:white;font-size:18px"> CONTROL PANEL</div>-->
+    <div >
+        <div  style="background-color:#ccccc0;border:0px solid black;width:100%;height:30%; font-size:12px;color:black;text-align:center;"> <strong>Year Co-ordinator  </strong> </div>
+        <div  style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:#ffffff;text-align:center;" > {{varerr}}</div>
+        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+        <!-- <table> -->
+            <tr>
+                <td colspan="10">
+
+        <form action="" method="post" name ="main" onsubmit="disable(this)">
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                <tr>
+                    <td>
+                        UserName :
+                    </td>
+                    <td>{{ form.teachername}}
+                    </td>
+                    <td>{{ form.teachername.errors}}
+                    </td>
+                    <td>
+                        Class :
+                    </td>
+                    <td>{{ form.klass}}
+                    </td>
+                    <td>
+                        <input name="submit" type= "submit" value="Setup Co-ordinator">
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+        </td></tr>
+
+        <tr>
+            <td colspan="10">
+                <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <tr>
+                        <td ><strong>S/N</strong></td>
+                        <td ><strong>Teacher's Name </strong></td>
+                        <td ><strong>Class</strong></td>
+                        <td ><strong> Session</strong></td>
+                        <td ><strong> Delete</strong></td>
+                    </tr>
+                    {% for pincode in getdetails %}
+
+                        <tr>
+                        <td >  {{ forloop.counter }} </td>
+                        <td >  {{ pincode.co_ordinator|title }}</td>
+                        <td > {{ pincode.klass }} </td>
+                        <td > {{ pincode.session }}</td>
+                        <td >  <a href="#" style="color:blue" onClick= "getdialogtry({{ pincode.id  }});">Delete Co-ordinator</a></td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+    </div>
+    <div id="myDialog" title="Edit Teacher">
+    </div>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            $("#myDialog").hide();
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogtry(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getcodi/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:250,
+                width:310,
+                title:'Delete Year Co-ordinator' ,
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $("#id_teachername").focus();
+            myautocomplete();
+
+
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function myautocomplete(){
+            $("#id_teachername").autocomplete({
+                //minLength: 0
+                // source: "/sysadmin/getuser/",
+                source: "/sysadmin/getname/",
+                select: function( event, ui ) {
+                    $( "#id_teachername" ).val( ui.item.username );
+                    return false;
+                }
+            })
+                    .data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                        .data( "item.autocomplete", item )
+                        .append( "<a>" + item.label + "</a>" )
+                        .appendTo( ul );
+            };
+
+        }
+    </script>
+
+{%endblock%}

@@ -1,0 +1,73 @@
+{%  load humanize %}
+
+<form id="form1" action="/student/student_return/" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+
+    <table style="text-align: left; vertical-align: text-top; border: 0px;" >
+        <tr >
+            <td colspan="4"  style="background-color:#d3d3d3;font-size:13px;color:red;font-weight:bold;text-decoration:blink;text-align:center" >{{ varerr }} </td>
+        </tr>
+        <tr >
+            <td colspan="4"  style="background-color: #ccccc0;color:black;text-align:center;" >Bio Data</td>
+        </tr>
+        <tr>
+            <td><label for="id_fullname">Student Name</label></td>
+            <td><input id="id_fullname" type="text" name="fullname" maxlength="275" value="{{ data.student }}" readonly="readonly" class="loginTxtbox"/></td>
+            <td><label for="id_admissionno">Admission Number</label></td>
+            <td><input id="id_admissionno" type="text" name="admissiono" maxlength="75" value="{{ data.admissionno }}" readonly="readonly" class="loginTxtbox"/></td>
+        </tr>
+        <tr>
+            <td><label for="id_class">Class</label></td>
+            <td><input id="id_class" type="text" name="class" maxlength="75" value="{{ data.klass }}" readonly="readonly" class="loginTxtbox"/></td>
+            <td><label for="id_arm">Arm</label></td>
+            <td><input id="id_arm" maxlength="60" name="arm" readonly="readonly" value="{{ data.arm }}" class="loginTxtbox"/> </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="4" class="sectionCaption" style="background-color: #ccccc0;color:black;text-align:center;">Reason For Withdrawal </td>
+        </tr>
+        <tr>
+            <td><label for="id_reason">Reason</label></td>
+            <td><textarea id="id_reason" rows="4" cols="20" name="reason" readonly="readonly" class="loginTxtbox1">{{ data.reason }}</textarea> </td>
+            <td><label for="id_datewithdrawal">Date Withdrwal</label></td>
+            <td><input id="id_datewithdrawal" readonly="readonly" type="text" name="datewithdrawal" maxlength="12" value="{{ data.date_withdrawn|date:'d/m/Y' }}" class="loginTxtbox"/></td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center; vertical-align: middle;"><input name="submit" type="submit" value=":: Return Student ::"></td>
+        </tr>
+        <tr>
+
+        </tr>
+    </table>
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+           // $("#id_datewithdrawal").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+          //  $("#id_reason").focus();
+            //$("id_birth_date").attr('disable','True');
+
+            // getLGAs();
+            // subclass()
+
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</form>

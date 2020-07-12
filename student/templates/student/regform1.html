@@ -1,0 +1,92 @@
+{%  load humanize %}
+
+<form id="form1" action="/student/withdraw_student/" method="post" enctype="multipart/form-data" onsubmit="disable(this)">
+
+<table style="text-align: left; vertical-align: text-top;" >
+
+    <tr >
+        <td colspan="4"  style="background-color: #ccccc0;color:black;text-align:center;" >BIO DATA</td>
+    </tr>
+    <tr>
+        <td><label for="id_surname">Surname</label></td>
+        <td><input id="id_surname" type="text" name="surname" maxlength="75" value="{{ data.surname }}" readonly="readonly" class="loginTxtbox"/></td>
+        <td><label for="id_firstname">First Name</label></td>
+        <td><input id="id_firstname" type="text" name="firstname" maxlength="75" value="{{ data.firstname }}" readonly="readonly" class="loginTxtbox"/></td>
+        <td rowspan =5><img style = "border:1px solid black;width:100px;height:100px" src ="/static/{{data.studentpicture}}" > </td>
+    </tr>
+    <tr>
+        <td><label for="id_othername">Other Names</label></td>
+        <td><input id="id_othername" type="text" name="othername" maxlength="75" value="{{ data.othername }}" readonly="readonly" class="loginTxtbox"/></td>
+        <td><label for="id_address">Address</label></td>
+        <td><input id="id_address" maxlength="300" name="address" readonly="readonly" value="{{ data.address }}" class="loginTxtbox"/> </td>
+    </tr>
+    <tr>
+        <td><label for="id_sex">Sex</label></td>
+        <td><input id="id_sex" maxlength="10" name="sex" readonly="readonly" value="{{ data.sex }}" class="loginTxtbox"/> </td>
+        <td><label for="id_birth_date">Date Of Birth</label></td>
+        <td><input id="id_birth_date" readonly="readonly" type="text" name="birth_date" maxlength="12" value="{{ data.birth_date|date:'d/m/Y' }}" class="loginTxtbox"/></td>
+    </tr>
+    <tr>
+        <td><label for="id_birth_place">Place of Birth</label></td>
+        <td><input id="id_birth_place" type="text" name="birth_place" maxlength="75"  value="{{ data.birth_place }}" readonly="readonly" class="loginTxtbox"/></td>
+        <td><label for="id_state_of_origin">State of Origin</label></td>
+        <td><input id="id_state_of_origin" maxlength="300" name="state_of_origin" readonly="readonly" value="{{ data.state_of_origin }}" class="loginTxtbox"/> </td>
+    </tr>
+    <tr>
+        <td><label for="id_lga">L.G.A.</label></td>
+        <td><input id="id_lga" maxlength="300" name="lga" readonly="readonly" value="{{ data.lga }}" class="loginTxtbox"/> </td>
+        <!-- <td><label for="id_studentpicture">Studentpicture</label></td>
+  <td><input id="id_studentpicture" type="file" name="studentpicture" size="5" />&nbsp;</td> -->
+        <td><label for="id_admissionno">Admission Number</label></td>
+        <td><input id="id_admissionno" type="text" name="admissionno" maxlength="25"  readonly="readonly" value="{{ data.admissionno }}" class="loginTxtbox"/></td>
+    </tr>
+    <tr>
+        <td colspan="4"  style="background-color: #ccccc0;color:black;text-align:center;"> Reason For Withdrawal</td>
+    </tr>
+    <tr>
+        <td><label for="id_reason">Reason</label></td>
+        <td><textarea id="id_reason" rows="4" cols="20" name="reason"></textarea> </td>
+        <td><label for="id_datewithdrawal">Date Withdrwal</label></td>
+        <td><input id="id_datewithdrawal" readonly="readonly" type="text" name="datewithdrawal" maxlength="12" class="loginTxtbox"/></td>
+    </tr>
+       <tr>
+        <td colspan="4" style="text-align: center; vertical-align: middle;"><input name="submit" type="submit" value=":: Withdraw Student ::"></td>
+    </tr>
+    <tr>
+
+        <td><input id="id_admissionnoold" type="hidden" name="admissionnoold" maxlength="25"  value="{{ data.admissionno }}" class="loginTxtbox"/></td>
+        <td><input id="id_oldclass" type="hidden" name="oldclass" maxlength="25"  value="{{ data.admitted_class }}" class="loginTxtbox"/></td>
+    </tr>
+</table>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+<script>
+    $(document).ready(function() {
+        var pickerOpts = {
+            //appendText: "mm/dd/yy",
+            //defaultDate: "+5",
+            showOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"yy-mm-dd"
+            //showButtonPanel: true
+            // showOn: "button"
+        };
+        $("#id_datewithdrawal").datepicker(pickerOpts);
+        //$("#id_dateofresum").datepicker(pickerOpts);
+        $("#id_reason").focus();
+        //$("id_birth_date").attr('disable','True');
+
+        // getLGAs();
+        // subclass()
+
+    });
+</script>
+</form>

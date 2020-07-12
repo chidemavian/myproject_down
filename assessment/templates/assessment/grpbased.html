@@ -1,0 +1,236 @@
+{% extends "assessment/base.htm" %}
+{%block head %}
+    {%block title %}SchApp{%endblock%}
+{%endblock %}
+{%block content%}
+
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-edit fa-1x"></i> Subject Scores</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+
+  <table width="100%" class="table  table-bordered " id="dataTables-example">
+    <!-- <table style="width:100%;"> -->
+        <tr>
+            <td colspan="10">
+                  <table width="100%" class="table  table-bordered " id="dataTables-example">
+                <!-- <table> -->
+                    <tr>
+                        <td>Session:</td>
+                        <td >{{ session }}</td>
+                        <td >Class:</td>
+                        <td >{{ klass }}&nbsp;{{ arm }}</td>
+                        <td>Subject:</td>
+                        <td >{{ subject }}</td>
+
+                        <td style="color:gray;font-size:15px;padding-left:10px;">Click  <a href="/assessment/secondary_print_assessment/{{ session1 }}/{{ klass1 }}/{{ grp }}/{{ name1 }}/{{ term1 }}/" style="color:blue;font-size:13px;font-weight:bold;">here </a>to printYour Subject Report</td>
+                    </tr>
+                    
+                </table>
+
+            </td>
+        </tr>
+
+<html>
+
+<body>
+        <table style="width:100%;">
+
+            <tr>
+                <td colspan="10">
+                        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                            <thead >
+                            <tr >
+                                <td >S/N</td>
+                                <td >Admission No</td>
+                                <td >Name</td>
+                                <td >Gender</td>
+                                <td >Subject</td>
+                                <td >Term</td>
+                                <td >Class</td>                                
+                                <td >CA 1</td>
+                                <td >Mid Term</td>
+                                <td >CA 3</td>
+                                <td >Exam Score</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for student in data %}
+                                <tr >
+                                    <td >{{ forloop.counter }}.</td>
+                                    <td>{{ student.admissionno }}</td>
+                                    <td >{{ student.fullname }}</td>
+                                   <!-- <td title = "enter {{ student.subject }} score for {{student.fullname}}"><a href="#" onClick= "getdialogtrys({{ student.id  }})">{{ student.fullname }}</td> -->
+                                   <td >{{ student.sex }}</td>
+                                    <td >{{ student.subject }}</td>
+                                    <td >{{ student.term }}</td>  
+                                    <td >{{ klass }}{{ student.arm }}</td>   
+
+
+                                    <td>
+                                        <input type="text" name="ca1" id="ca1" size="5" value="{{ student.first_ca }}" onclick= "getdialogtry1({{ student.id  }})"
+                                   </td>
+
+                                    <td>
+                                        <input type="text" name="ut" id="ut" size="5" value="{{ student.unified_test}}" onclick= "getdialogtry2({{ student.id  }})">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="ca3" id="ca3" size="5" value="{{ student.third_ca }}" onclick= "getdialogtry3({{ student.id  }})">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="exam" id="exam" size="5" value="{{ student.exam_score }}" onclick= "getdialogtry4({{ student.id  }})">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                </td>
+            </tr>
+        </table>
+<div id="myDialog" title="Enter Assessment Score">
+</div>
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+<script >
+    function getdialogtrys(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry1(vid){
+        var state = vid; 
+        // alert(state);
+        var url = "/assessment/getsubjectscore1/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry2(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore2/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry3(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore3/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry4(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore4/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:450,
+                    width:550,
+                    title:'<a>SchApp 8.0 Student Score</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+
+        </script>
+</body>
+</html>
+
+
+
+{%endblock%}

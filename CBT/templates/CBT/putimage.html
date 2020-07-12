@@ -1,0 +1,113 @@
+<html>
+<head>.
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+
+
+
+
+{{ g }}
+
+<form  action="/cbt/enter/image/{{ getdetails.question.id }}/" 
+method="post" 
+enctype= "multipart/form-data" onsubmit="disable(this)">
+
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr style="width:auto">
+            <td colspan="15">
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Session:
+                        </td>
+                        <td>
+                            {{ getdetails.question.session }}
+                        </td>
+  
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Class:
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.question.klass }}
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Term:
+                        </td>
+                        <td>
+                            {{ getdetails.question.term }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Exam Type:
+                        </td>
+                        <td>
+                            {{ getdetails.question.exam_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="color:blue;">
+                            Question
+                        </td>
+                        <td >
+                            {{getdetails.question.qstn}}
+                        </td>
+                    </tr>
+         </table>
+
+<input type='file' name='filetoupload' >
+
+<table width="100%" class="table  table-bordered " id="dataTables-example">
+
+<tr>
+            <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Save    "> 
+</tr>
+</table>
+
+
+            </td>
+
+        </tr>
+    </table>
+    </form>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#content").focus();
+    });
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Exam Origin</title>
+     <script type="text/javascript" src="/static/jquery/jquery.js"></script>
+
+    <link type="text/css" rel="Stylesheet" href="/static/CSS/new_lekan.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+ <a class="navbar-brand" href="#">Welcome to ExamOrigin</a>
+      </div>
+      <!-- /.navbar-header -->
+  </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+
+
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 style='text-align:center' class="panel-title">Log In To ExamOrigin</h3>
+                    </div>
+       <table style="margin-top:0%;margin-bottom:-2%" width="100%" class="table  table-bordered" id="dataTables-example">
+
+    <tr style="text-align:center">
+        <td style='background:blue'>
+    <a href="/login/admin/" style='color:white' ><i class="fa fa-plus fa-fw"></i>Admin login </a>
+          <td >
+         <a href="/authen/login/student/"  ><i class="fa fa-plus fa-fw"></i>Student login</a>
+
+        </td>
+        </td>
+      </tr>
+    </table>
+                    <div class="panel-body">
+                        <form action = ""  method="post" role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                  <label style='color:red'> {{varerr}}</label>
+                                    <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log In    ">
+                                <!-- <a class="btn btn-lg btn-success btn-block">Login</a> -->
+                                <div>
+                                <!-- <a href="#"> Forgot Password?</a> -->
+                                <!-- <a href='/authen/signup/new/'> Sign Up</a> -->
+                              </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+    <div  class="col-md-4 col-md-offset-4"  style = "kmargin-top:-8%">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 style='text-align:center' class="panel-title">Contact Us</h3>
+                    </div>
+                <div>
+                <tr>
+                    <td style='background:white' class="form-group" ><i  class = "fa fa-phone">: 09061235456</i></td>
+                    <td  style= "text-align:right"><a href="https://wa.me/23409061287894"><i class = "fa fa-whatsapp fa-1x">:09061287894</i>  </a></td>
+                </tr>
+                </div>
+        </div>
+    </div>
+
+</html>

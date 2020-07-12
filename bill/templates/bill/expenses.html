@@ -1,0 +1,84 @@
+{% extends 'bill/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+    <table style="border:1px solid black;width:100%;">
+        <tr >
+            <td colspan="10">
+
+        <form  action="" method="POST"  onsubmit="disable(this)">
+
+            <table style="width: 100%; text-align: left; vertical-align: text-top; border: 0px;" >
+                <tr>
+                    <td colspan="10" style="text-align:center;color:black;background-color:#ccccc0;">LIST OF PAYABLES </td>
+                </tr>
+                <tr >
+                    <td colspan="4"  style="background-color:#d3d3d3;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                </tr>
+
+                <tr>
+                    <td width="10%">{{ form.expenses.label_tag }}</td>
+                    <td width="44%">{{ form.expenses }}</td>
+                    <td width="31%">{{ form.expenses.errors }}</td>
+
+                </tr>
+
+                <tr>
+                    <td align ="left" style="width:;"></td>
+                    <td align ="left" style="width:auto;"><input name="submit" type="submit" value=":: Create BILL Name ::"></td>
+                    <td align ="left" style="width:;"></td>
+                </tr>
+            </table>
+        </form>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td align="center" valign="top"style="border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N </td>
+            <td align="center" valign="top"style="border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Bill Description</td>
+            <td align="center" valign="top"style="border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle" >Delete Entry
+            </td>
+        </tr>
+
+        {% for j in getdetails %}
+        <tr>
+            <td  align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:15px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }}
+            </td>
+            <td align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:15px;width:auto;color:#000000;border:1px solid black"> {{ j.name }}
+            </td>
+            <td align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:15px;width:auto;color:#000000;border:1px solid black"><a href="/bill/deleteexpense/{{ j.id }}/" title="Delete {{ j.name }}" style="color:blue;"> {{ j.name }} </a>
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+          //  $("#id_birth_date").datepicker(pickerOpts);
+            //$("#id_dateofresum").datepicker(pickerOpts);
+            $("#id_expenses").focus();
+
+        });
+    </script>
+
+{% endblock %}

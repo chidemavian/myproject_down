@@ -1,0 +1,47 @@
+{%extends 'setup/typography.html' %}
+{% block content %}
+
+  <!--   <div align ="center" style="border-radius:10px;background-color:#ccccc0;border:0px solid black;width:100%;height:3%; font-size:14px;color:black;text-align:center"> Class Set Up </div> -->
+    <div align="center" style="color:red;font-family:verdana;font-size:15px;text-decoration:blink;background-color:;" > {{varerr}}</div>
+    <table align ="left" style="border:0px solid black;width:100%;">
+        <tr>
+            <td style="border:0px solid black;width:30%;vertical-align:top">
+            <form action="/setup/class/" method="post" name ="main" id="form1" onsubmit="disable(this)">
+                <table align ="left" style="border:1px solid black;width:100%;">
+                    <thead> 
+                        <tr>
+                            <td colspan="12" style="border:0px solid black;width:100%;font-weight: bol;background-color:#ccccc0;color: black;text-align:center">Class Set Up
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align ="left" style="width:auto;">{{ form.klass.label }}:</td>
+                        <td align ="left" style="width:auto;">{{form.klass}}</td>
+             <!--            <td align ="left" style="width:auto;">{{form.klass.errors}}</td> -->
+                    </tr>
+                 
+                        <td align ="left" style="width:;"></td>
+                        <td align ="left" style="width:auto;">
+                            <input name="submit"auto type= "submit" value="   Create CLASS  ">
+                        </td>
+                        <td align ="left" style="width:auto;"></td>
+                    <tr>
+                        <td align="center" valign="top" style = "border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> S/N</td>
+                        <td align="center" valign="top" style = "border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Created Classes </td>
+                        <td align="center" valign="top" style = "border-radius:10px;width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"> Delete </td>
+                    </tr>
+                    {% for pincode in class %}
+                        <tr>
+                            <td align="center" valign="top" style = "border-radius:10px;background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter}}</td>
+                            <!--  <td align="center" valign="top" style = "border:1px solid black;background-color:white;font-size:12px;width:auto;color:white"> <strong><a href="/setup/class/delete/{{ pincode.id }}/"  title="Delete This Class">{{ pincode.klass}}</a></strong></td>-->
+                            <td align="center" valign="top" style = "border-radius:10px;border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black"> {{ pincode.klass}}</td>
+                            <td align="center" valign="top" style = "border-radius:10px;border:1px solid black;background-color:white;font-size:12px;width:auto;color:black"> <a href="/setup/class/delete/{{ pincode.id }}/"  title="Delete {{ pincode.klass}}">Delete {{ pincode.klass}}</a></td>
+                            {% endfor %}
+                    </tr>
+                    </tbody>
+                </table> </form>
+        </td>
+    </tr>
+    </table>
+    {% endblock %}

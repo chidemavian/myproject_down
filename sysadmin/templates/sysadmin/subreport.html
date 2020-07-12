@@ -1,0 +1,34 @@
+
+
+
+            <tr>
+                <td colspan="10">
+                    <table style="width:100%;color:black;border-collapse:collapse;">
+                        <tr>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">S/N</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black"> Adm No</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">subject</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Student's Name</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Gender</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Class</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Arm</td>       
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Term Score</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">Position</td>
+                            <td align="center" valign="top" style = "width : auto; height:10px;background-color:#e5e5e5;font-size:11px;color:#000000;border:1px solid black">house</td>
+                        </tr>
+                        {% for pincode in getdetails %}
+                        <tr>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ forloop.counter }} </td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black">  {{ pincode.academic_rec.student.admissionno }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:9%;color:#000000;border:1px solid black"> {{ pincode.subject }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:25%;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.fullname }} </td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.sex }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.klass }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.arm }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:10%;color:#000000;border:1px solid black"> {{ pincode.term_score }}</td>
+                            <td align="left" valign="top" style = "background-color:white;font-size:12px;width:auto;color:#000000;border:1px solid black"> {{ pincode.academic_rec.student.house }}</td>
+                        {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </tr>

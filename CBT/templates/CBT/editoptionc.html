@@ -1,0 +1,119 @@
+<html>
+<head>.
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+
+
+<form  action="/cbt/change/optionc/{{ getdetails.question.id }}/" method="post" onsubmit="disable(this)">
+    <table width="100%" class="table  table-bordered " id="dataTables-example">
+        <tr style="width:auto">
+
+                <table width="100%" class="table  table-bordered " id="dataTables-example">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Session:
+                        </td>
+                        <td>
+                            {{ getdetails.question.session }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Class:
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.question.klass }}
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Term:
+                        </td>
+                        <td>
+                            {{ getdetails.question.term }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:blue;">
+                            Exam Type:
+                        </td>
+                        <td>
+                            {{ getdetails.question.exam_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="color:blue;">
+                            Option  C
+                        </td>
+                    <td>
+                        {{ getdetails.options}}
+                    </td>
+
+</table>
+
+
+
+   <table width="100%" class="table  table-bordered " id="dataTables-example">
+         <div class="panel-body">
+
+                    <fieldset>
+
+                        <div class="form-group">                                   
+                            <textarea placeholder='Enter the correct option C here' name='optionc' id='optionc' class="form-control" rows="4"></textarea>
+                        </div>
+
+                    </fieldset>
+            </div>
+                 
+         </table>
+
+   </tr>
+
+ <table width="100%" class="table  table-bordered " id="dataTables-example">
+
+          <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Save changes    "> 
+
+</table>
+
+
+            </td>
+
+        </tr>
+    </table>
+    </form>
+</body>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#content").focus();
+    });
+</script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+</body>
+</html>
+

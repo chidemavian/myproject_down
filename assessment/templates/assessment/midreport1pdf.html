@@ -1,0 +1,77 @@
+
+    {% for k in replist %}
+    <tr >
+        <table style="font-family: times new roman; width: 100%;font-size: 70%;border-collapse: collapse;margin: 0.5px;top: 10%;margin-top:32%;margin-bottom:1%">
+        <td style="border: 0px solid black;padding: 0.2%;font-size: 400%;text-align: center"> {{term}} Term First CA PROGRSS REPORT {{session}} </td>
+        </table>
+    </tr>
+    <tr>
+        <table style="font-family: times new roman; width: 100%;font-size: 70%;border-collapse: collapse;margin-top:2%;margin-bottom:0%">
+        <td style="border: 0px solid black;padding: 0.2%;font-size: 100%;text-align: right">CLASS:</td>
+        <td> {{k.studentinfo.admitted_class }}<a style='border: 0px solid black;text-align:left'>{{ k.studentinfo.admitted_arm }}</a> </td>
+        </table>
+    </tr>
+    <tr>
+        <table style="font-family: times new roman; width: 100%;font-size: 70%;border-collapse: collapse;margin: 0.9px;top: 10%;margin-top:0%;margin-bottom:40%">
+        <td> NAME OF STUDENT: </td>
+        <td>  {{ k.studentinfo.fullname}} </td>
+        </table>
+    </tr>
+    <tr>
+        <table style="text-align:center">
+            <tr>
+                <td style="width:10%">S/N</td>
+                <td> SUBJECT </td>
+                <td> SCORE </td>
+                <td> SCORE % </td>
+                <td> GRADE</td>
+                <td>  EFFORT </td>
+                <td>  NAME OF TEACHER </td>
+            </tr>
+            {% for p in k.subject %}
+            <tr>
+                <td>  {{forloop.counter}}. </td>
+                <td style="text-align:left" >  {{p.subject}} </td>
+                <td>  {{p.first_ca}} </td>
+                <td>  {{p.totalperc}} </td>
+                <td>  {{p.grade}} </td>
+                <td>  {{p.remark}} </td>
+                <td>  {{p.teacher}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </tr>
+<tr>
+    <table style="font-family: times new roman; width: 100%;font-size: 70%;border-collapse: collapse;margin: 0.9px;top: 10%;margin-top:1%;margin-bottom:10%">
+        <td>STUDENT AVERAGE: </td>
+        <td>  {{k.academic.stu_ave1}} </td>
+        <td> CLASS AVERAGE: </td>
+        <td>  {{ k.academic.class_ave1}} </td>
+    </table>
+</tr>
+           <tr>
+                <table style="margin-top:0px;margin-bottom:450%;width:100%">
+                    <tr>
+                        <td style="font-size:10px;width:27%;border:1px solid black;text-align:center">Homeroom Teacher's Comment & Sign:</td>
+                        <td style="text-align:left;border:1px solid black;width:auto;font-size:12px;">{{ k.academic.com1 }}</td>
+                        <td style="border:1px solid black;font-size:12px;width:5%">Sign:</td>
+                        <td style="border:1px solid black;font-size:12px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:10px;border:1px solid black;text-align:center">Name of Co-ordinator & Sign:</td>
+                        <td style="text-align:left;border:1px solid black;font-size:12px;">{{k.codi.co_ordinator}}</td>
+                        <td style="border:1px solid black;font-size:12px;width:5%">Sign:</td>
+                        <td style="border:1px solid black;font-size:12px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:10px;border:1px solid black;text-align:center">Principal's Signature</td>
+                        <td style="border:1px solid black;text-align:center"></td>
+                        <td style="border:1px solid black;width:5%;text-align:center">Date:</td>
+                        <td style="font-size:9px;border:1px solid black;text-align:center;width:10%"> {{k.date}}</td>
+                    </tr>
+                </table>
+        </tr>   
+
+    {% endfor %}
+
+

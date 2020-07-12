@@ -1,0 +1,202 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+
+            <div class="row">
+                <div class="col-lg-12">
+              <h1 class="page-header"><i class="fa fa-edit fa-1x"></i> My Subject</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+      <table width="100%" class="table  table-bordered" id="dataTables-example">
+    <!-- <table style="width:auto; text-align: left; vertical-align: middle;background-color:#D1B37F"> -->
+        <tr>
+            <td colspan="20" style="text-align:center;color:black;font-size:14px;background-color:#D1B37F;">
+                  EDIT STUDENT SUBJECT COMBINATION
+            </td>
+        </tr>
+      <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                    <tr >
+                        <td>
+                            {{ form.session.label_tag }}</td>
+                            <td>{{ form.session }}</td>
+                    </tr>
+                       <tr> 
+                        <td>{{ form.klass.label_tag }}</td>
+                        <td>{{ form.klass }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.arm.label_tag }}</td>
+                        <td>{{ form.arm }}</td>
+                    <tr>
+
+                        <td>
+                            {{ form.term.label_tag }}</td>
+                            <td>{{ form.term }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.student.label_tag }}</td>
+                            <td>{{ form.student }}</td>
+                    </tr>
+    </table>
+        
+
+          <table width="100%" class="table  table-bordered" id="dataTables-example">
+        <tr>
+
+            <td><div class="box2"></div></td>
+
+        </tr>
+    </table>
+    </table>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            getclass();
+            getarm();
+
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getclassaff/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getarmaff/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                        getstudent();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getstudent(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val();
+            // alert(state);
+            var url = "/assessment/getstudentsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_student").val('');
+            $("#id_student").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_student").append(options);
+                        autopost2();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_arm").change(function () {
+                getstudent();
+            });
+            $("#id_klass").change(function () {
+                getstudent();
+            });
+            $("#id_term").change(function () {
+                getstudent();
+            });
+            $("#id_student").change(function () {
+                autopost2();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost2(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val() +':'+ $("#id_student").val();
+            var url = "/assessment/getsubject4student/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box2").show();
+                    $(".box2").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+{% endblock %}

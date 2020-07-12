@@ -1,0 +1,167 @@
+<html>
+<head>
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+    <style type="text/css">
+        .error2 { colo: red; }
+        .error1 { colr: red; }
+        .error { colr: red; }
+        .submit { margin-left: 125px; margin-top: 10px;}
+
+        .loginTxtbox
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: left;
+            border: #4772A9 1px solid;
+            height: 21px;
+        }
+    </style>
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form  action="/assessment/editcas/{{ getdetails.id }}/" method="post" onsubmit="disable(this)">
+   
+    <table style="width:100%;background-color:grey;">
+        <tr style="width:auto">
+            <td colspan="15">
+                <table style="width:auto">
+                    <tr>
+                        <td colspan="15" style="font-weight:bold;color:#ffffff;background-color:#000;text-align:center">
+                            Press ESC to close this box
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            Adm. No : 
+                        </td>
+                        <td>
+                            {{ getdetails.academic_rec.student.admissionno }}
+                        </td>
+  
+
+                    </tr>
+                    <tr>
+                        <td style="color:white;">
+                         Name:  
+                        </td>
+                        <td  colspan="5">
+                            {{ getdetails.academic_rec.student.fullname }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="color:white;">
+                            Session : 
+                        </td>
+                        <td>
+                            {{ getdetails.session }}
+                        </td>
+                        
+                        <td rowspan="2">
+                        <img style="width: 60px; height: 50px;" src="/static/{{ getdetails.academic_rec.student.studentpicture }}" alt="{{ k.studentinfo.fullname  }}">
+                        </td>
+
+                      <!--  <td rowspan="4">
+                            <img src="/static/{{ getdetails.academic_rec.student.studentpicture  }}" alt="" width="100px" height="80px">
+                        </td>-->
+
+                    </tr>
+                    <tr>
+
+                        <td style="color:white;">
+                            Term :
+                        </td>
+                        <td>
+                            {{getdetails.term}}
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="color:white;">
+                            Class: 
+                        </td>
+                        <td>
+                            {{getdetails.klass}}{{getdetails.arm }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white;">
+                            Group:
+                        </td>
+                        <td>
+                            {{getdetails.subject_group }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white;">
+                            Subject
+                        </td>
+                        <td>
+                            {{getdetails.subject }}
+                        </td>
+                    </tr>
+                                        
+                    <tr>
+                        <td style="color:white;font-size:10px">
+                            HOLIDAY ASSIGNMENT:   
+                        </td>
+                        <td>
+                            <input type="text" name="ha" id="ha" size="5" value="{{ getdetails.ha }}" class ="loginTxtbox">
+                        </td>
+                        <td><span class="error1"> Not empty or more than 100</span></td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <input type="hidden" name="exam" id="exam" size="5" value="{{ getdetails.exam_score }}" class ="loginTxtbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="secondca" id="secondca" size="5" value="{{ getdetails.second_ca }}" class ="loginTxtbox">
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="unifiedtest" id="unifiedtest" size="5" value="{{ getdetails.unified_test }}" class ="loginTxtbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="firstca" id="firstca" size="5" value="{{ getdetails.first_ca }}" class ="loginTxtbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="thirdca" id="thirdca" size="5" value="{{ getdetails.third_ca }}" class ="loginTxtbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center;color:black"><input  type="submit" value=":: Update Score ::" name="submit"></td>
+                    </tr>
+                </table>
+
+            </td>
+
+        </tr>
+    </table>
+</body>
+</form>
+
+
+</body>
+</html>
+

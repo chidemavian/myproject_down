@@ -1,0 +1,56 @@
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>SchApp 8.0 Enterprise School software{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+
+
+
+<table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+    <tr>
+        <td>
+            <div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;" > {{varerr}}</div>
+
+            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                
+                <div> Lesson Note Module For  {{subject}} {{term }} term, {{klass}}</div>
+                       <tr class = "ajaxhead">
+                        <td> S/N</td>
+                        <td > Topic </td>
+                         <td > Lesson Notes </td> 
+                         <td > Uploaded File </td> 
+                    </tr>
+                     {% if myintr %}
+                         {% for pincode in myintr %}
+                        <tr class = "ajaxbody">
+                            <td >{{ forloop.counter}}</td>
+                            <td>  {{ pincode.topic}}</td>
+                            <td>
+<form 
+         action="/lesson/note/upload/{{ pincode.id }}/" 
+         enctype="multipart/form-data" 
+         method="POST"> 
+                  <a  href="/lesson/note/view/{{ pincode.id }}/"> Download Note</a>
+                                    &nbsp;&nbsp;&nbsp;
+                                 <!--   <a  href="/lesson/note/edit/{{ pincode.id }}/" >Edit File </a>
+                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; -->
+                 <button type="submit">Upload Note</button>
+                 <div><input type="file" name="datafile" size="40"/> </div>
+                            
+</form> 
+                           </td>
+                            <td> {{ pincode.file}}</td>
+                            {% endfor %}
+                     {% else %}
+                            <td colspan="7" align="left" valign="top" style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">  .......No Record Found</td>
+                     {% endif %}
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

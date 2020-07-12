@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp v8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<table style="width:100%;">
+    <tr>
+        <td colspan="10">
+
+            <table style="width:100%;background-color:white;border-collapse:collapse;">
+                <thead >
+                <tr>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Admission No</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Name</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Sex</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Class</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Arm</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Session</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Term</td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+                    <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle"></td>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in data %}
+                    <tr>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.admissionno }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.fullname }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.sex }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.admitted_class }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.admitted_arm }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.student.admitted_session }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.comment.term }}</td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <a href="#" style="color:blue" onClick= "comment({{ student.comment.id  }});"> Principal's Comment </a> </td>
+                        <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black"> <a href="#" style="color:blue" onClick= "getdialogtry({{student.comment.id   }});"> View Student Performance </a> </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+<div id="comment" title="Enter Comment">
+</div>
+<div id="academic" title="Student Academic Record">
+</div>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $("#comment").hide();
+        $("#academic").hide();
+    });
+</script>
+
+<script type="text/javascript" language="javascript">
+    function comment(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getprinicipalcomment/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#comment").html(html);
+                getcomment();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getcomment(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:510,
+            width:550,
+            title:'<a href="#">SchApp v8.0 | Principal Comment</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#comment").dialog(dialogOpts);
+    }
+
+</script>
+
+
+<script type="text/javascript" language="javascript">
+    function getdialogtry(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getstudentacademic/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#academic").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+<script type="text/javascript" language="javascript">
+    function getdialog(){
+        var dialogOpts = {
+            autoOpen:true,
+            modal:true,
+            position: ["center", "middle"],
+            height:590,
+            width:590,
+            title:'<a href="#">SchApp v8.0  | Student Academic Record</a>' ,
+            closeOnEscape:true,
+            show: true,
+            hide: true,
+            bgiframe: true
+        };
+        $("#academic").dialog(dialogOpts);
+    }
+
+</script>
+
+
+</body>
+</html>
+

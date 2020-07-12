@@ -1,0 +1,157 @@
+{% extends 'student/base.htm' %}
+{% block content %}
+    <table style="width: auto; height: auto;">
+
+
+        <tr>
+            <td colspan="10">
+                <form action="" method="POST" onsubmit="disable(this)">
+                    <table  style="width:auto;height:100%; text-align: left; vertical-align: middle;background-color:#ffffff;color:#000;">
+                        <tr >
+                            <td colspan="14"  style="background-color:#ccccc0;font-size:12px;color:black;width:100%;text-align:center;height:25px;" > STUDENT REPORT</td>
+                        </tr>
+                        <tr >
+                            <td colspan="14"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.session.label }}
+                            </td>
+                            <td>
+                                {{ form.session }}
+                            </td>
+                            <td>
+                                {{ form.klass.label }}
+                            </td>
+                            <td>
+                                {{ form.klass }}
+                            </td>
+                            <td>
+                                {{ form.arm.label }}
+                            </td>
+                            <td>
+                                {{ form.arm }}
+                            </td>
+                            <td>
+                                {{ form.dayboarding.label }}
+                            </td>
+                            <td>
+                                {{ form.dayboarding }}
+                            </td>
+                            <td>
+                                {{ form.filtermethod.label }}
+                            </td>
+                            <td>
+                                {{ form.filtermethod }}
+                            </td>
+                            <td>
+                                {{ form.excelfile.label }}
+                            </td>
+                            <td>
+                                {{ form.excelfile }}
+                            </td>
+                            <td  style="text-align: center; vertical-align: middle;"><input type="submit" value=":: View Report ::" name = "submit"></td>
+
+                        </tr>
+                    </table>
+                </form>
+
+            </td>
+        </tr>
+    <tr>
+        <td colspan="10">
+         {% if students_list %}
+            <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+            <div class="printable">
+            <table  style="width:100%;background-color:white;border-collapse:collapse;">
+
+                <tr>
+                    <td style="width:auto; text-align: right; vertical-align: middle;">
+                        <img style="width: 120px; height: 100px;" src="/static/{{ school.logo }}" alt="{{ school.name }}">
+                    </td>
+                    <td style="width:auto; text-align: left; vertical-align: middle; padding-left: 5px;">
+                        <span style="font-size:20px;font-weight:bold;">{{ school.name }}</span><br>
+                        {{ school.address }}<br>
+                        {{ school.website }}
+                    </td>
+                </tr>
+                <tr>
+
+                    <td style="text-align:center;width:100%;" colspan="2"><h2>Student List for {{ disclass }}&nbsp;{{ disarm }},<span style="font-size:25px;font-weight:bold;"> {{ session }} Session</span> </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table style="width:auto;background-color:white;border-collapse:collapse;">
+                            <tr >
+                                <td>
+                                    <table>
+
+
+                                        
+                                    </table>
+                                </td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">S/N</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Name</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Sex</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Admission No</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Class</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Arm</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">House</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Day/Boarding</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent Phone</td>
+                                <td style = "width:auto; height:20px;background-color:#E6E6E6;font-size:14px;border:1px solid black;color:#000000;vertical-align:middle">Parent E-Mail</td>
+                            </tr>
+
+                            {% for student in students_list %}
+                                <tr>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ forloop.counter }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.fullname }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.sex }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.admissionno }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.admitted_class }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.admitted_arm }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.house }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.dayboarding }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.fathernumber }}</td>
+                                    <td style = "background-color:white;font-size:11px;width:auto;color:#000000;border:1px solid black">{{ student.fatheremail|lower }}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+                </tr>
+
+
+            </table>
+            </div>
+        {% endif %}
+        </td>
+    </tr>
+
+    </table>
+<script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+</script>
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+<!--
+<div style="width: 100%;">
+    <input type="button" value="Print">
+    <em style="text-decoration: infotext; ">Download report as <a href="/students/report/download?format=pdf">pdf</a>&nbsp;
+    or&nbsp;<a href="/students/report/download?format=xls">xls</a>&nbsp;(MS Excel format)</em>
+</div>
+-->
+
+{% endblock %}

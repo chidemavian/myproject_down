@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SchApp 8.0 {% block title %}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+    {% if data %}
+        <table style="margin-top:0%;margin-bottom:0%" width="100%" class="table  table-bordered" id="dataTables-example">
+                    <span style='color:blue'>{{report}}</span> Assessment Scores for <span style='color:blue'>{{term}}</span> term <span style='color:blue'>{{klass}}{{arm}}  {{subject}}   </span>
+            <tr>
+                <td colspan="10">
+                        <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                            <thead >
+                            <tr style="text-align:center;font-weight:bold">
+                                <td >S/N</td>
+                                <!-- <td >Admission No</td> -->
+                                <td >Name</td>                              
+                                <td >CA</td>
+                                <td >Exam Score</td>
+                            </tr>
+                            </thead>
+            
+                            <tbody>
+    
+                            {% for student in data %}
+                                <tr style="text-align:center;">
+                                    <td >{{ forloop.counter }}.</td>
+                                    <!-- <td>{{ student.admissionno }}</td> -->
+                                    <!-- <td >{{ student.fullname }}</td> -->
+                                   <td title = "enter {{ student.subject }} score for {{student.fullname}}"><a href="#" onClick= "getdialogtry1({{ student.id  }})">{{ student.fullname }}</td>
+
+                                    <td>
+                                 <input style="text-align:center" type="text" name="fourthca" id="fourthca" size="1" value="{{ student.fourth_ca }}" onclick= "getdialogtry1({{ student.id  }})">
+                                    </td>
+                                    <td>
+                                     <input style="text-align:center" type="text" name="sixthca" id="sixthca" size="1" value="{{ student.sixth_ca }}" onclick= "getdialogtry1({{ student.id  }})">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                    
+                            </tbody>
+                
+                        </table>
+                </td>
+            </tr>
+ 
+        </table>
+<form action="/assessment/happy/" method="POST"> 
+                <table style="margin-top:0%;margin-bottom:05%" width="100%" class="table  table-bordered table-hover" id="dataTables-example">
+                     <td ><input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="Save"></td>
+
+        </table>
+</form>
+                {% else %}
+        <div>There are no students offering this course. </div>
+        <div>if you think this is an error, kindly consult with the class teachers of the affected students</div>
+        {% endif %}
+<div id="myDialog" title="Enter Assessment Score">
+</div>
+<script type="text/javascript" >
+            $(document).ready(function() {
+                $("#myDialog").hide();
+            });
+</script>
+<script >
+    function getdialogtrys(vid){
+        //alert(vid);
+        var state = vid;
+        var url = "/assessment/getsubjectscore/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+<script >
+    function getdialogtry1(vid){
+        // alert(vid);
+        var state = vid +':'+ $("#id_reporttype").val();
+         // alert(state)
+        var url = "/assessment/getsubjectscore1/";
+        var i = 0;
+        var data='userid='+state;
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:data,
+            success:function(html) {
+                //$("#myDialog").show();
+                $("#myDialog").html(html);
+                getdialog();
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+
+        <script type="text/javascript" language="javascript">
+            function getdialog(){
+                var dialogOpts = {
+                    autoOpen:true,
+                    modal:true,
+                    position: ["center", "middle"],
+                    height:450,
+                    width:550,
+                    title:'<a>SchApp 8.0 Student Score</a>' ,
+                    closeOnEscape:true,
+                    show: true,
+                    hide: true,
+                    bgiframe: true
+                };
+                $("#myDialog").dialog(dialogOpts);
+            }
+
+        </script>
+</body>
+
+</html>

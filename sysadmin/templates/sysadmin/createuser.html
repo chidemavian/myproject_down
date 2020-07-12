@@ -1,0 +1,344 @@
+{% extends "sysadmin/base.htm" %}
+{%block head %}
+{%block title %}{%endblock%}
+{%endblock %}
+{%block content%}
+<div align ="center" style="background-color:#ccccc0;border:0px solid black;width:100%;height:4%; font-size:15px;color:black">  New User Sign Up </div>
+
+<div align="center" style="color:red;font-family:verdana;font-size:13px;text-decoration:blink;background-color:white;" > {{varerr}}</div>
+
+  <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+
+                
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sign up user</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action = "/sysadmin/createuser/"  method="post" role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                  <label style='color:red'> {{varerr}}</label>
+                                    <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Staff name" name="staffname" type="text" value="">
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input class="btn btn-lg btn-success btn-block" name="submit" type= "submit" value="    Log On    ">
+                                <!-- <a class="btn btn-lg btn-success btn-block">Login</a> -->
+                                <div>
+                              </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+   
+ <td colspan="10"><div class="box2"></div></td> 
+
+
+
+    <div id="myDialog" >
+    </div>
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            // userprofiles();
+        $("#id_Filters").change(function () {
+            userprofiles();
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_Filters").change(function () {
+                userprofiles();
+            });
+    </script>
+
+        <script type="text/javascript" language="javascript">
+        function userprofiles(){
+            var state = $("#id_Filters").val() ;
+            //alert(state);
+            var url = "/sysadmin/users_ajax/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $("#id_page-wrapper").hide();
+                    $("#id_page-wrapper").html(html);
+                    $(".box2").show();
+                    $(".box2").html(html);
+                }
+            });
+            return false;
+        }
+    </script>
+
+
+
+    <script language="javascript" type="text/javascript">
+        function disable(f)
+        {
+            var button = f.elements['submit'];
+            button.value = 'Processing';
+            button.disabled = 'true';
+            return true;
+        }
+    </script>
+
+<script type="text/javascript">
+document.getElementById('id_username').focus()
+</script>
+
+    <script type="text/javascript" language="javascript">
+        function admno(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getusermain/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialog();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialog(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:670,
+                title:'Edit User Account',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript" language="javascript">
+        function academic(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getacademic/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialogaca();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogaca(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:870,
+                title:'Edit User Account - Student/Academic',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function admin(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/getadmin/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialogadmin();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function homeview(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/sysadmin/homeview/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialogadmin();
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getdialogadmin(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:470,
+                title:'Edit User Account - Administrator',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript" language="javascript">
+        function hrm(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/hrm/sysadmin/getuseraccount/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialoghrm();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialoghrm(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:870,
+                title:'Edit User Account',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function acc(vid){
+            //alert(vid);
+            var state = vid;
+            var url = "/SchApp/account/sysadmin/getuseraccountrw/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    //$("#myDialog").show();
+                    $("#myDialog").html(html);
+                    getdialogacc();
+                }
+            });
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getdialogacc(){
+            var dialogOpts = {
+                autoOpen:true,
+                modal:true,
+                position: ["center", "middle"],
+                height:"auto",
+                width:870,
+                title:'Edit User Account - Accounting',
+                closeOnEscape:true,
+                show: true,
+                hide: true,
+                bgiframe: true
+            };
+            $("#myDialog").dialog(dialogOpts);
+        }
+
+    </script>
+    <script type="text/javascript">
+        function disbutton(){
+            $("input[type=submit]").attr("disabled", "disabled");
+            return false;
+        }
+
+    </script>
+
+
+ {%endblock%}

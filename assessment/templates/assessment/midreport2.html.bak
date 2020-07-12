@@ -1,0 +1,143 @@
+{% extends 'assessment/base.htm' %}
+{% block content %}
+ 
+    <tr>
+        <table style="width:auto; text-align: left; vertical-align: middle;background-color:#FFF;">
+            <tr>
+                     <form action="" method="POST">                    
+                        <td>{{ form.session.label_tag }}&nbsp;{{ form.session }}</td>
+                        <td>{{ form.klass.label_tag }}&nbsp;{{ form.klass }}</td>
+                        <td>{{ form.arm.label_tag }}&nbsp;{{ form.arm }}</td>
+                        <td>{{ form.term.label_tag }}&nbsp;{{ form.term }}</td>
+                        <td>{{ form.ca.label_tag }}&nbsp;{{ form.ca }}</td>
+                        <td><input name="submit" type= "submit" value=" View Report "></td>
+                    </form>
+            </tr>
+        </table>
+    </tr>
+ 
+<style>
+table {
+    font-family: arial, sans-serif;
+    width: 85%;
+    font-size: 70%;
+    border-collapse: collapse;
+    margin: 0.5px;
+    top: 10%;
+}
+
+td, th {
+    border: 2px solid black; #dddddd;
+    padding: 0.2%;
+    font-size: 80%;
+}
+
+tr:nth-child(even) {
+    background-color: #ddddd;
+}
+</style>
+
+     <input name="submitprint" type= "submit" value="Print Report" onclick = "openrecprint();">
+
+    <div class="printable">
+    {% for k in replist %}
+
+  <table style='border:0.9px solid black'>
+    <tr>
+      <td rowspan="3">
+          <img style="width: 120px; height: 100px;" src="/static/{{school.logo }}" alt="{{ k.studentinfo.fullname  }}">
+      </td>    
+        <td style='border:0px solid black'>
+          <tr>          
+              <td style='border:0px solid black;text-align:center;font-size:30px;font-weight-bold'>Bright Future College</td>
+          </tr>
+          <tr>
+              <td style='border:0px solid black;font-size:14px;text-align:center'>{{term}}  Term Second CA PROGRSS REPORT {{session}}</td>
+          </tr>
+        </td>
+    </tr>
+
+</table>
+
+    <tr>
+        <table style="margin-top:0%;margin-bottom:0%">
+        <td> NAME OF STUDENT: </td>
+        <td>  {{ k.studentinfo.fullname}} </td>
+        </table>
+    </tr>
+    <tr>
+        <table style="margin-top:0%;margin-bottom:0%">
+        <td style="text-align: righ">CLASS:</td>
+        <td> {{k.studentinfo.admitted_class }}{{ k.studentinfo.admitted_arm }} </td>
+        </table>
+    </tr>
+
+    <tr>
+        <table style="text-align:center">
+            <tr >
+                <td style="font-weight:bold; font-size:12px">S/N</td>
+                <td style="font-weight:bold; font-size:12px"> SUBJECT </td>
+                <td style="font-weight:bold; font-size:12px"> SCORE </td>
+                <td style="font-weight:bold; font-size:12px"> SCORE % </td>
+                <td style="font-weight:bold; font-size:12px"> GRADE</td>
+                <td style="font-weight:bold; font-size:12px">  EFFORT </td>
+                <td style="font-weight:bold; font-size:12px">  NAME OF TEACHER </td>
+            </tr>
+            {% for p in k.subject %}
+            <tr >
+                <td >  {{forloop.counter}}. </td>
+                <td style="text-align:left">  {{p.subject}} </td>
+                <td>  {{p.second_ca}} </td>
+                <td>  {{p.totalperc}} </td>
+                <td>  {{p.grade}} </td>
+                <td>  {{p.remark}} </td>
+                <td>  {{p.teacher}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </tr>
+<tr>
+    <table style="margin-top:1%;margin-bottom:1px;font-weight:bold">
+        <td>STUDENT AVERAGE: </td>
+        <td>  {{k.academic.stu_ave2}} </td>
+        <td> CLASS AVERAGE: </td>
+        <td>  {{ k.academic.class_ave2}} </td>
+    </table>
+</tr>
+           <tr>
+                <table style="margin-top:0px;margin-bottom:30%">
+                    <tr>
+                        <td style="font-size:80%;width:27%;border:2px solid black;text-align:center">Homeroom Teacher's Comment & Sign:</td>
+                        <td style="text-align:left;border:2px solid black;width:auto">{{ k.academic.com2 }}</td>
+                        <td style="border:2px solid black;width:5%">Sign:</td>
+                        <td style="border:2px solid black;font-size:12px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:2px solid black;text-align:center">Name of Co-ordinator & Sign:</td>
+                        <td style="text-align:left;border:1px solid black">{{k.codi.co_ordinator}}</td>
+                        <td style="border:2px solid black;width:5%">Sign:</td>
+                        <td style="border:2px solid black;font-size:12px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:2px solid black;text-align:center">Principal's Signature</td>
+                        <td style="border:2px solid black;text-align:center"></td>
+                        <td style="border:2px solid black;width:5%;text-align:center">Date:</td>
+                        <td style="border:2px solid black;text-align:center;width:10%"> {{k.date}}</td>
+                    </tr>
+                </table>
+        </tr>   
+
+    {% endfor %}
+    </div>
+
+<script language="javascript" type="text/javascript">
+        function openrecprint()
+        {
+            //alert("welcome");
+            $( ".printable" ).print();
+        }
+</script>
+{% endblock %}
+
+
+

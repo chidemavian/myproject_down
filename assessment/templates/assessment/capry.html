@@ -1,0 +1,191 @@
+{% extends 'assessment/base.htm' %}
+{% block sectionTitle %}{% endblock %}
+{% block content %}
+    <table style="width:auto; text-align: left; vertical-align: middle;background-color:#00FF00">
+        <tr>
+            <td colspan="20" style="text-align:center;color:white;background-color:#00FF00;font-size:14px;font-weight:bold;">
+                  Enter Assessment
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20"  style="background-color:#ffffff;font-size:13px;color:red;width:100%;font-weight:bold;text-decoration:blink;text-align:center" > {{ varerr }}
+            </td>
+        </tr>
+        <tr style="color:white;width:auto;">
+            <td colspan="20">
+                <table style="width:auto;">
+                    <tr>
+                        <td>
+                            {{ form.session.label_tag }}&nbsp;{{ form.session }}
+                        </td>
+                        <td>
+                            {{ form.klass.label_tag }}&nbsp;{{ form.klass }}
+                        </td>
+                        <td>
+                            {{ form.arm.label_tag }}&nbsp;{{ form.arm }}
+                        </td>
+
+                        <td>
+                            {{ form.term.label_tag }}&nbsp;{{ form.term }}
+                        </td>
+
+                        <td>
+                            {{ form.student.label_tag }}&nbsp;{{ form.student }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td colspan="20">
+                <div class="box">
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+    <!--<div id="regform" style="width: 100%;"></div>-->
+
+
+    <script>
+        $(document).ready(function() {
+            var pickerOpts = {
+                //appendText: "mm/dd/yy",
+                //defaultDate: "+5",
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:"yy-mm-dd"
+                //showButtonPanel: true
+                // showOn: "button"
+            };
+            getclass();
+            getarm();
+
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function getclass(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getclassaffpry/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_klass").val('');
+            $("#id_klass").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_klass").append(options);
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getarm(){
+            var state = $("#id_session").val() ;
+            //alert(state);
+            var url = "/assessment/getarmaff/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_arm").val('');
+            $("#id_arm").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_arm").append(options);
+                        getstudent();
+
+                    }
+                })
+            }
+        }
+
+    </script>
+    <script type="text/javascript" language="javascript">
+        function getstudent(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val();
+            //alert(state);
+            var url = "/assessment/getstudentsubject/";
+            var i = 0;
+            var data='userid='+state;
+            $("#id_student").val('');
+            $("#id_student").html('');
+            if (state != undefined){
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:data,
+                    success: function(data){
+                        var options = '';
+                        for (i=0; i<data.length; i++){
+                            options += '<option value="' + data[i] +'">' + data[i] + '</option>'
+                        }
+                        $("#id_student").append(options);
+                        autopost();
+                    }
+                })
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" >
+        $(document).ready(function() {
+
+            $("#id_arm").change(function () {
+                autopost();
+            });
+            $("#id_klass").change(function () {
+                autopost();
+            });
+            $("#id_term").change(function () {
+                autopost();
+            });
+            $("#id_student").change(function () {
+                autopost();
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function autopost(){
+            var state = $("#id_session").val() + ':'+ $("#id_klass").val()+':'+ $("#id_arm").val() +':'+ $("#id_term").val() +':'+ $("#id_student").val();
+            //alert(state);
+            var url = "/assessment/getsubject4studentpry/";
+            var i = 0;
+            var data='userid='+state;
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:data,
+                success:function(html) {
+                    $(".box").show();
+                    $(".box").html(html);
+
+                }
+            });
+            return false;
+        }
+    </script>
+{% endblock %}
